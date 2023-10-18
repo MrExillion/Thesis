@@ -6,6 +6,7 @@ using UnityEngine;
 public class RadarMixin : MonoBehaviour, MRadar
 {
     [SerializeField] private GameObject signalObject;
+    private int numTouches = 0;
     private void Awake()
     {
        
@@ -24,13 +25,18 @@ public class RadarMixin : MonoBehaviour, MRadar
     void Update()
     {
 
-        Touch touch = Input.GetTouch(0);
-        if(Input.touchCount > 0)
+       // touchCount is the amount of touches registered on the screen so 1 = 1 finger, 2 = 2 fingers etc.
+        if(Input.touchCount > numTouches ) // i need to add a cd timer
         {
-
-            RadarTemplate.radar1.SendBroadcast(gameObject);
+            Touch touch = Input.GetTouch(0);
+            if (TouchPhase.Began == touch.phase && (touch.deltaTime >= 0.5f + Time.deltaTime || touch.deltaTime == 0))
+            {
+                RadarTemplate.radar1.SendBroadcast(gameObject);
+                //numTouches += 1;
+                Debug.Log(touch.deltaTime + ", " + Time.deltaTime);
+            }
         }
-
+       // Debug.Log("Number of touches registered" + Input.touchCount);
 
     }
 }
