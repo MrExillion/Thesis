@@ -1,9 +1,13 @@
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-
+using SensorInputPrototype.InspectorReadOnlyCode;
 public static class Radar
 {
+    #if UNITY_EDITOR
+    [ShowOnly] 
+    #endif
+    [SerializeField]
     private static ConditionalWeakTable<MRadar, Fields> table;
     static Radar()
     {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using SensorInputPrototype.InspectorReadOnlyCode;
 public class RadarTemplate : InteractionType, MRadar
 {
 

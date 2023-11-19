@@ -2,11 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using SensorInputPrototype.InspectorReadOnlyCode;
 
 public class RadarMixin : MonoBehaviour, MRadar
 {
-    [SerializeField] private GameObject signalObject;
-    private int numTouches = 0;
+    #if UNITY_EDITOR 
+    [ShowOnly] 
+    #endif
+    [SerializeField]
+    private GameObject signalObject;
+    #if UNITY_EDITOR 
+    [ShowOnly]
+    #endif
+    [SerializeField]
+    int numTouches = 0;
     private void Awake()
     {
        

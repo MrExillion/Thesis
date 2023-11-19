@@ -1,14 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using SensorInputPrototype.InspectorReadOnlyCode;
 public class RadarPropagationMove : MonoBehaviour
 {
-    [SerializeField] private float maximumLifetime = 15f;
-    private float lifeTime = 0f;
+    #if UNITY_EDITOR 
+    [ShowOnly]
+    #endif
+    [SerializeField]
+    private float maximumLifetime = 15f;
+    #if UNITY_EDITOR 
+    [ShowOnly] 
+    #endif
+    [SerializeField] private float lifeTime = 0f;
+    #if UNITY_EDITOR 
+    [ShowOnly] 
+    #endif
     [SerializeField] private Vector3 propagationScaler = new Vector3(1f, 1f, 1f); // Vector at least at 100% scale this scale is applied per frame, adjusted by time fixed delta time.
-    private Vector3 waveScale; // private current variable for the current scale
-    [SerializeField] private float moveSpeed = 1; // scalar multiplied by time fixed delta time and the current position of the transform in order to Move() the rigidBody
+    #if UNITY_EDITOR 
+    [ShowOnly] 
+    #endif
+    [SerializeField] private Vector3 waveScale; // private current variable for the current scale
+    #if UNITY_EDITOR 
+    [ShowOnly] 
+    #endif
+    [SerializeField]
+    private float moveSpeed = 1; // scalar multiplied by time fixed delta time and the current position of the transform in order to Move() the rigidBody
     // Start is called before the first frame update
     void OnEnable()
     {

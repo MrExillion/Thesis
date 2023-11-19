@@ -6,13 +6,22 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Android;
 using Gyroscope = UnityEngine.InputSystem.Gyroscope;
+using SensorInputPrototype.InspectorReadOnlyCode;
 
 public class BalanceInputScript : MonoBehaviour
 {
     public float frequency = 16f;
     public Light light;
     public static LightSensor lightsensorref;
+    #if UNITY_EDITOR 
+    [ShowOnly]
+    #endif
+    [SerializeField]
     private float maxIntensity = 256f;
+    #if UNITY_EDITOR
+    [ShowOnly]
+    #endif
+    [SerializeField]
     private float curentIntensity;
     private void Awake()
     {
