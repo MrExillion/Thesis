@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using SensorInputPrototype.InspectorReadOnlyCode;
-
+using SensorInputPrototype.MixinInterfaces;
 public class RadarMixin : MonoBehaviour, MRadar
 {
     #if UNITY_EDITOR 

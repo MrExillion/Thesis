@@ -14,28 +14,29 @@ using System.Collections;
 //using Unity.VisualScripting.InputSystem;
 //using UnityEngine;
 //using Component = UnityEngine.Component;
-
-public interface ITemplate 
+namespace SensorInputPrototype.MixinInterfaces
 {
-    
-    //private void GetTemplateComponent<T>(GameObject go, ref T co) where T : Component
-    //{
+    public interface ITemplate
+    {
 
-    //    var temp = go.GetComponent<T>() as Dictionary<Component, StaticFieldAccessor<context>>;
-    //    temp.TryGetValue(co,ReflectionContext).Fields
-        
-    
-    //}
+        //private void GetTemplateComponent<T>(GameObject go, ref T co) where T : Component
+        //{
 
-    //public int GetTemplateId<T>(GameObject go, ref T co) where T : Component
-    //{ 
-    //   GetTemplateComponent<T>()
-    //}
-    //public int GetTemplateId(GameObject go, MonoBehaviour mono)
-    //{
-    //    go.GetComponent(typeof(mono)).Template
-    //}
+        //    var temp = go.GetComponent<T>() as Dictionary<Component, StaticFieldAccessor<context>>;
+        //    temp.TryGetValue(co,ReflectionContext).Fields
+
+
+        //}
+
+        //public int GetTemplateId<T>(GameObject go, ref T co) where T : Component
+        //{ 
+        //   GetTemplateComponent<T>()
+        //}
+        //public int GetTemplateId(GameObject go, MonoBehaviour mono)
+        //{
+        //    go.GetComponent(typeof(mono)).Template
+        //}
+    }
+
 }
-
-
 

@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Reflection;
 
 using SensorInputPrototype.InspectorReadOnlyCode;
-
+using SensorInputPrototype.MixinInterfaces;
 public static class MixinTemplates
 {
     #if UNITY_EDITOR 

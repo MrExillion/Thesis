@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using SensorInputPrototype.InspectorReadOnlyCode;
 using Unity.Mathematics;
-
+using SensorInputPrototype.MixinInterfaces;
 public static class HRotate
 {
 #if UNITY_EDITOR

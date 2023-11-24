@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SensorInputPrototype.InspectorReadOnlyCode;
+using SensorInputPrototype.MixinInterfaces;
 public class RadarTemplate : InteractionType, MRadar
 {
 

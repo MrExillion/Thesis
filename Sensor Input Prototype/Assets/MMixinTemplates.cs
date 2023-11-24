@@ -1,5 +1,8 @@
 ﻿using System;
-public interface MMixinTemplates
+namespace SensorInputPrototype.MixinInterfaces
 {
-    // Reference only
+    public interface MMixinTemplates
+    {
+        // Reference only
+    }
 }

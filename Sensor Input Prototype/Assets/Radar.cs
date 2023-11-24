@@ -2,6 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using SensorInputPrototype.InspectorReadOnlyCode;
+using SensorInputPrototype.MixinInterfaces;
 public static class Radar
 {
     #if UNITY_EDITOR

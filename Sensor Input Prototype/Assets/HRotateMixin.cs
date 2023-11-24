@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Mathematics;
 using SensorInputPrototype.InspectorReadOnlyCode;
+using SensorInputPrototype.MixinInterfaces;
 public class HRotateMixin : MonoBehaviour, MHRotate
 {
     #if UNITY_EDITOR 

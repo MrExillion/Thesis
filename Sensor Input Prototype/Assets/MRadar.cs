@@ -1,10 +1,12 @@
 using System;
-public interface MRadar
+namespace SensorInputPrototype.MixinInterfaces
 {
-    // Reference only
+    public interface MRadar
+    {
+        // Reference only
+    }
+
 }
-
-
 
 
 
