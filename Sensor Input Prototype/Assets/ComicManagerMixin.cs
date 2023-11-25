@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SensorInputPrototype.MixinInterfaces;
-public class ComicManagerMixin : MonoBehaviour, MComicManager
+public class ComicManagerMixin : MonoBehaviour, MComicManager, IGlobalReferenceManager
 {
     internal int currentPanel;
     internal int currentChapter;

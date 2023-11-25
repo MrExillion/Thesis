@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ComicManagerTemplate : PanelSystemTemplateType, MTransition, MComicManager
+public class ComicManagerTemplate : PanelSystemTemplateType, MTransition, MComicManager, IGlobalReferenceManager
 {
     [SerializeField] public int containerId;
     public override int panelId
@@ -21,12 +21,14 @@ public class ComicManagerTemplate : PanelSystemTemplateType, MTransition, MComic
    
     private void Awake()
     {
-
-        this.InitializeComicManager();
+        //panelId = containerId;
+        this.AddNewMixin<ComicManagerMixin>(gameObject);
+        // this.InitializeComicManager();
 
         // DO NOT CALL Templates SetPanelID() -- need a fix or this.
         // SetUp All Properties Shared across hierachy
-        this.SetPrimaryComic<ComicManagerTemplate>();
+        //this.SetPrimaryComic<ComicManagerTemplate>(); // I think this should be discontinued now that i have a GloablReferenceSingleton
+
 
     }
 }

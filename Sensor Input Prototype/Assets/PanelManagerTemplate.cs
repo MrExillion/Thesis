@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-public class PanelManagerTemplate : PanelSystemTemplateType, MThesisAPI
+public class PanelManagerTemplate : PanelSystemTemplateType, MThesisAPI, MPanelManager, IGlobalReferenceManager
 {
     [SerializeField] public int pageId;
 
@@ -27,17 +27,19 @@ public class PanelManagerTemplate : PanelSystemTemplateType, MThesisAPI
 
     private void Awake()
     {
+        //panelId = pageId;
 
-
-        GlobalReferenceManager.MixinPairs.Add(new Tuple<int, UnityEngine.Component>(this.GetInstanceID(), this.GetComponentOrAdd<PanelManagerMixin>()));
-
+        this.AddNewMixin<PanelManagerMixin>(gameObject);
+        //GlobalReferenceManager.MixinPairs.Add(new Tuple<int, UnityEngine.Component>(this.GetInstanceID(), this.GetComponentOrAdd<PanelManagerMixin>()));
+        
     }
 
     private void Start()
     {
 
 
-        (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == this.GetInstanceID()).Item2 as PanelManagerMixin).InvokeTempListReadyDelegate(gameObject, this, panelId);
+        (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == this.GetInstanceID()).Item2 as PanelManagerMixin).InvokeTempListReadyDelegate(gameObject, this, pageId);
+
     }
 
 

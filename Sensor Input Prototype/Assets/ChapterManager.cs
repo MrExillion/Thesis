@@ -17,12 +17,13 @@ public static class ChapterManager
     [SerializeField]
     private static ConditionalWeakTable<MChapterManager, Fields> table;
     private static List<Tuple<GameObject, ChapterManagerTemplate, int, List<Tuple<GameObject, PageManagerTemplate, int, List<Tuple<GameObject, PanelManagerTemplate, int, List<Tuple<GameObject, UniversalPanel, int, int>>>>>>>> chapters;
+    private static List<Tuple<GameObject, PageManagerTemplate, int, List<Tuple<GameObject, PanelManagerTemplate, int, List<Tuple<GameObject, UniversalPanel, int, int>>>>>> pageListToBeSaved;
     static ChapterManager()
     {
 
         table = new ConditionalWeakTable<MChapterManager, Fields>();
         //table.NewChapter();
-        
+
     }
     private sealed class Fields : MonoBehaviour, MThesisAPI
     {
@@ -35,8 +36,8 @@ public static class ChapterManager
     //    GameObject[] ChapterManagerMixins = chapterManagerMixin.GetChapterOrder();
     //    for (int i = 0; i < ChapterManagerMixins.Length; i++)
     //    {
-         
-    
+
+
 
 
     //            //GetPages(gameObject.GetComponentInParent<PageManagerMixin>().Get()).SetValue(panelObjects, table.GetOrCreateValue(map).pageList.Length);
@@ -47,7 +48,7 @@ public static class ChapterManager
     //}
     public static void InitializeChapterManager(this MChapterManager map)
     {
-        
+
         if (table.GetOrCreateValue(map).mixin == null)
         {
             table.GetOrCreateValue(map).mixin = table.GetOrCreateValue(map).GetComponentOrAdd<ChapterManagerMixin>();
@@ -61,7 +62,7 @@ public static class ChapterManager
     //    return table.GetOrCreateValue(map).chapterOrder;
     //}
 
-    
+
     public static void InitializeComicStructure_chapters(this MComicManager map, GameObject gameObject, ChapterManagerTemplate chapterManagerTemplate, int chapterID,
         System.Collections.Generic.List<Tuple<GameObject, PageManagerTemplate, int, List<Tuple<GameObject, PanelManagerTemplate, int, List<Tuple<GameObject, UniversalPanel, int, int>>>>>> pageTupleList)
     {
@@ -70,6 +71,27 @@ public static class ChapterManager
         pageTuple = new Tuple<GameObject, ChapterManagerTemplate, int, List<Tuple<GameObject, PageManagerTemplate, int, List<Tuple<GameObject, PanelManagerTemplate, int, List<Tuple<GameObject, UniversalPanel, int, int>>>>>>>(gameObject, chapterManagerTemplate, chapterID, pageTupleList);
         chapters.Add(pageTuple);
     }
+
+    public static List<Tuple<GameObject, PageManagerTemplate, int, List<Tuple<GameObject, PanelManagerTemplate, int, List<Tuple<GameObject, UniversalPanel, int, int>>>>>> TrackChapters(this MChapterManager map, List<GameObject> chapterObjects)
+    {
+        foreach (GameObject gameObject in chapterObjects)
+        {
+            pageListToBeSaved.Add(PageManager.getPageList().Find(x => x.Item2.GetInstanceID() == gameObject.GetComponent<PanelManagerTemplate>().GetInstanceID()));
+        }
+        return pageListToBeSaved;
+    }
+    public static
+        List<Tuple<GameObject, ChapterManagerTemplate, int,
+          List<Tuple<GameObject, PageManagerTemplate, int,
+             List<Tuple<GameObject, PanelManagerTemplate, int,
+                List<Tuple<GameObject, UniversalPanel, int, int
+                    >>>>>>>>
+        getChapterList()
+    {
+
+        return chapters;
+    }
+
 
 
 

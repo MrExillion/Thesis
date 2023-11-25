@@ -6,7 +6,7 @@ using SensorInputPrototype.InspectorReadOnlyCode;
 using static System.TimeZoneInfo;
 using System.Net.Security;
 using SensorInputPrototype.MixinInterfaces;
-public class PanelManagerMixin : MonoBehaviour, MPanelManager
+public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceManager
 {
 
 

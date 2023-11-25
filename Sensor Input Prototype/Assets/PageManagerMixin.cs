@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-public class PageManagerMixin : MonoBehaviour, MPageManager, MTransition, MComicManager
+public class PageManagerMixin : MonoBehaviour, MPageManager, MTransition, MComicManager, IGlobalReferenceManager
 {
     
     private void Start()

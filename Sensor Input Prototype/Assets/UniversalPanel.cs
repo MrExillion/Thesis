@@ -6,15 +6,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 
-public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager
+public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobalReferenceManager
 {
     
     public int PanelId = 0; // I am considering the UI system to be able to simply dictate the panel ID by order of execution as the list in the PageManager, but for now its not like that. 
     public int transitionType = 0; // I want this to maybe be some fancier solution in the future, either by automatically finding the transition through appliance, or by using Enums to be more inspector reader friendly
     private void Awake()
     {
-        
-        GlobalReferenceManager.MixinPairs.Add(new Tuple<int, UnityEngine.Component>(this.GetInstanceID(), this.GetComponentOrAdd<UniversalPanel>()));
+        this.AddNewMixin<UniversalPanel>(this.gameObject);
+        //GlobalReferenceManager.MixinPairs.Add(new Tuple<int, UnityEngine.Component>(this.GetInstanceID(), this.GetComponentOrAdd<UniversalPanel>()));
         this.TrackPanel(gameObject, this, PanelId, transitionType);
     }
     public int GetTransitionType()

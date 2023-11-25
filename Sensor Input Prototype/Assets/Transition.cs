@@ -29,7 +29,7 @@ public static class Transition
         void Update()
         {
             // just used to update canTransition
-            canTransition = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetInstanceID()).Item2 as ComicManagerMixin).CanTransition();
+            canTransition = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetInstanceID()).Item2 as ComicManagerMixin).CanTransition(); // In theory it should look at the fields associated with the implementation inside the extension, but this might be incorrect.
 
 
 

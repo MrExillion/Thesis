@@ -37,13 +37,15 @@ public static class ComicManager
     public static ComicManagerTemplate PrimaryComic;
     static ComicManager()
     {
+        comicHierachy = new List<Tuple<GameObject, ComicManagerTemplate, int, List<Tuple<GameObject, ChapterManagerTemplate, int, List<Tuple<GameObject, PageManagerTemplate, int, List<Tuple<GameObject, PanelManagerTemplate, int, List<Tuple<GameObject, UniversalPanel, int, int>>>>>>>>>>();
+
 
         table = new ConditionalWeakTable<MComicManager, Fields>();
         transitionsTable = new ConditionalWeakTable<MTransition, TransitionFields>();
 
 
     }
-    private sealed class Fields : MonoBehaviour, MComicManager, MChapterManager, MPageManager, MPanelManager, MTransition
+    private sealed class Fields : MonoBehaviour, MComicManager, MChapterManager, MPageManager, MPanelManager, MTransition, MThesisAPI, IGlobalReferenceManager
     {
         internal List<GameObject> panelObjects;
         internal List<GameObject> pageObjects;
@@ -994,6 +996,24 @@ public static class ComicManager
 
 
     #endregion
+
+    #region ComicManagerGlobalfunctions_Get_Set_Other
+    public static
+    List<Tuple<GameObject, ComicManagerTemplate,int,
+    List<Tuple<GameObject, ChapterManagerTemplate, int,
+      List<Tuple<GameObject, PageManagerTemplate, int,
+         List<Tuple<GameObject, PanelManagerTemplate, int,
+            List<Tuple<GameObject, UniversalPanel, int, int
+                >>>>>>>>>>
+    getComicsList()
+    {
+
+        return comicHierachy;
+    }
+
+
+    #endregion
+
 
 
 

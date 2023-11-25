@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ChapterManagerTemplate : PanelSystemTemplateType, MChapterManager
+public class ChapterManagerTemplate : PanelSystemTemplateType, MChapterManager, IGlobalReferenceManager
     {
     public List<GameObject> chapterOrder;
     [SerializeField] public int comicId;
@@ -21,7 +21,10 @@ public class ChapterManagerTemplate : PanelSystemTemplateType, MChapterManager
 
     private void Awake()
     {
-        this.InitializeChapterManager();
+        //panelId = comicId;
+        //this.InitializeChapterManager();
+        this.AddNewMixin<ChapterManagerMixin>(gameObject);
+        this.InitializeComicStructure_chapters(gameObject, this, comicId, this.TrackChapters(chapterOrder));
     }
 
 

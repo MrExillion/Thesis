@@ -31,7 +31,8 @@ public static class PanelManager
     {
 
         table = new ConditionalWeakTable<MPanelManager, Fields>();
-        
+        panels = new List<Tuple<GameObject, PanelManagerTemplate, int, List<Tuple<GameObject, UniversalPanel, int, int>>>>();
+        tempPanels = new List<Tuple<GameObject, UniversalPanel, int, int>>();
 
     }
     private sealed class Fields : ComicManagerTemplate, MTransition
@@ -127,5 +128,9 @@ public static class PanelManager
         }
         
     }
+    public static List<Tuple<GameObject, PanelManagerTemplate, int, List<Tuple<GameObject, UniversalPanel, int, int>>>> getPanelList()
+    {
 
+        return panels;
+    }
 }
