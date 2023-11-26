@@ -25,11 +25,14 @@ public class PageManagerTemplate : PanelSystemTemplateType, MPageManager, IGloba
         this.AddNewMixin<PanelManagerMixin>(gameObject); // this is the new was of dealing with the thing i saw below.
         //GlobalReferenceManager.MixinPairs.Add(new Tuple<int, UnityEngine.Component>(this.GetInstanceID(), this.GetComponentOrAdd<PanelManagerMixin>()));
         //this.InitializePageManager(); Unneeded as Component Addition Is being done in the above line 
+        
+    }
+
+
+    private void Start()
+    {
         this.InitializeComicStructure_pages(gameObject, this, chapterId, this.TrackPages(pageOrder));
     }
-    
-
-
 
 }
 

@@ -25,17 +25,27 @@ public class CameraSequencer : MonoBehaviour, MTransition
     private static ComicManagerTemplate comicManager;
     private void Awake()
     {
-        comicManager = ComicManager.PrimaryComic;
+        
     }
 
     public int GetPanelFocus()
     {
         return panelFocus;
     }
+
+    private void OnEnable()
+    {
+        GlobalReferenceManager.SetActiveComic(comicManager);
+    }
     private void Update()
     {
         
         comicManager = (GlobalReferenceManager.GetActiveComicTemplate() as ComicManagerTemplate);
+        foreach( System.Tuple<int, Component> tuples in GlobalReferenceManager.MixinPairs)
+        {
+            Debug.Log(tuples.Item1, tuples.Item2);
+
+        }
         currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetInstanceID()).Item2 as ComicManagerMixin);
         //currentPanelManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == .GetInstanceID()).Item2 as ComicManagerMixin);
         panelFocus = currentComicManagerMixin.currentPanel;

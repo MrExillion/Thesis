@@ -24,9 +24,14 @@ public class ChapterManagerTemplate : PanelSystemTemplateType, MChapterManager, 
         //panelId = comicId;
         //this.InitializeChapterManager();
         this.AddNewMixin<ChapterManagerMixin>(gameObject);
+        
+
+
+    }
+
+    private void Start()
+    {
         this.InitializeComicStructure_chapters(gameObject, this, comicId, this.TrackChapters(chapterOrder));
     }
-
-
-    }
+}
 

@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class PanelManagerTemplate : PanelSystemTemplateType, MThesisAPI, MPanelManager, IGlobalReferenceManager
 {
@@ -20,6 +21,7 @@ public class PanelManagerTemplate : PanelSystemTemplateType, MThesisAPI, MPanelM
         set { panelId = pageId; }
     }
     public List<GameObject> panelOrder;
+    //[HideInInspector] public 
     public bool canTransition = false;
     // private static List<Tuple<int,PanelManagerMixin>> mixin;
 
@@ -38,7 +40,7 @@ public class PanelManagerTemplate : PanelSystemTemplateType, MThesisAPI, MPanelM
     {
 
 
-        (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == this.GetInstanceID()).Item2 as PanelManagerMixin).InvokeTempListReadyDelegate(gameObject, this, pageId);
+        (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GetComponent<PanelManagerMixin>().GetInstanceID()).Item2 as PanelManagerMixin).InvokeTempListReadyDelegate(gameObject, this, pageId);
 
     }
 

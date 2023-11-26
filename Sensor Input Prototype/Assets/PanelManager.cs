@@ -103,14 +103,26 @@ public static class PanelManager
     {
         List<Tuple<GameObject, UniversalPanel, int, int>> tupleListOut;
         tupleListOut = new List<Tuple<GameObject, UniversalPanel, int, int>>();
+
+        
         foreach (Tuple<GameObject, UniversalPanel, int, int> tuple in tempPanels)
         {
             //I am not sure if Tuples only hold pointers or values when replaced, use the commented code if problems occur and null reference exceptions cause doubt
             /*
             Tuple<GameObject, UniversalPanel, int, int> tempTuple1 = new Tuple<GameObject, UniversalPanel, int, int>(tuple.Item1, tuple.Item2, tuple.Item3, tuple.Item4);
-            tupleListOut.Insert(tuple.Item3, tempTuple1);
+            tupleListOut.Insert(tuple.Item3, tempTuple1); 
+            //this premise changed as i had and index issue Using Insert, indicating that the list might be sorted correctly by default. nevertheless i changed the code first to see if this is the case, before omitting the use of the delegate chain.
             */
-            tupleListOut.Insert(tuple.Item3, tuple);
+            int startIndex = tupleListOut.Count; // shift the index start to avoid checking tuples that have already been added to payload
+
+            for (int i = startIndex; tempPanels.Count < i; i--)
+            {
+                if(i == tuple.Item3)
+                {
+                    tupleListOut.Add(tuple);
+                }
+            }
+            
         }
         // Clear the tempPanels to avoid unused memory reservations. The GC behaviour in this regard is unknown.
         tempPanels.Clear();

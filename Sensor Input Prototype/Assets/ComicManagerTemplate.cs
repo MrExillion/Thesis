@@ -9,6 +9,7 @@ using UnityEngine;
 public class ComicManagerTemplate : PanelSystemTemplateType, MTransition, MComicManager, IGlobalReferenceManager
 {
     [SerializeField] public int containerId;
+    public List<GameObject> comicsList;
     public override int panelId
     {
         get { return panelId; }

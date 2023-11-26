@@ -4107,6 +4107,8 @@ MonoBehaviour:
   readOnlyTemplateId: 0
   templateId: 0
   containerId: 0
+  comicsList:
+  - {fileID: 418097681}
   currentPanel: 1
   nextPanel: 2
   previousPanel: 1
@@ -5046,7 +5048,7 @@ GameObject:
   - component: {fileID: 1001011975}
   - component: {fileID: 1001011976}
   m_Layer: 0
-  m_Name: Page1
+  m_Name: Page1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5668,7 +5670,7 @@ GameObject:
   - component: {fileID: 1295329264}
   - component: {fileID: 1295329265}
   m_Layer: 0
-  m_Name: Chapter1
+  m_Name: Chapter1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6523,7 +6525,7 @@ GameObject:
   - component: {fileID: 1602784608}
   - component: {fileID: 1602784609}
   m_Layer: 0
-  m_Name: Chapter1 (1)
+  m_Name: Chapter2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7713,7 +7715,7 @@ GameObject:
   - component: {fileID: 1883901931}
   - component: {fileID: 1883901932}
   m_Layer: 0
-  m_Name: Page1
+  m_Name: Page1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8055,7 +8057,7 @@ GameObject:
   - component: {fileID: 2002541447}
   - component: {fileID: 2002541448}
   m_Layer: 0
-  m_Name: Page1 (1)
+  m_Name: Page2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8264,7 +8266,7 @@ GameObject:
   - component: {fileID: 2019028231}
   - component: {fileID: 2019028232}
   m_Layer: 0
-  m_Name: Page1 (1)
+  m_Name: Page2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
