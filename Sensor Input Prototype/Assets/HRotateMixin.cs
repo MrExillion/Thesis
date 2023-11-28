@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using Unity.Mathematics;
 using SensorInputPrototype.InspectorReadOnlyCode;
 using SensorInputPrototype.MixinInterfaces;
-public class HRotateMixin : MonoBehaviour, MHRotate
+public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
 {
     #if UNITY_EDITOR 
     [ShowOnly]
@@ -182,13 +182,13 @@ public class HRotateMixin : MonoBehaviour, MHRotate
        
         template.UpdateRotation(quaternion.z - initialRotation.z, quaternion.eulerAngles.z - initialRotation.eulerAngles.z);
         template.OnRotatePhone(camera);
-        canTransition = template.TryTransition();
+        canTransition = template.IsTransitionConditionMet();
         
         if (MathF.Truncate(Time.realtimeSinceStartup) % 5f == 0 && isRunningDebug == false)
         {
-            //template.CallbackExecute("TryTransition",Debug.Log(""));
+            //mixin.CallbackExecute("TryTransition",Debug.Log(""));
 
-            Debug.Log("bool TryTransition() Returned:\t" + template.TryTransition() + ",\t"+gameObject.GetComponent<UniversalPanel>().PanelId);
+            Debug.Log("bool TryTransition() Returned:\t" + template.IsTransitionConditionMet() + ",\t"+gameObject.GetComponent<UniversalPanel>().PanelId);
             Debug.Log("quaternionMonitoring: " + quaternion.ToString() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
             Debug.Log("compass adjust: " + compassAdjust + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
             isRunningDebug = true;
@@ -199,7 +199,11 @@ public class HRotateMixin : MonoBehaviour, MHRotate
         }
 
 
-
+        if(canTransition)
+        this.TriggerTransition();
 
     }
+    
+
+
 }

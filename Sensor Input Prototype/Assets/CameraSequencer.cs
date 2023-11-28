@@ -15,14 +15,14 @@ public class CameraSequencer : MonoBehaviour, MTransition
     [ShowOnly] 
     #endif
     [SerializeField]
-    private int panelFocus = 1;
+    public int panelFocus = 1;
     #if UNITY_EDITOR 
     [ShowOnly] 
     #endif
     [SerializeField]
     private bool panelTransition = false;
-    private static ComicManagerMixin currentComicManagerMixin;
-    private static ComicManagerTemplate comicManager;
+    [SerializeField] public ComicManagerMixin currentComicManagerMixin;
+    [SerializeField] public ComicManagerTemplate comicManager;
     private void Awake()
     {
         
@@ -35,25 +35,45 @@ public class CameraSequencer : MonoBehaviour, MTransition
 
     private void OnEnable()
     {
-        GlobalReferenceManager.SetActiveComic(comicManager);
+        //currentComicManagerMixin = ComicManagerMixin.mixin;
+        //ComicManager.PrimaryComic = ComicManagerMixin.mixin;
+        //GlobalReferenceManager.SetActiveComic(comicManager);
+
     }
+    private void Start()
+    {
+        currentComicManagerMixin = ComicManagerMixin.mixin;
+        if(ComicManager.PrimaryComic == null)
+        {
+            //ComicManager.PrimaryComic = ComicManager.getComicsList()[0].Item2;
+            ComicManager.PrimaryComic = comicManager;
+        }
+        
+        
+    }
+
     private void Update()
     {
-        
-        comicManager = (GlobalReferenceManager.GetActiveComicTemplate() as ComicManagerTemplate);
+        //GlobalReferenceManager.SetActiveComic(comicManager);
+        //comicManager = (GlobalReferenceManager.GetActiveComicTemplate() as ComicManagerTemplate);
         foreach( System.Tuple<int, Component> tuples in GlobalReferenceManager.MixinPairs)
         {
-            Debug.Log(tuples.Item1, tuples.Item2);
+            //Debug.Log(tuples.Item1, tuples.Item2);
 
         }
-        currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetInstanceID()).Item2 as ComicManagerMixin);
+        //GlobalReferenceManager.AddNewMixin<ComicManagerMixin>(this.comicManager,comicManager.gameObject);
+
+        currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin);
+        //currentComicManagerMixin = ComicManager.PrimaryComic.GetPrimaryMixin();
         //currentPanelManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == .GetInstanceID()).Item2 as ComicManagerMixin);
         panelFocus = currentComicManagerMixin.currentPanel;
         panelTransition = this.CanTransition();
 
 
+
         if(panelTransition)
         {
+            
             panelFocus = comicManager.nextPanel;
             Debug.Log("PanelTransitioned: " + GetPanelFocus());
             gameObject.transform.position = new Vector3(

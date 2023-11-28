@@ -4,31 +4,32 @@ using UnityEngine;
 using SensorInputPrototype.MixinInterfaces;
 public class ComicManagerMixin : MonoBehaviour, MComicManager, IGlobalReferenceManager
 {
-    internal int currentPanel;
-    internal int currentChapter;
-    internal int currentPage;
-    internal int currentComic;
-    internal int nextPanel;
-    internal int nextChapter;
-    internal int nextPage;
-    internal int nextComic;
-    internal int previousPanel;
-    internal int previousChapter;
-    internal int previousPage;
-    internal int previousComic;
+    public int currentPanel = 0;
+    public int currentChapter = 0;
+    public int currentPage = 0;
+    public int currentComic = 0;
+    public int nextPanel = 1;
+    public int nextChapter = 1;
+    public int nextPage = 1;
+    public int nextComic = 1;
+    public int previousPanel = -1;
+    public int previousChapter = -1;
+    public int previousPage =  -1;
+    public int previousComic = 1;
 
-    //public static ComicManagerTemplate template;
+    public static ComicManagerMixin mixin;
     private void Start()
     {
-        //if (template == null)
-        //    template = gameObject.GetComponent<ComicManagerTemplate>();
-        //else
-        //    return;        
+        if (mixin == null)
+            mixin = this;
+            
+        else
+            return;
     }
 
     private void Update()
     {
-        //template.UpdateTransitionTypeLine(template);
+        //mixin.UpdateTransitionTypeLine(mixin);
     }
 
     public void TemporaryComicManagerPropGet()

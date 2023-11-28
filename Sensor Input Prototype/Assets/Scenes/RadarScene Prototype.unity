@@ -2697,6 +2697,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelFocus: 1
   panelTransition: 0
+  currentComicManagerMixin: {fileID: 0}
+  comicManager: {fileID: 749030444}
 --- !u!1001 &634728099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7886,11 +7888,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959160483}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57e552f1e46767949bf036504caa467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hierarchy: []
+  comicContainer: {fileID: 0}
 --- !u!4 &1959160485
 Transform:
   m_ObjectHideFlags: 0
@@ -8924,8 +8928,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 580251443}
   - {fileID: 1959160485}
+  - {fileID: 580251443}
   - {fileID: 490322953}
   - {fileID: 749030443}
   - {fileID: 1986149815}

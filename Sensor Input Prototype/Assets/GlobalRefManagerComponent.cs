@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using SensorInputPrototype.MixinInterfaces;
 using System;
+#if UNITY_EDITOR
 using UnityEditor.SearchService;
+
 using UnityEngine.SceneManagement;
 using Unity.Android.Types;
 using UnityEditor;
 using System.ComponentModel;
-
+#endif
 public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
 {
 

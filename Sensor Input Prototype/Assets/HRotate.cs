@@ -16,7 +16,7 @@ public static class HRotate
 
         table = new ConditionalWeakTable<MHRotate, Fields>();
     }
-    private sealed class Fields
+    private sealed class Fields : MTransition
     {
         internal float horizontalRotation = 0f; // this should match the cameras current rotation  --- and it should reset on transition complete
         internal float horizontalRotationEuler = 0;
@@ -40,7 +40,7 @@ public static class HRotate
         camera.gameObject.transform.rotation = new Quaternion(camera.transform.rotation.x, camera.transform.rotation.y, table.GetOrCreateValue(map).horizontalRotation, camera.transform.rotation.w);
         
     }
-    public static bool TryTransition(this MHRotate map)
+    public static bool IsTransitionConditionMet(this MHRotate map)
     {
         //Debug.Log("Horizontal Angle: " + table.GetOrCreateValue(map).horizontalRotationEuler);
 

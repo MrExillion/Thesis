@@ -14,7 +14,7 @@ public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceM
     //public int currentPanel = 1;
     //public int nextPanel = 2;
     //public static PanelManagerMixin panelManager;
-    //public static PanelManagerTemplate template;
+    //public static PanelManagerTemplate mixin;
     public bool canTransition = false;
     //private static int transitionToDo = 0;
 
@@ -25,7 +25,7 @@ public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceM
     //    else
     //        return;
     //}
-    //public static ComicManagerTemplate template;
+    //public static ComicManagerTemplate mixin;
 
     /*
      PanelManagerTemplate Has the following Fields:

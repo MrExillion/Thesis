@@ -89,7 +89,7 @@ public static class ComicManager
     //    {
     //        if (table.GetOrCreateValue(map).GetPanel(table.GetOrCreateValue(map).currentPanel) == panel)
     //        {
-    //            transitionsTable.GetOrCreateValue(map).transitionToDo = panel.GetComponent<UniversalPanel>().GetTransitionType(panelOrder[ComicManagerMixin.template.currentPanel].GetComponent(typeof(comicStructureContainerClassName).GetEnumName(ClassCaller(keywordThis)))) // this should be a return type function from an interface that handles both panels and pages
+    //            transitionsTable.GetOrCreateValue(map).transitionToDo = panel.GetComponent<UniversalPanel>().GetTransitionType(panelOrder[ComicManagerMixin.mixin.currentPanel].GetComponent(typeof(comicStructureContainerClassName).GetEnumName(ClassCaller(keywordThis)))) // this should be a return type function from an interface that handles both panels and pages
 
 
     //        }
@@ -100,6 +100,7 @@ public static class ComicManager
     public static void SetPrimaryComic<T>(this MComicManager map) where T : ComicManagerTemplate
     {
         PrimaryComic = table.GetOrCreateValue(map).GetComponent<T>();
+        table.GetOrCreateValue(map).mixin.GetOrAddComponent<T>();
     }
 
 

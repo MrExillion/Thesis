@@ -18,6 +18,7 @@ public static class GlobalReferenceManager
     private static ChapterManagerTemplate activeChapterTemplate = null;
     private static PageManagerTemplate activePageTemplate = null;
     private static PanelManagerTemplate activePanelTemplate = null;
+    private static ComicManagerMixin comicManagerMixin = null;
 
 
 
@@ -30,7 +31,7 @@ public static class GlobalReferenceManager
         MixinPairs = new List<Tuple<int, UnityEngine.Component>>();
         table = new ConditionalWeakTable<IGlobalReferenceManager, Fields>();
         // dictionary = new Dictionary<int, ComicManagerTemplate>();
-
+        
     }
     private sealed class Fields : MonoBehaviour, IGlobalReferenceManager, MThesisAPI
     {

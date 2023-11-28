@@ -70,6 +70,18 @@ public static class PanelManager
             return panels.Find(x=> x.Item2 == (map as Component)).Item4.Find(x=> x.Item3 == panelId).Item4;
             //GetPanelTransition(map, panelId);
     }
+    public static int GetNumberOfPanels(this MPanelManager map)
+    {
+
+        return panels.Count;
+    }
+
+    public static int GetPanelIndexInList(this MPanelManager map, int panelId)
+    {
+
+        return panels.IndexOf(panels.Find(x => x.Item4.Find(x => x.Item3 == panelId) == x.Item4.Find(x => x.Item3 == panelId)));
+
+    }
 
 
     public static void InitializeComicStructure_panels(this MPanelManager map, GameObject gameObject, PanelManagerTemplate panelManagerTemplate, int panelID, 

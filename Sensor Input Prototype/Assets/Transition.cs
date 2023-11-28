@@ -11,8 +11,11 @@ public static class Transition
 {
 
     private static ConditionalWeakTable<MTransition, Fields> table;
-    public delegate void TransitionCB();
-
+    public delegate void TransitionCB(MTransition map);
+    public static bool atEndOfPage = false;
+    public static bool atEndOfChapter = false;
+    public static bool atEndOfComic = false;
+   
 
     static Transition()
     {
@@ -28,11 +31,46 @@ public static class Transition
 
         void Update()
         {
-            // just used to update canTransition
-            canTransition = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetInstanceID()).Item2 as ComicManagerMixin).CanTransition(); // In theory it should look at the fields associated with the implementation inside the extension, but this might be incorrect.
+            //    // just used to update canTransition
+            //    canTransition = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetInstanceID()).Item2 as ComicManagerMixin).CanTransition(); // In theory it should look at the fields associated with the implementation inside the extension, but this might be incorrect.
 
+            /*
+                First check if the panel can transition or not.
+            
+                    then if it can, check if at the end of page
+                        if yes then check if at the end of chapter
+                            if yes then check if at the end of comic
+                                if yes then transition to next comic,
+                                else
+                                    transition to next chapter
+                            else
+                                transition to next page
+                       else
+                            transition to next panel
+                .... in this case we just want to set the bools.
+            then the CanTransition will simply set the bools in the GlobalReferenceManager or something
+                
+             
+             */
 
+            if (canTransition)
+            {
+                
+                if (GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<UniversalPanel>().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count)
+                {
+                    Transition.atEndOfPage = canTransition;
 
+                    if (GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count)
+                    {
+                        Transition.atEndOfChapter = canTransition;
+                        if (GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<PageManagerTemplate>().chapterId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count)
+                        {
+                            Transition.atEndOfComic = canTransition;
+                        }
+                    }
+                }
+            }
+            
         }
 
 
@@ -53,7 +91,7 @@ public static class Transition
                 try
                 {
                     
-                    cB?.Invoke();
+                    cB?.Invoke(map);
                 }
                 catch
                 {
@@ -89,6 +127,27 @@ public static class Transition
         table.GetOrCreateValue(map).transitionCB.Add(delegateFunction);
 
     }
+
+    public static void TryTransition(this MTransition map)
+    {
+        table.GetOrCreateValue(map).canTransition = true;
+
+    }
+
+    public static void TriggerTransition(this MTransition map)
+    {
+        
+        //AddTransitionCallBack(thi)
+        table.GetOrCreateValue(map).AddTransitionCallBack(ResetLocalTransitionState);
+        //table.GetOrCreateValue(map).canTransition = true;
+        map.TryTransition();
+    }
+
+    public static void ResetLocalTransitionState(this MTransition map)
+    {
+        table.GetOrCreateValue(map).canTransition = false;
+    }
+
 
 }
 

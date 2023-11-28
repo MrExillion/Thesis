@@ -3,12 +3,12 @@ using UnityEditor;
 using System.Runtime.CompilerServices;
 using SensorInputPrototype.MixinInterfaces;
 
-[CustomEditor(typeof(IGlobalReferenceManager))]
-[CanEditMultipleObjects]
+//[CustomEditor(typeof(IGlobalReferenceManager))]
+//[CanEditMultipleObjects]
 
 
-public class ManagerEditorHelper : Editor,IGlobalReferenceManager
-{
+//public class ManagerEditorHelper : Editor,IGlobalReferenceManager
+//{
 
     //SerializedProperty comicManagerProperty1;
 
@@ -29,6 +29,6 @@ public class ManagerEditorHelper : Editor,IGlobalReferenceManager
     //    {
     //        EditorUtility.DisplayDialog("MyTool", "Do It in C# !", "OK", "");
     //    }
-}
+//}
 
 
