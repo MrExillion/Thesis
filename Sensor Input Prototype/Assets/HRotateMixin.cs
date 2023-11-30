@@ -133,7 +133,7 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus())
+        if(gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus()+1)
         {
             Debug.Log("PanelId: "+gameObject.GetComponent<UniversalPanel>().PanelId +" , GetPanelFocus() => "+ Camera.main.GetComponent<CameraSequencer>().GetPanelFocus());
             return;
