@@ -153,11 +153,11 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     }
     public static Tuple<GameObject, UniversalPanel, int, int> GetLastTuple()
     {
-        int layer1 = ComicManager.getComicsList().Count;
-        int layer2 = ComicManager.getComicsList()[layer1 ].Item4.Count;
-        int layer3 = ComicManager.getComicsList()[layer1 ].Item4[layer2].Item4.Count;
-        int layer4 = ComicManager.getComicsList()[layer1 ].Item4[layer2 ].Item4[layer3].Item4.Count;
-        int layer5 = ComicManager.getComicsList()[layer1 ].Item4[layer2 ].Item4[layer3].Item4[layer4].Item4.Count;
+        int layer1 = ComicManager.getComicsList().Count-1;
+        int layer2 = ComicManager.getComicsList()[layer1 ].Item4.Count-1;
+        int layer3 = ComicManager.getComicsList()[layer1 ].Item4[layer2].Item4.Count-1;
+        int layer4 = ComicManager.getComicsList()[layer1 ].Item4[layer2 ].Item4[layer3].Item4.Count-1;
+        int layer5 = ComicManager.getComicsList()[layer1 ].Item4[layer2 ].Item4[layer3].Item4[layer4].Item4.Count-1;
         return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
 
     }
