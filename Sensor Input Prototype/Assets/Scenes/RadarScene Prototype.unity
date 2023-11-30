@@ -7888,13 +7888,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959160483}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57e552f1e46767949bf036504caa467d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hierarchy: []
-  comicContainer: {fileID: 0}
+  primaryComic: {fileID: 749030442}
 --- !u!4 &1959160485
 Transform:
   m_ObjectHideFlags: 0

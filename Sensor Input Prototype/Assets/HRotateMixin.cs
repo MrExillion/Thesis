@@ -32,7 +32,7 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     [SerializeField]
     private static HRotateTemplate template;
     private bool isRunningDebug;
-
+    private bool triggered = true;
     private void Awake()
     {
         //if (gameObject.GetComponent<HRotateTemplate>() == t.GetComponent<HRotateTemplate>())
@@ -133,6 +133,18 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     // Update is called once per frame
     void Update()
     {
+        if(gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus())
+        {
+            Debug.Log("PanelId: "+gameObject.GetComponent<UniversalPanel>().PanelId +" , GetPanelFocus() => "+ Camera.main.GetComponent<CameraSequencer>().GetPanelFocus());
+            return;
+        }
+        if(!triggered && template.IsTransitionConditionMet())
+        {
+            Debug.Log("Triggered: " + triggered + " , IsTransitionConditionsMet() => " + template.IsTransitionConditionMet());   
+            return;
+        }
+       
+
         
         int heading = (int)MathF.Truncate(Input.compass.magneticHeading);
         if (MathF.Abs(heading) >= 360 && heading != 0)
@@ -182,25 +194,34 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
        
         template.UpdateRotation(quaternion.z - initialRotation.z, quaternion.eulerAngles.z - initialRotation.eulerAngles.z);
         template.OnRotatePhone(camera);
+
+        if (template.IsTransitionConditionMet() == false)
+            triggered = true;
+
+
         canTransition = template.IsTransitionConditionMet();
         
         if (MathF.Truncate(Time.realtimeSinceStartup) % 5f == 0 && isRunningDebug == false)
         {
             //mixin.CallbackExecute("TryTransition",Debug.Log(""));
 
-            Debug.Log("bool TryTransition() Returned:\t" + template.IsTransitionConditionMet() + ",\t"+gameObject.GetComponent<UniversalPanel>().PanelId);
-            Debug.Log("quaternionMonitoring: " + quaternion.ToString() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
-            Debug.Log("compass adjust: " + compassAdjust + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
+            //Debug.Log("bool TryTransition() Returned:\t" + template.IsTransitionConditionMet() + ",\t"+gameObject.GetComponent<UniversalPanel>().PanelId);
+           // Debug.Log("quaternionMonitoring: " + quaternion.ToString() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
+           // Debug.Log("compass adjust: " + compassAdjust + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
             isRunningDebug = true;
         }
-        else
+        else if (MathF.Truncate(Time.realtimeSinceStartup) % 5f != 0)
         {
             isRunningDebug = false;
         }
 
 
-        if(canTransition)
-        this.TriggerTransition();
+        if(canTransition && triggered)
+        {
+            this.TriggerTransition();
+            triggered = false;
+        }
+
 
     }
     

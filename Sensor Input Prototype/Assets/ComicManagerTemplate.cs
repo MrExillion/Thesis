@@ -29,9 +29,17 @@ public class ComicManagerTemplate : PanelSystemTemplateType, MTransition, MComic
         // DO NOT CALL Templates SetPanelID() -- need a fix or this.
         // SetUp All Properties Shared across hierachy
         //this.SetPrimaryComic<ComicManagerTemplate>(); // I think this should be discontinued now that i have a GloablReferenceSingleton
-        //GlobalReferenceManager.SetActiveComic(this);
+        //GlobalReferenceManager.SetActiveComicContainer(this);
         
 
     }
+    void Update()
+    {
+
+        previousPanel = GetComponent<ComicManagerMixin>().nextPanel;
+        currentPanel = GetComponent<ComicManagerMixin>().currentPanel;
+        nextPanel = GetComponent<ComicManagerMixin>().nextPanel;
+    }
+
 }
 

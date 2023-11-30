@@ -37,7 +37,7 @@ public class CameraSequencer : MonoBehaviour, MTransition
     {
         //currentComicManagerMixin = ComicManagerMixin.mixin;
         //ComicManager.PrimaryComic = ComicManagerMixin.mixin;
-        //GlobalReferenceManager.SetActiveComic(comicManager);
+        //GlobalReferenceManager.SetActiveComicContainer(comicManager);
 
     }
     private void Start()
@@ -54,35 +54,36 @@ public class CameraSequencer : MonoBehaviour, MTransition
 
     private void Update()
     {
-        //GlobalReferenceManager.SetActiveComic(comicManager);
+        //GlobalReferenceManager.SetActiveComicContainer(comicManager);
         //comicManager = (GlobalReferenceManager.GetActiveComicTemplate() as ComicManagerTemplate);
-        foreach( System.Tuple<int, Component> tuples in GlobalReferenceManager.MixinPairs)
-        {
-            //Debug.Log(tuples.Item1, tuples.Item2);
+        //foreach( System.Tuple<int, Component> tuples in GlobalReferenceManager.MixinPairs)
+        //{
+        //    //Debug.Log(tuples.Item1, tuples.Item2);
 
-        }
+        //}
         //GlobalReferenceManager.AddNewMixin<ComicManagerMixin>(this.comicManager,comicManager.gameObject);
-
-        currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin);
+        if(currentComicManagerMixin == null)
+            currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin);
         //currentComicManagerMixin = ComicManager.PrimaryComic.GetPrimaryMixin();
         //currentPanelManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == .GetInstanceID()).Item2 as ComicManagerMixin);
         panelFocus = currentComicManagerMixin.currentPanel;
-        panelTransition = this.CanTransition();
-
-
+        panelTransition = GlobalReferenceManager.GetCurrentUniversalPanel().CanTransition();
+        Debug.Log("Can Transition?   " + panelTransition);
 
         if(panelTransition)
         {
-            
+            Debug.Log("PanelTransitioned from: " + GetPanelFocus() +" to: "+comicManager.nextPanel);
             panelFocus = comicManager.nextPanel;
             Debug.Log("PanelTransitioned: " + GetPanelFocus());
             gameObject.transform.position = new Vector3(
-                (currentComicManagerMixin.GetPanel(
-                GlobalReferenceManager.GetActivePanelTemplate(),panelFocus).GetComponent<PanelManagerMixin>()).NextPanelAnchor("x"),
-                (currentComicManagerMixin.GetPanel(
-                GlobalReferenceManager.GetActivePanelTemplate(), panelFocus).GetComponent<PanelManagerMixin>()).NextPanelAnchor("y"),
-                    gameObject.transform.position.z);
-            Transition.Next(currentComicManagerMixin);
+                (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("x"),
+                (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("y"),
+                gameObject.transform.position.z);
+
+            
+            
+            //Transition.Next(currentComicManagerMixin);
+
 
 
             //panelTransition = false; //should be a callback instead
@@ -90,7 +91,7 @@ public class CameraSequencer : MonoBehaviour, MTransition
             //comicManager.GetPrimaryMixin().nextPanel = comicManager.GetPrimaryMixin().nextPanel + 1;
             //if(comicManager.GetPrimaryMixin().panelOrder.Length -1 == comicManager.GetPrimaryMixin().currentPanel)
             //{
-                //comicManager.GetPrimaryMixin().nextPanel = 1;
+            //comicManager.GetPrimaryMixin().nextPanel = 1;
             //}
         }
         else

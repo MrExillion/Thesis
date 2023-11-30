@@ -41,7 +41,7 @@ public static class ComicManager
 
 
         table = new ConditionalWeakTable<MComicManager, Fields>();
-        transitionsTable = new ConditionalWeakTable<MTransition, TransitionFields>();
+       // transitionsTable = new ConditionalWeakTable<MTransition, TransitionFields>();
 
 
     }
@@ -119,45 +119,7 @@ public static class ComicManager
 
     }
 
-    public static bool CheckForTransition(this MComicManager map)
-    {
-        int nextInLineTransitionType = transitionsTable.GetOrCreateValue(map).transitionToDo;
-        int currentPanel = transitionsTable.GetOrCreateValue(map).currentPanel;
-        Debug.Log("TransitionType: " + nextInLineTransitionType + ",\tgameObject: " + map + ",\tPanelId: " + currentPanel, table.GetOrCreateValue(map).gameObject);
-        switch (nextInLineTransitionType)
-        {
-            case 0:
-                //if(gameObject.GetComponent<HRotateMixin>() == null)
-                //{
-                //Debug.Assert(GetComponent<HRotateMixin>() == null, "Universal Panel, with ID: " + gameObject.GetComponent<UniversalPanel>().PanelId.ToString() + ", has evaluated: \"GetComponent<HRotateMixin>() == null\" ",gameObject.GetComponent<UniversalPanel>());
-                // goto default;
-                //}
-                // else
-                // {
-                //Debug.Log("CanTransition:\t"+GetComponent<HRotateMixin>().canTransition+",\t"+this.PanelId);
-                try { return map.GetAllOfSameType(map, false)[currentPanel].GetComponent<HRotateMixin>().canTransition; }
-                catch
-                {
-                    //Debug.LogError("Somthing bad happened", gameObject);
-                    return false;
-                }
-            // }
-
-
-            case 1:
-
-
-            case 2:
-
-            case 3:
-
-            case 4:
-
-            default:
-                Debug.Log("Transition not found, defaulting");
-                return false;
-        }
-    }
+   
 
     /// <summary>
     /// Only looks for panel within context, cannot reference panels higher in the hierarchy, returns GameObject, use GetUniversalPanel to get the script reference.

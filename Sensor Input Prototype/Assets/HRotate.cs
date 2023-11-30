@@ -4,6 +4,8 @@ using UnityEngine;
 using SensorInputPrototype.InspectorReadOnlyCode;
 using Unity.Mathematics;
 using SensorInputPrototype.MixinInterfaces;
+using Unity.VisualScripting;
+
 public static class HRotate
 {
 #if UNITY_EDITOR
@@ -16,10 +18,12 @@ public static class HRotate
 
         table = new ConditionalWeakTable<MHRotate, Fields>();
     }
-    private sealed class Fields : MTransition
+    private sealed class Fields : MonoBehaviour, MTransition
     {
         internal float horizontalRotation = 0f; // this should match the cameras current rotation  --- and it should reset on transition complete
         internal float horizontalRotationEuler = 0;
+        internal bool hasTransitioned = false;
+        
         //[SerializeField] internal GameObject signalObject; // used in Radar to track game objects or instantiate them
         internal enum CallbackRegistry { GetCallbackRegistry = 0, UpdateRotation = 1, GetHRotation = 2, OnRotatePhone = 3, TryTransition = 4};
     }
@@ -28,6 +32,28 @@ public static class HRotate
         table.GetOrCreateValue(map).horizontalRotation = rotationToSave;
         table.GetOrCreateValue(map).horizontalRotationEuler = eulerAngleToSave;
         //Debug.Log(table.GetOrCreateValue(map).horizontalRotation);
+    }
+
+    public static bool IsReset(this MHRotate map)
+    {
+        
+
+        GameObject gameObject = (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[(int)MathF.Abs( (float) Camera.main.GetComponent<CameraSequencer>().currentComicManagerMixin.previousPanel )];
+        if(gameObject.GetComponent<UniversalPanel>().transitionType == (int)Transition.transitionTypes.HRotate)
+        {
+            if (((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f)) && table.GetOrCreateValue(gameObject.GetComponent<HRotateTemplate>()).hasTransitioned)
+            {
+                table.GetOrCreateValue(map).hasTransitioned = table.GetOrCreateValue(gameObject.GetComponent<HRotateTemplate>()).hasTransitioned;
+            }
+            else if (!((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f)) && table.GetOrCreateValue(gameObject.GetComponent<HRotateTemplate>()).hasTransitioned)
+            {
+                table.GetOrCreateValue(gameObject.GetComponent<HRotateTemplate>()).hasTransitioned = false;
+                table.GetOrCreateValue(map).hasTransitioned = table.GetOrCreateValue(gameObject.GetComponent<HRotateTemplate>()).hasTransitioned;
+            }
+
+
+        }
+        return table.GetOrCreateValue(map).hasTransitioned;
     }
 
     public static float GetHRotation(this MHRotate map)
@@ -43,9 +69,13 @@ public static class HRotate
     public static bool IsTransitionConditionMet(this MHRotate map)
     {
         //Debug.Log("Horizontal Angle: " + table.GetOrCreateValue(map).horizontalRotationEuler);
-
-        //float angleZ = Camera.main.gameObject.transform.rotation.eulerAngles.z;
-        return ((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f) );
+        
+            if (((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f)))
+              table.GetOrCreateValue(map).hasTransitioned = true;
+            
+        
+                //float angleZ = Camera.main.gameObject.transform.rotation.eulerAngles.z;
+         return ((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f));
         //return (MathF.Acos(table.GetOrCreateValue(map).horizontalRotation) < -60.0f || MathF.Acos(table.GetOrCreateValue(map).horizontalRotation) > 60.0f);
 
     }

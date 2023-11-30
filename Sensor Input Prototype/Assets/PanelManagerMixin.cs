@@ -109,34 +109,90 @@ public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceM
     public float NextPanelAnchor(string axisLetter)
     {
 
-        if (Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1 < this.GetNumberOfPanels(this, false))
+        //if (Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1 < this.GetNumberOfPanels(this, false))
+        if (!Transition.atEndOfPage)
         {
 
 
             if (axisLetter == "y")
             {
-                return GetComponent<PanelManagerTemplate>().panelOrder[Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1].transform.position.y;
+                float outValue = GetComponent<PanelManagerTemplate>().panelOrder[Camera.main.GetComponent<CameraSequencer>().GetPanelFocus()].transform.position.y;
+                (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin).previousPanel = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin).currentPanel;
+
+                (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin).currentPanel = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin).nextPanel;
+                if((GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin).nextPanel == GetComponent<PanelManagerTemplate>().panelOrder.Count - 1)
+                {
+                    (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin).nextPanel = 0;
+                }
+                else
+                {
+                    (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == GlobalReferenceManager.GetActiveComicTemplate().GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin).nextPanel += 1;
+                }
+                
+
+
+
+                return outValue;
+
+
             }
             else
             {
-                Debug.Log(Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1);
-                return GetComponent<PanelManagerTemplate>().panelOrder[Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1].transform.position.x;
+                Debug.Log("Focus Gained on: "+(Camera.main.GetComponent<CameraSequencer>().GetPanelFocus()));
+                float outValue = GetComponent<PanelManagerTemplate>().panelOrder[Camera.main.GetComponent<CameraSequencer>().GetPanelFocus()].transform.position.x;
+                
+                return outValue;
             }
             //should throw exception here if bad.
         }
-        else // next page instead, currently just loops. Should it loop if no more pages? => In the beginning yes.
+        else if (!Transition.atEndOfChapter && !Transition.atEndOfComic)
         {
-            if (axisLetter == "y")
+            if (axisLetter == "x")
             {
-                return GetComponent<PanelManagerTemplate>().panelOrder[0].transform.position.y;
+                GlobalReferenceManager.SetActivePanelContainer((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).pageOrder[this.GetComponent<PanelManagerTemplate>().pageId + 1].GetComponent<PanelManagerTemplate>());
+                Transition.atEndOfPage = false;
             }
-            else
+                
+            return GlobalReferenceManager.GetActivePanelTemplate().GetComponent<PanelManagerMixin>().NextPanelAnchor(axisLetter);
+        }
+        else if (!Transition.atEndOfComic)
+        {
+            if (axisLetter == "x")
             {
-                Debug.Log(0);
-                return GetComponent<PanelManagerTemplate>().panelOrder[0].transform.position.x;
+                GlobalReferenceManager.SetActivePageContainer((GlobalReferenceManager.GetActiveChapterTemplate() as ChapterManagerTemplate).chapterOrder[(GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId + 1].GetComponent<PageManagerTemplate>());
+                GlobalReferenceManager.SetActivePanelContainer((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).pageOrder[0].GetComponent<PanelManagerTemplate>());
+                Transition.atEndOfChapter = false; Transition.atEndOfPage = false;
             }
+            
+            return GlobalReferenceManager.GetActivePanelTemplate().GetComponent<PanelManagerMixin>().NextPanelAnchor(axisLetter);
+        }
+        else
+        {
+            if (axisLetter == "x")
+            {
+                GlobalReferenceManager.SetActiveChapterContainer((GlobalReferenceManager.GetActiveComicTemplate() as ComicManagerTemplate).comicsList[0].GetComponent<ChapterManagerTemplate>());
+                GlobalReferenceManager.SetActivePageContainer((GlobalReferenceManager.GetActiveChapterTemplate() as ChapterManagerTemplate).chapterOrder[0].GetComponent<PageManagerTemplate>());
+                GlobalReferenceManager.SetActivePanelContainer((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).pageOrder[0].GetComponent<PanelManagerTemplate>());
+                Transition.atEndOfPage = false; Transition.atEndOfChapter = false; Transition.atEndOfComic = false;
+
+
+            }
+            return GlobalReferenceManager.GetActivePanelTemplate().GetComponent<PanelManagerMixin>().NextPanelAnchor(axisLetter);
+
+            //if (axisLetter == "y")
+            //{
+            //    return GetComponent<PanelManagerTemplate>().panelOrder[0].transform.position.y;
+            //}
+            //else
+            //{
+            //    Debug.Log(0);
+            //    return GetComponent<PanelManagerTemplate>().panelOrder[0].transform.position.x;
+            //}
 
         }
+        Debug.Log((Transition.atEndOfPage && Transition.atEndOfChapter && Transition.atEndOfComic) + ",  ERROR Code should be Unreachable, but was executed: Defaulting Transition to panel 0 in the current context.", this);
+        return GetComponent<PanelManagerTemplate>().panelOrder[0].transform.position.x;
+
     }
 
 

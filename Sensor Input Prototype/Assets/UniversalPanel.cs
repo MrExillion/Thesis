@@ -62,4 +62,29 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
         
     }
 
+    public static bool ResetConditions(UniversalPanel panel)
+    {
+        switch (panel.transitionType)
+        {
+            case (int)Transition.transitionTypes.HRotate:
+                {
+
+                    
+                    return !(panel.GetComponent<HRotateMixin>().IsTransitionConditionMet());
+
+
+                    
+
+                }
+
+            default:
+                return false;
+                break;
+        
+        
+        }
+
+                
+    }
+
 }

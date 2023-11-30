@@ -15,7 +15,7 @@ public class ComicManagerMixin : MonoBehaviour, MComicManager, IGlobalReferenceM
     public int previousPanel = -1;
     public int previousChapter = -1;
     public int previousPage =  -1;
-    public int previousComic = 1;
+    public int previousComic = -1;
 
     public static ComicManagerMixin mixin;
     private void Start()
@@ -30,6 +30,8 @@ public class ComicManagerMixin : MonoBehaviour, MComicManager, IGlobalReferenceM
     private void Update()
     {
         //mixin.UpdateTransitionTypeLine(mixin);
+        
+
     }
 
     public void TemporaryComicManagerPropGet()
