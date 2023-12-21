@@ -968,7 +968,7 @@ public static class ComicManager
          List<Tuple<GameObject, PanelManagerTemplate, int,
             List<Tuple<GameObject, UniversalPanel, int, int
                 >>>>>>>>>>
-    getComicsList()
+    getComicsList(this MComicManager map)
     {
 
         return comicHierachy;

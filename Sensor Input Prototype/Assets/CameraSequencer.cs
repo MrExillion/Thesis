@@ -9,7 +9,7 @@ using UnityEngine;
 using SensorInputPrototype.InspectorReadOnlyCode;
 using SensorInputPrototype.MixinInterfaces;
 
-public class CameraSequencer : MonoBehaviour, MTransition
+public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
 {
     #if UNITY_EDITOR 
     [ShowOnly] 
@@ -23,6 +23,9 @@ public class CameraSequencer : MonoBehaviour, MTransition
     private bool panelTransition = false;
     [SerializeField] public ComicManagerMixin currentComicManagerMixin;
     [SerializeField] public ComicManagerTemplate comicManager;
+    private bool blockChainReaction = false;
+    private int previousTransitionType = -1;
+
     private void Awake()
     {
         
@@ -62,16 +65,27 @@ public class CameraSequencer : MonoBehaviour, MTransition
 
         //}
         //GlobalReferenceManager.AddNewMixin<ComicManagerMixin>(this.comicManager,comicManager.gameObject);
-        if(currentComicManagerMixin == null)
-            currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin);
+
+
+
+
+        if (currentComicManagerMixin == null)
+        { currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin);
+        }
+        if (previousTransitionType == (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType)
+        {
+            blockChainReaction = true;
+        }
+
         //currentComicManagerMixin = ComicManager.PrimaryComic.GetPrimaryMixin();
         //currentPanelManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == .GetInstanceID()).Item2 as ComicManagerMixin);
         panelFocus = currentComicManagerMixin.currentPanel;
         panelTransition = GlobalReferenceManager.GetCurrentUniversalPanel().CanTransition();
         Debug.Log("Can Transition?   " + panelTransition);
 
-        if(panelTransition)
+        if(panelTransition && !blockChainReaction)
         {
+            GlobalReferenceManager.GetCurrentUniversalPanel().ResetCanTransition();
             Debug.Log("PanelTransitioned from: " + GetPanelFocus() +" to: "+comicManager.nextPanel);
             panelFocus = comicManager.nextPanel;
             Debug.Log("PanelTransitioned: " + GetPanelFocus());
@@ -79,9 +93,9 @@ public class CameraSequencer : MonoBehaviour, MTransition
                 (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("x"),
                 (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("y"),
                 gameObject.transform.position.z);
+            panelTransition = false;
+            previousTransitionType = GlobalReferenceManager.GetCurrentUniversalPanel().transitionType;
 
-            
-            
             //Transition.Next(currentComicManagerMixin);
 
 
@@ -94,9 +108,9 @@ public class CameraSequencer : MonoBehaviour, MTransition
             //comicManager.GetPrimaryMixin().nextPanel = 1;
             //}
         }
-        else
+        else if(blockChainReaction && UniversalPanel.ResetConditions(GlobalReferenceManager.GetCurrentUniversalPanel()))
         {
-
+            blockChainReaction = false;
         }
     }
 

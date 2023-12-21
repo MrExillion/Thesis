@@ -8,7 +8,7 @@ public class HRotateTemplate : InteractionType, MHRotate, MMixinTemplates
    
     private void Awake()
     {
-        SetTemplateId();
+        //SetTemplateId();
     }
     
 

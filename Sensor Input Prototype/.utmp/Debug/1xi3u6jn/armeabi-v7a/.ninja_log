@@ -1,3 +1,5 @@
 # ninja log v5
 1	247	7218738389042635	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	8aff829b3d0db055
 250	591	7218738391387308	C:/Users/Peder/Documents/Thesis/Sensor Input Prototype/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.com.unity.template.mobile3D/gradle-project/unityLibrary/build/intermediates/cxx/Debug/1xi3u6jn/obj/armeabi-v7a/libswappywrapper.so	f47111c6c433d36
+39	1341	7231482353602955	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	8aff829b3d0db055
+1343	2079	7231482359810854	C:/Users/Peder/Documents/Thesis/Sensor Input Prototype/Library/PramData/AndroidApplicationController/Cache/com.DefaultCompany.com.unity.template.mobile3D/gradle-project/unityLibrary/build/intermediates/cxx/Debug/1xi3u6jn/obj/armeabi-v7a/libswappywrapper.so	f47111c6c433d36

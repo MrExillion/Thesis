@@ -15,7 +15,7 @@ public static class Transition
 
     private static ConditionalWeakTable<MTransition, Fields> table;
     public delegate void TransitionCB(MTransition map);
-    public delegate void TransitionCallBack();
+    public delegate void TransitionCallBack(MTransition map);
 
     public delegate bool TransitionResetCondition(UniversalPanel panel);
 
@@ -78,11 +78,15 @@ public static class Transition
 
     public static bool CanTransition(this MTransition map)
     {
-        if (!Transition.transitionInProgress)
-            return table.GetOrCreateValue(map).canTransition;
-        else
-            return false;
+             return table.GetOrCreateValue(map).canTransition;
+        
     }
+    public static void ResetCanTransition(this MTransition map)
+    {
+        table.GetOrCreateValue(map).canTransition = false;
+
+    }
+
     private static void TransitionCallBackOldMethod(this MTransition map)
     {
         // original plan with this was something akin to hooksecurefunc in World Of Warcraft LUA scripting, I haven't tested if it could work like this.
@@ -133,7 +137,8 @@ public static class Transition
 
     public static void TryTransition()
     {
-        GlobalReferenceManager.GetCurrentUniversalPanel().CheckTransitionType();
+        //GlobalReferenceManager.GetCurrentUniversalPanel().CheckTransitionType();
+        
         Debug.Log("TryTansition() Executed");
 
     }
@@ -141,10 +146,11 @@ public static class Transition
     public static void TriggerTransition(this MTransition map)
     {
 
-        Transition.TryTransition();
+        //Transition.TryTransition();
+        table.GetOrCreateValue(map).canTransition = true;
         bool testBool = !table.Any(x => x.Value.callBackInProgress == true);
         Debug.Log("callBackInProgress evaluated to " + testBool);
-        if ((!table.Any(x => x.Value.callBackInProgress == true)) && GlobalReferenceManager.GetCurrentUniversalPanel().CanTransition()) // a double check to avoid multiple instances of a transition running at the same time.
+        if ((!table.Any(x => x.Value.callBackInProgress == true))) // a double check to avoid multiple instances of a transition running at the same time.
         {
             // this line below should prompt the table.Any to return true, which must return false for the line below to execute, thus checking for a Transition to already be in progress.
             table.GetOrCreateValue(map).callBackInProgress = true;
@@ -163,7 +169,8 @@ public static class Transition
             Transition.transitionInProgress = false;
 
             GlobalReferenceManager.GetCurrentUniversalPanel().ResetLocalTransitionState();
-            Transition.Fields.callBack.Invoke(); // making the callback single instance is full of IDK if this is possible, but this way is an attempt. Unlike the above i need to know this globally across all implementations, nut just in a specific instance. so i cannot use any to find the callback.
+            Transition.Fields.callBack.Invoke(map); // making the callback single instance is full of IDK if this is possible, but this way is an attempt. Unlike the above i need to know this globally across all implementations, nut just in a specific instance. so i cannot use any to find the callback.
+            
         }
 
     }
@@ -224,9 +231,11 @@ public static class Transition
     }
     public static bool CheckTransitionType(this MTransition map)
     {
+        table.GetOrCreateValue(map).canTransition = true;
+        return table.GetOrCreateValue(map).canTransition;
         //int nextInLineTransitionType = table.GetOrCreateValue(map).transitionToDo;
 
-        int nextInLineTransitionType = GlobalReferenceManager.GetCurrentUniversalPanel().transitionType;
+        int nextInLineTransitionType = (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType;
         //int currentPanel = table.GetOrCreateValue(map).currentPanel;
         //Debug.Log("TransitionType: " + nextInLineTransitionType + ",\tgameObject: " + map + ",\tPanelId: " + currentPanel, table.GetOrCreateValue(map).gameObject);
         switch (nextInLineTransitionType)
@@ -269,7 +278,7 @@ public static class Transition
 
     }
 
-    public static void CallBack()
+    public static void CallBack(this MTransition map)
     {
         //CallBacks for TransitionTrigger
 
@@ -278,7 +287,7 @@ public static class Transition
 
 
         // I Think i should add the Set Actives, and itteration updates here if not handled from CameraSequencer
-
+        table.GetOrCreateValue(map).callBackInProgress = false;
 
 
     }

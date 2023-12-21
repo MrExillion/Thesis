@@ -70,7 +70,7 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
                 {
 
                     
-                    return !(panel.GetComponent<HRotateMixin>().IsTransitionConditionMet());
+                    return (panel.GetComponent<HRotateMixin>().IsResetConditionMet());
 
 
                     
@@ -86,5 +86,8 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
 
                 
     }
+
+   
+
 
 }

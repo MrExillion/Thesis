@@ -8,36 +8,37 @@ using SensorInputPrototype.InspectorReadOnlyCode;
 using SensorInputPrototype.MixinInterfaces;
 using Unity.VisualScripting;
 
-using System.Runtime.InteropServices.WindowsRuntime;
+
 
 public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
 {
-    #if UNITY_EDITOR 
+#if UNITY_EDITOR
     [ShowOnly]
-    #endif
+#endif
     [SerializeField]
     private Camera camera;
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [ShowOnly]
-    #endif
+#endif
     [SerializeField]
     private int compassAdjust = -1;
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [ShowOnly]
-    #endif
+#endif
     [SerializeField]
     private Quaternion quaternion;
     private Quaternion initialRotation;
     public bool canTransition = false;
     private int previousPanel = 0;
     //[SerializeField] public GameObject t;
-    #if UNITY_EDITOR
-    [ShowOnly] 
-    #endif
+#if UNITY_EDITOR
+    [ShowOnly]
+#endif
     [SerializeField]
-    private static HRotateTemplate template;
+    //private static HRotateTemplate template;
+    public static CameraSequencer template;
     private bool isRunningDebug;
-    private bool triggered = true;
+    public bool triggered = true;
     private static ComicManagerMixin comicManagerMixin;
     private void Awake()
     {
@@ -48,7 +49,7 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
         { HRotateMixin.comicManagerMixin = Camera.main.GetComponent<CameraSequencer>().currentComicManagerMixin; }
         //if (gameObject.GetComponent<HRotateTemplate>() == t.GetComponent<HRotateTemplate>())
         if (template == null)
-            template = gameObject.GetComponent<HRotateTemplate>();
+            template = camera.GetComponent<CameraSequencer>();
         else
             return;
         //#if (PLATFORM_ANDROID == true && UNITY_EDITOR == false)
@@ -62,14 +63,14 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     // Start is called before the first frame update
     private void Start()
     {
-        
+
 
         //camera.transform.localRotation
 
         int heading = (int)MathF.Truncate(Input.compass.magneticHeading);
         if (MathF.Abs(heading) >= 360 && heading != 0)
         {
-            heading = heading - ((heading % 360)*360); // I can't find indications on weather or not this is needed, but this compensates the heading to always be between -360 and 360, while never dividing by 0.
+            heading = heading - ((heading % 360) * 360); // I can't find indications on weather or not this is needed, but this compensates the heading to always be between -360 and 360, while never dividing by 0.
         }
 
 
@@ -79,7 +80,7 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
             {
                 compassAdjust = 1;
             }
-            else if( heading > -270)
+            else if (heading > -270)
             {
                 compassAdjust = -1;
             }
@@ -88,10 +89,10 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
                 compassAdjust = 1;
             }
 
-        }              
+        }
         else
         {
-            
+
 
             if (heading < 90)
             {
@@ -101,13 +102,13 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
             {
                 compassAdjust = 1;
             }
-            else 
+            else
             {
                 compassAdjust = -1;
             }
 
         }
-        
+
 
         quaternion = new Quaternion(Input.gyro.attitude.x, Input.gyro.attitude.y, Input.gyro.attitude.z, compassAdjust * Input.gyro.attitude.w);
 
@@ -146,74 +147,86 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     }
 
 
-    public static Tuple<GameObject,UniversalPanel,int,int> GetTupleByIndex(int layer1,int layer2,int layer3,int layer4,int layer5)
+    public static Tuple<GameObject, UniversalPanel, int, int> GetTupleByIndex(int layer1, int layer2, int layer3, int layer4)
     {
-        return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
+        GameObject go = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1].GetComponent<ChapterManagerTemplate>().chapterOrder[layer2].GetComponent<PageManagerTemplate>().pageOrder[layer3].GetComponent<PanelManagerTemplate>().panelOrder[layer4].GetComponent<UniversalPanel>().gameObject;
+        UniversalPanel up = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1].GetComponent<ChapterManagerTemplate>().chapterOrder[layer2].GetComponent<PageManagerTemplate>().pageOrder[layer3].GetComponent<PanelManagerTemplate>().panelOrder[layer4].GetComponent<UniversalPanel>();
+        int index = (up as UniversalPanel).PanelId;
+        int transitionId = (int)(up as UniversalPanel).transitionType;
+        /*comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];*/
+        return new Tuple<GameObject, UniversalPanel, int, int>(go, up, index, transitionId);
 
     }
     public static Tuple<GameObject, UniversalPanel, int, int> GetLastTuple()
     {
-        int layer1 = ComicManager.getComicsList().Count-1;
-        int layer2 = ComicManager.getComicsList()[layer1 ].Item4.Count-1;
-        int layer3 = ComicManager.getComicsList()[layer1 ].Item4[layer2].Item4.Count-1;
-        int layer4 = ComicManager.getComicsList()[layer1 ].Item4[layer2 ].Item4[layer3].Item4.Count-1;
-        int layer5 = ComicManager.getComicsList()[layer1 ].Item4[layer2 ].Item4[layer3].Item4[layer4].Item4.Count-1;
-        return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
-
+        int layer1 = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList.Count - 1;
+        UnityEngine.Debug.Log(layer1);
+        UnityEngine.Debug.Log(comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1]);
+        //UnityEngine.Debug.DebugBreak();
+        int layer2 = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1].GetComponent<ChapterManagerTemplate>().chapterOrder.Count - 1;
+        int layer3 = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1].GetComponent<ChapterManagerTemplate>().chapterOrder[layer2].GetComponent<PageManagerTemplate>().pageOrder.Count - 1;
+        int layer4 = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1].GetComponent<ChapterManagerTemplate>().chapterOrder[layer2].GetComponent<PageManagerTemplate>().pageOrder[layer3].GetComponent<PanelManagerTemplate>().panelOrder.Count - 1;
+        //int layer5 = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1].GetComponent<ChapterManagerTemplate>().chapterOrder[layer2].GetComponent<PageManagerTemplate>().pageOrder[layer3].GetComponent<PanelManagerTemplate>().panelOrder[layer4].GetComponent<UniversalPanel>();
+        GameObject go = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1].GetComponent<ChapterManagerTemplate>().chapterOrder[layer2].GetComponent<PageManagerTemplate>().pageOrder[layer3].GetComponent<PanelManagerTemplate>().panelOrder[layer4].GetComponent<UniversalPanel>().gameObject;
+        UniversalPanel up = comicManagerMixin.gameObject.GetComponent<ComicManagerTemplate>().comicsList[layer1].GetComponent<ChapterManagerTemplate>().chapterOrder[layer2].GetComponent<PageManagerTemplate>().pageOrder[layer3].GetComponent<PanelManagerTemplate>().panelOrder[layer4].GetComponent<UniversalPanel>();
+        int index = (up as UniversalPanel).PanelId;
+        int transitionId = (int)(up as UniversalPanel).transitionType;
+        /*comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];*/
+        return new Tuple<GameObject, UniversalPanel, int, int>(go, up, index, transitionId);
     }
-    public static Tuple<GameObject, UniversalPanel, int, int> GetLastTuple(int depth,int index)
+    public static Tuple<GameObject, UniversalPanel, int, int> GetLastTuple(int depth, int index)
     {
-        int layer1 = ComicManager.getComicsList().Count;
-        int layer2 = ComicManager.getComicsList()[layer1].Item4.Count;
-        int layer3 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4.Count;
-        int layer4 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4.Count;
-        int layer5 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer1].Item4[layer2].Item4.Count;
+        int layer1 = comicManagerMixin.GetComponent<ComicManagerTemplate>().getComicsList().Count;
+        int layer2 = comicManagerMixin.getComicsList()[layer1].Item4.Count;
+        int layer3 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4.Count;
+        int layer4 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4.Count;
+        int layer5 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer1].Item4[layer2].Item4.Count;
         switch (depth)
         {
             case 0:
                 {
                     layer1 = index;
-                    layer2 = ComicManager.getComicsList()[layer1].Item4.Count;
-                    layer3 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4.Count;
-                    layer4 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4.Count;
-                    layer5 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4.Count;
+                    layer2 = comicManagerMixin.getComicsList()[layer1].Item4.Count;
+                    layer3 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4.Count;
+                    layer4 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4.Count;
+                    layer5 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4.Count;
 
-                    return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
+                    return comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
                 }
             case 1:
                 {
 
                     layer2 = index + 1;
-                    layer3 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4.Count;
-                    layer4 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4.Count;
-                    layer5 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer1].Item4[layer2].Item4.Count;
+                    layer3 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4.Count;
+                    layer4 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4.Count;
+                    layer5 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer1].Item4[layer2].Item4.Count;
 
-                    return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
+                    return comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
 
                 }
             case 2:
                 {
                     layer3 = index + 1;
-                    layer4 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4.Count;
-                    layer5 = ComicManager.getComicsList()[layer1].Item4[layer1].Item4[layer2].Item4[layer4].Item4.Count;
+                    layer4 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4.Count;
+                    layer5 = comicManagerMixin.getComicsList()[layer1].Item4[layer1].Item4[layer2].Item4[layer4].Item4.Count;
 
-                    return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
+                    return comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
                 }
             case 3:
                 {
 
                     layer4 = index + 1;
-                    layer5 = ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4.Count;
+                    layer5 = comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4.Count;
 
-                    return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
+                    return comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
                 }
             case 4:
                 {
                     layer5 = index + 1;
 
-                    return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
+                    return comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
                 }
-            default: return ComicManager.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
+            default: return comicManagerMixin.getComicsList()[layer1].Item4[layer2].Item4[layer3].Item4[layer4].Item4[layer5];
         }
 
 
@@ -230,15 +243,15 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     /// <returns> either int3 or int4</returns>
     public int BoolIntOut(int int1, int int2, int int3, int int4)
     {
-        if(int1 == 0 && int2 >0) // prev > 0 cur == 0 => Retrun prev super
+        if (int1 == 0 && int2 > 0) // prev > 0 cur == 0 => Retrun prev super
         {
             return int4;
         }
-        else if(int1 > 0 && int2 < int1) // prev >= 0 cur >0 => Return current Super
+        else if (int1 > 0 && int2 < int1) // prev >= 0 cur >0 => Return current Super
         {
             return int3;
         }
-        else if(int2 > int1) // 
+        else if (int2 > int1) // 
         {
             return int4;
         }
@@ -253,6 +266,10 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     // Update is called once per frame
     void Update()
     {
+
+
+
+
         HRotateMixin.comicManagerMixin = Camera.main.GetComponent<CameraSequencer>().currentComicManagerMixin;
         /*
          current comic> current ch> current page> current panel = 0,0,0,0 : LookAt => count, count, count, count.
@@ -278,132 +295,151 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
 
 
 
-        Debug.Log("PanelId: " + gameObject.GetComponent<UniversalPanel>().PanelId + " , GetPanelFocus() => " + Camera.main.GetComponent<CameraSequencer>().GetPanelFocus());
+        UnityEngine.Debug.Log("PanelId: " + gameObject.GetComponent<UniversalPanel>().PanelId + " , GetPanelFocus() => " + (Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1));
         if (gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1)
         {
 
             return;
         }
-
-        if (comicManagerMixin.previousPanel < 0 || (comicManagerMixin.previousPanel > comicManagerMixin.currentPanel && comicManagerMixin.currentPage == 0))
+        else if (triggered)
         {
+            //if (comicManagerMixin.previousPanel < 0 || (comicManagerMixin.previousPanel > comicManagerMixin.currentPanel && comicManagerMixin.currentPage == 1))
+            //{
 
-            if(GetLastTuple().Item4 == (int)Transition.transitionTypes.HRotate)
+            //    if (GetLastTuple().Item4 == (int)Transition.transitionTypes.HRotate)
+            //    {
+            //        GetLastTuple().Item1.GetComponent<HRotateMixin>().triggered = false;
+            //        GetLastTuple().Item1.GetComponent<HRotateMixin>().canTransition = false;
+            //        triggered = false;
+
+            //    }
+
+
+
+            //}
+            //else if (GetTupleByIndex(BoolIntOut(comicManagerMixin.currentChapter-1, comicManagerMixin.previousChapter-1, comicManagerMixin.currentComic - 1, comicManagerMixin.previousComic - 1), BoolIntOut(comicManagerMixin.currentPage-1, comicManagerMixin.previousPage - 1, comicManagerMixin.currentChapter - 1, comicManagerMixin.previousChapter - 1), BoolIntOut(comicManagerMixin.currentPanel-1, comicManagerMixin.previousPanel - 1, comicManagerMixin.currentPage - 1, comicManagerMixin.previousPage - 1), comicManagerMixin.previousPanel-1).Item4 == (int)Transition.transitionTypes.HRotate)
+            //{
+            //    HRotateMixin hRotateMixin = GetTupleByIndex(BoolIntOut(comicManagerMixin.currentChapter - 1, comicManagerMixin.previousChapter - 1, comicManagerMixin.currentComic - 1, comicManagerMixin.previousComic - 1), BoolIntOut(comicManagerMixin.currentPage - 1, comicManagerMixin.previousPage - 1, comicManagerMixin.currentChapter - 1, comicManagerMixin.previousChapter - 1), BoolIntOut(comicManagerMixin.currentPanel - 1, comicManagerMixin.previousPanel - 1, comicManagerMixin.currentPage - 1, comicManagerMixin.previousPage - 1), comicManagerMixin.previousPanel - 1).Item1.GetComponent<HRotateMixin>();
+
+            //    hRotateMixin.triggered = false;
+            //    hRotateMixin.canTransition = false;
+            //    triggered = false;
+            //        Debug.Log("instanceID checked, thisInstanceID, ch,page,oabel ids: "+ hRotateMixin.GetInstanceID() + ", " + this.GetInstanceID() + ", " + comicManagerMixin.currentChapter+ ", " + comicManagerMixin.currentPage +", "+ comicManagerMixin.currentPanel);
+            //}
+
+            //}
+
+
+
+
+
+            int heading = (int)MathF.Truncate(Input.compass.magneticHeading);
+            if (MathF.Abs(heading) >= 360 && heading != 0)
             {
-                    GetLastTuple().Item1.GetComponent<HRotateMixin>().triggered = false;                    
-                    GetLastTuple().Item1.GetComponent<HRotateMixin>().canTransition = false;
-                    triggered = false;
-
+                heading = heading - ((heading % 360) * 360); // I can't find indications on weather or not this is needed, but this compensates the heading to always be between -360 and 360, while never dividing by 0.
             }
-               
-            
-
-        }
-        else if (GetTupleByIndex(0, BoolIntOut(comicManagerMixin.currentChapter,comicManagerMixin.previousChapter,comicManagerMixin.currentComic,comicManagerMixin.previousComic), BoolIntOut(comicManagerMixin.currentPage,comicManagerMixin.previousPage,comicManagerMixin.currentChapter,comicManagerMixin.previousChapter),BoolIntOut(comicManagerMixin.currentPanel,comicManagerMixin.previousPanel,comicManagerMixin.currentPage,comicManagerMixin.previousPage) ,comicManagerMixin.previousPanel).Item4 == (int)Transition.transitionTypes.HRotate)
-        {
-            HRotateMixin hRotateMixin = GetTupleByIndex(0, BoolIntOut(comicManagerMixin.currentChapter, comicManagerMixin.previousChapter, comicManagerMixin.currentComic, comicManagerMixin.previousComic), BoolIntOut(comicManagerMixin.currentPage, comicManagerMixin.previousPage, comicManagerMixin.currentChapter, comicManagerMixin.previousChapter), BoolIntOut(comicManagerMixin.currentPanel, comicManagerMixin.previousPanel, comicManagerMixin.currentPage, comicManagerMixin.previousPage), comicManagerMixin.previousPanel).Item1.GetComponent<HRotateMixin>();
-            
-            hRotateMixin.triggered = false;
-            hRotateMixin.canTransition = false;
-            triggered = false;
-
-        }
 
 
-
-
-
-
-        
-        int heading = (int)MathF.Truncate(Input.compass.magneticHeading);
-        if (MathF.Abs(heading) >= 360 && heading != 0)
-        {
-            heading = heading - ((heading % 360) * 360); // I can't find indications on weather or not this is needed, but this compensates the heading to always be between -360 and 360, while never dividing by 0.
-        }
-
-
-        if (heading < 0)
-        {
-            if (heading > -90)
+            if (heading < 0)
             {
-                compassAdjust = 1;
-            }
-            else if (heading >= -270)
-            {
-                compassAdjust = -1;
+                if (heading > -90)
+                {
+                    compassAdjust = 1;
+                }
+                else if (heading >= -270)
+                {
+                    compassAdjust = -1;
+                }
+                else
+                {
+                    compassAdjust = 1;
+                }
+
             }
             else
             {
-                compassAdjust = 1;
+
+
+                if (heading < 90)
+                {
+                    compassAdjust = -1;
+                }
+                else if (heading <= 270)
+                {
+                    compassAdjust = 1;
+                }
+                else
+                {
+                    compassAdjust = -1;
+                }
+
             }
+
+            // Should be either 1 or -1 but may need to be checked and corrected
 
         }
-        else
-        {
-
-
-            if (heading < 90)
-            {
-                compassAdjust = -1;
-            }
-            else if (heading < 270)
-            {
-                compassAdjust = 1;
-            }
-            else
-            {
-                compassAdjust = -1;
-            }
-
-        }
-
-        // Should be either 1 or -1 but may need to be checked and corrected
-        
         quaternion = new Quaternion(Input.gyro.attitude.x, Input.gyro.attitude.y, Input.gyro.attitude.z, compassAdjust * Input.gyro.attitude.w);
-       
+
         template.UpdateRotation(quaternion.z - initialRotation.z, quaternion.eulerAngles.z - initialRotation.eulerAngles.z);
         template.OnRotatePhone(camera);
 
+        UnityEngine.Debug.Log("Triggered: " + triggered);
+        if (triggered) // YOU SHALLL NOT PASS INSERT GANDALF ASCHII ART HAHA! If triggered is false, then the execution aborts.
+        {
+
+            canTransition = template.IsTransitionConditionMet();
+            UnityEngine.Debug.Log("" + canTransition + " , " + template.IsTransitionConditionMet());
+            if (MathF.Truncate(Time.realtimeSinceStartup) % 5f == 0 && isRunningDebug == false)
+            {
+                //mixin.CallbackExecute("TryTransition",Debug.Log(""));
+
+
+                UnityEngine.Debug.Log("bool TryTransition() Returned:\t" + template.IsTransitionConditionMet() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
+                // Debug.Log("quaternionMonitoring: " + quaternion.ToString() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
+                // Debug.Log("compass adjust: " + compassAdjust + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
+                isRunningDebug = true;
+            }
+            else if (MathF.Truncate(Time.realtimeSinceStartup) % 5f != 0)
+            {
+                isRunningDebug = false;
+            }
+
+
+            if (canTransition)
+            {
+                this.TriggerTransition();
+                triggered = false;
+                canTransition = false;
+                //template.UpdateRotation(initialRotation.z, initialRotation.eulerAngles.z);
+                //template.OnRotatePhone(camera);
+            }
+
+
+        }
+        
         if (template.IsTransitionConditionMet() == false && !triggered)
+        {
             triggered = true;
+           
+            
 
-        if (!triggered) // YOU SHALLL NOT PASS INSERT GANDALF ASCHII ART HAHA! If triggered is false, then the execution aborts.
-        {
-            Debug.Log("Triggered: " + triggered + " , IsTransitionConditionsMet() => " + template.IsTransitionConditionMet());
-            return;
         }
-        
-
-
-        
-
-
-        canTransition = template.IsTransitionConditionMet();
-        
-        if (MathF.Truncate(Time.realtimeSinceStartup) % 5f == 0 && isRunningDebug == false)
-        {
-            //mixin.CallbackExecute("TryTransition",Debug.Log(""));
-
-            //Debug.Log("bool TryTransition() Returned:\t" + template.IsTransitionConditionMet() + ",\t"+gameObject.GetComponent<UniversalPanel>().PanelId);
-           // Debug.Log("quaternionMonitoring: " + quaternion.ToString() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
-           // Debug.Log("compass adjust: " + compassAdjust + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
-            isRunningDebug = true;
-        }
-        else if (MathF.Truncate(Time.realtimeSinceStartup) % 5f != 0)
-        {
-            isRunningDebug = false;
-        }
-
-
-        if(canTransition)
-        {
-            this.TriggerTransition();
-            triggered = false;
-        }
+        UnityEngine.Debug.Log("Triggered: " + triggered + " , IsTransitionConditionsMet() => " + template.IsTransitionConditionMet());
 
 
     }
-    
 
+    void LateUpdate()
+    {
+
+        if (canTransition)
+        {
+            triggered = false;
+            canTransition = false;
+            template.UpdateRotation(initialRotation.z, initialRotation.eulerAngles.z);
+            template.OnRotatePhone(camera);
+        }
+
+    }
 
 }

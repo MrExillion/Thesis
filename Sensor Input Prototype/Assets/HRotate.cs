@@ -70,8 +70,8 @@ public static class HRotate
     {
         //Debug.Log("Horizontal Angle: " + table.GetOrCreateValue(map).horizontalRotationEuler);
         
-            if (((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f)))
-              table.GetOrCreateValue(map).hasTransitioned = true;
+            //if (((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f)))
+            //  table.GetOrCreateValue(map).hasTransitioned = true;
             
         
                 //float angleZ = Camera.main.gameObject.transform.rotation.eulerAngles.z;
@@ -79,160 +79,172 @@ public static class HRotate
         //return (MathF.Acos(table.GetOrCreateValue(map).horizontalRotation) < -60.0f || MathF.Acos(table.GetOrCreateValue(map).horizontalRotation) > 60.0f);
 
     }
+    public static bool IsResetConditionMet(this MHRotate map)
+    {
+        //Debug.Log("Horizontal Angle: " + table.GetOrCreateValue(map).horizontalRotationEuler);
 
+        //if (((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f)))
+        //  table.GetOrCreateValue(map).hasTransitioned = true;
+
+
+        //float angleZ = Camera.main.gameObject.transform.rotation.eulerAngles.z;
+        return !((table.GetOrCreateValue(map).horizontalRotationEuler > -350.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -10.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 350.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 10.0f));
+        //return (MathF.Acos(table.GetOrCreateValue(map).horizontalRotation) < -60.0f || MathF.Acos(table.GetOrCreateValue(map).horizontalRotation) > 60.0f);
+
+    }
     //private static Fields.CallbackRegistry GetCallBackRegistry(this MHRotate map)
     //{
 
     //    //return table.CallbackRegistry.GetOrCreateValue(map)
     //    return Fields.CallbackRegistry;
     //}
-/*
-    private static object CallbackExecute(this MHRotate map, string functionNameToHookToCallback, float arg1, Func<Debug> func)
-    {
-        object payload = null;
-        
-        
-        switch (functionNameToHookToCallback)
+    /*
+        private static object CallbackExecute(this MHRotate map, string functionNameToHookToCallback, float arg1, Func<Debug> func)
         {
-            case nameof(Fields.CallbackRegistry.GetCallbackRegistry) :
+            object payload = null;
+
+
+            switch (functionNameToHookToCallback)
+            {
+                case nameof(Fields.CallbackRegistry.GetCallbackRegistry) :
+                        {
+                        //table.GetOrCreateValue(map).GetCallbackRegistry(arg1,arg2);
+                        throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
+
+
+                        }
+
+                case nameof(Fields.CallbackRegistry.UpdateRotation):
                     {
-                    //table.GetOrCreateValue(map).GetCallbackRegistry(arg1,arg2);
-                    throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
-                    
-                    
+                        map.UpdateRotation(arg1);
+                        payload = func;
+                        break;
+                    }
+                case nameof(Fields.CallbackRegistry.GetHRotation):
+                    {
+                        map.GetHRotation();
+                        payload = func;
+                        break;
+                    }
+                case nameof(Fields.CallbackRegistry.OnRotatePhone):
+                    {
+
+                        throw new ArgumentException("Incorrect param type", "arg1: found float expected Camera");
+                    }
+                case nameof(Fields.CallbackRegistry.TryTransition):
+                    {
+                        map.TryTransition();
+                        payload = func;
+                        break;
+                    }
+                default:
+                    {
+                        throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
+
+                    }
+            }
+
+
+
+            return payload;
+        }
+        private static object CallbackExecute(this MHRotate map, string functionNameToHookToCallback, Camera arg1, Func<Debug> func)
+        {
+            object payload = null;
+
+
+            switch (functionNameToHookToCallback)
+            {
+                case nameof(Fields.CallbackRegistry.GetCallbackRegistry):
+                    {
+                        throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
                     }
 
-            case nameof(Fields.CallbackRegistry.UpdateRotation):
-                {
-                    map.UpdateRotation(arg1);
-                    payload = func;
-                    break;
-                }
-            case nameof(Fields.CallbackRegistry.GetHRotation):
-                {
-                    map.GetHRotation();
-                    payload = func;
-                    break;
-                }
-            case nameof(Fields.CallbackRegistry.OnRotatePhone):
-                {
+                case nameof(Fields.CallbackRegistry.UpdateRotation):
+                    {
 
-                    throw new ArgumentException("Incorrect param type", "arg1: found float expected Camera");
-                }
-            case nameof(Fields.CallbackRegistry.TryTransition):
-                {
-                    map.TryTransition();
-                    payload = func;
-                    break;
-                }
-            default:
-                {
-                    throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
-                    
-                }
+
+                        throw new ArgumentException("Incorrect param type", "arg1: found Camera expected float");
+
+                    }
+                case nameof(Fields.CallbackRegistry.GetHRotation):
+                    {
+                        map.GetHRotation();
+                        payload = func;
+                        break;
+                    }
+                case nameof(Fields.CallbackRegistry.OnRotatePhone):
+                    {
+
+                        map.OnRotatePhone(arg1);
+                        payload = func;
+                        break;
+                    }
+                case nameof(Fields.CallbackRegistry.TryTransition):
+                    {
+                        map.TryTransition();
+                        payload = func;
+                        break;
+                    }
+                default:
+                    {
+                        throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
+                    }
+            }
+
+
+
+            return payload;
         }
-        
-        
 
-        return payload;
-    }
-    private static object CallbackExecute(this MHRotate map, string functionNameToHookToCallback, Camera arg1, Func<Debug> func)
-    {
-        object payload = null;
-
-
-        switch (functionNameToHookToCallback)
+        private static object CallbackExecute(this MHRotate map, string functionNameToHookToCallback, Func<UnityEngine.Debug> func)
         {
-            case nameof(Fields.CallbackRegistry.GetCallbackRegistry):
-                {
-                    throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
-                }
+            object payload = null;
 
-            case nameof(Fields.CallbackRegistry.UpdateRotation):
-                {
-                                          
-                    
-                    throw new ArgumentException("Incorrect param type", "arg1: found Camera expected float");
-                    
-                }
-            case nameof(Fields.CallbackRegistry.GetHRotation):
-                {
-                    map.GetHRotation();
-                    payload = func;
-                    break;
-                }
-            case nameof(Fields.CallbackRegistry.OnRotatePhone):
-                {
 
-                    map.OnRotatePhone(arg1);
-                    payload = func;
-                    break;
-                }
-            case nameof(Fields.CallbackRegistry.TryTransition):
-                {
-                    map.TryTransition();
-                    payload = func;
-                    break;
-                }
-            default:
-                {
-                    throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
-                }
+            switch (functionNameToHookToCallback)
+            {
+                case nameof(Fields.CallbackRegistry.GetCallbackRegistry):
+                    {
+                        throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
+                    }
+
+                case nameof(Fields.CallbackRegistry.UpdateRotation):
+                    {
+
+
+                        throw new ArgumentException("Incorrect param type", "arg1: missing argument expected float");
+
+                    }
+                case nameof(Fields.CallbackRegistry.GetHRotation):
+                    {
+                        func();
+                        payload = map.GetHRotation();
+                        break;
+                    }
+                case nameof(Fields.CallbackRegistry.OnRotatePhone):
+                    {
+
+                        throw new ArgumentException("Incorrect param type", "arg1: missing argument expected a Camera");
+                    }
+                case nameof(Fields.CallbackRegistry.TryTransition):
+                    {
+                        func();
+                        payload = map.TryTransition(); ;
+                        break;
+                    }
+                default:
+                    {
+                        throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
+                    }
+            }
+
+
+
+            return payload;
         }
 
-
-
-        return payload;
-    }
-
-    private static object CallbackExecute(this MHRotate map, string functionNameToHookToCallback, Func<UnityEngine.Debug> func)
-    {
-        object payload = null;
-
-
-        switch (functionNameToHookToCallback)
-        {
-            case nameof(Fields.CallbackRegistry.GetCallbackRegistry):
-                {
-                    throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
-                }
-
-            case nameof(Fields.CallbackRegistry.UpdateRotation):
-                {
-
-
-                    throw new ArgumentException("Incorrect param type", "arg1: missing argument expected float");
-
-                }
-            case nameof(Fields.CallbackRegistry.GetHRotation):
-                {
-                    func();
-                    payload = map.GetHRotation();
-                    break;
-                }
-            case nameof(Fields.CallbackRegistry.OnRotatePhone):
-                {
-
-                    throw new ArgumentException("Incorrect param type", "arg1: missing argument expected a Camera");
-                }
-            case nameof(Fields.CallbackRegistry.TryTransition):
-                {
-                    func();
-                    payload = map.TryTransition(); ;
-                    break;
-                }
-            default:
-                {
-                    throw new ArgumentException("Function Not Implemented", functionNameToHookToCallback);
-                }
-        }
-
-
-
-        return payload;
-    }
-
-    */
+        */
 
 
 
