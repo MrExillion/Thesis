@@ -295,14 +295,18 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
 
 
 
-        UnityEngine.Debug.Log("PanelId: " + gameObject.GetComponent<UniversalPanel>().PanelId + " , GetPanelFocus() => " + (Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1));
+        //UnityEngine.Debug.Log("PanelId: " + gameObject.GetComponent<UniversalPanel>().PanelId + " , GetPanelFocus() => " + (Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1));
         if (gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1)
         {
 
             return;
         }
-        else if (triggered)
+        if (gameObject.GetComponent<UniversalPanel>()  != GlobalReferenceManager.GetCurrentUniversalPanel())
         {
+            return;
+        }
+            //else if (triggered)
+            //{
             //if (comicManagerMixin.previousPanel < 0 || (comicManagerMixin.previousPanel > comicManagerMixin.currentPanel && comicManagerMixin.currentPage == 1))
             //{
 
@@ -377,24 +381,24 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
 
             // Should be either 1 or -1 but may need to be checked and corrected
 
-        }
+        //}
         quaternion = new Quaternion(Input.gyro.attitude.x, Input.gyro.attitude.y, Input.gyro.attitude.z, compassAdjust * Input.gyro.attitude.w);
 
         template.UpdateRotation(quaternion.z - initialRotation.z, quaternion.eulerAngles.z - initialRotation.eulerAngles.z);
         template.OnRotatePhone(camera);
 
-        UnityEngine.Debug.Log("Triggered: " + triggered);
-        if (triggered) // YOU SHALLL NOT PASS INSERT GANDALF ASCHII ART HAHA! If triggered is false, then the execution aborts.
-        {
+        //UnityEngine.Debug.Log("Triggered: " + triggered);
+        //if (triggered) // YOU SHALLL NOT PASS INSERT GANDALF ASCHII ART HAHA! If triggered is false, then the execution aborts.
+        //{
 
             canTransition = template.IsTransitionConditionMet();
-            UnityEngine.Debug.Log("" + canTransition + " , " + template.IsTransitionConditionMet());
+            //UnityEngine.Debug.Log("" + canTransition + " , " + template.IsTransitionConditionMet());
             if (MathF.Truncate(Time.realtimeSinceStartup) % 5f == 0 && isRunningDebug == false)
             {
                 //mixin.CallbackExecute("TryTransition",Debug.Log(""));
 
 
-                UnityEngine.Debug.Log("bool TryTransition() Returned:\t" + template.IsTransitionConditionMet() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
+                //UnityEngine.Debug.Log("bool TryTransition() Returned:\t" + template.IsTransitionConditionMet() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
                 // Debug.Log("quaternionMonitoring: " + quaternion.ToString() + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
                 // Debug.Log("compass adjust: " + compassAdjust + ",\t" + gameObject.GetComponent<UniversalPanel>().PanelId);
                 isRunningDebug = true;
@@ -407,39 +411,51 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
 
             if (canTransition)
             {
-                this.TriggerTransition();
-                triggered = false;
-                canTransition = false;
+                //UnityEngine.Debug.Log("EXECUTE:: Triggered: " + triggered + " , IsTransitionConditionsMet() => " + template.IsTransitionConditionMet());
+                gameObject.GetComponent<UniversalPanel>().TriggerTransition();
+                //triggered = false;
+                //canTransition = false;
                 //template.UpdateRotation(initialRotation.z, initialRotation.eulerAngles.z);
                 //template.OnRotatePhone(camera);
             }
 
 
-        }
+        //}
         
-        if (template.IsTransitionConditionMet() == false && !triggered)
-        {
-            triggered = true;
+        //if (template.IsTransitionConditionMet() == false && !triggered)
+        //{
+        //    triggered = true;
            
             
 
-        }
-        UnityEngine.Debug.Log("Triggered: " + triggered + " , IsTransitionConditionsMet() => " + template.IsTransitionConditionMet());
+        //}
+        //UnityEngine.Debug.Log("Triggered: " + triggered + " , IsTransitionConditionsMet() => " + template.IsTransitionConditionMet());
 
 
     }
 
     void LateUpdate()
     {
+        //UnityEngine.Debug.Log("PanelId: " + gameObject.GetComponent<UniversalPanel>().PanelId + " , GetPanelFocus() => " + (Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1));
+        if (gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1)
+        {
+
+            return;
+        }
+        if (gameObject.GetComponent<UniversalPanel>() != GlobalReferenceManager.GetCurrentUniversalPanel())
+        {
+            return;
+        }
 
         if (canTransition)
         {
             triggered = false;
             canTransition = false;
-            template.UpdateRotation(initialRotation.z, initialRotation.eulerAngles.z);
-            template.OnRotatePhone(camera);
         }
+            //    //template.UpdateRotation(initialRotation.z, initialRotation.eulerAngles.z);
+            //    //template.OnRotatePhone(camera);
+            //}
 
-    }
+        }
 
 }

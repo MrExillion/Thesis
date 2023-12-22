@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -78,8 +79,9 @@ public static class Transition
 
     public static bool CanTransition(this MTransition map)
     {
-             return table.GetOrCreateValue(map).canTransition;
-        
+        return table.GetOrCreateValue(map).canTransition;
+        //return Transition.canTransition;
+
     }
     public static void ResetCanTransition(this MTransition map)
     {
@@ -147,47 +149,53 @@ public static class Transition
     {
 
         //Transition.TryTransition();
-        table.GetOrCreateValue(map).canTransition = true;
-        bool testBool = !table.Any(x => x.Value.callBackInProgress == true);
+        
+        bool testBool = table.Any(x => x.Value.callBackInProgress == true);
         Debug.Log("callBackInProgress evaluated to " + testBool);
-        if ((!table.Any(x => x.Value.callBackInProgress == true))) // a double check to avoid multiple instances of a transition running at the same time.
+        if (!(table.Any(x => x.Value.callBackInProgress == true)) ) // a double check to avoid multiple instances of a transition running at the same time.
         {
+            table.GetOrCreateValue(map).canTransition = true;
+
             // this line below should prompt the table.Any to return true, which must return false for the line below to execute, thus checking for a Transition to already be in progress.
             table.GetOrCreateValue(map).callBackInProgress = true;
-
-
-
-            GlobalReferenceManager.GetCurrentUniversalPanel().OnTransitionTrigger();
             Transition.transitionInProgress = true;
+
+
+            OnTransitionTrigger(map);
+
             //UniversalPanel panel = GlobalReferenceManager.GetCurrentUniversalPanel();
             //GlobalReferenceManager.GetCurrentUniversalPanel().StartCoroutine(TransitionCooldown(GlobalReferenceManager.GetCurrentUniversalPanel(), map)); // blocks the transition until the trigger condition is unmade
             //while (Fields.transitionResetCondition.Invoke(panel) == false)
             //{
-                ////Transition.transitionInProgress = true;
+            ////Transition.transitionInProgress = true;
 
             //}
-            Transition.transitionInProgress = false;
 
-            GlobalReferenceManager.GetCurrentUniversalPanel().ResetLocalTransitionState();
+
+            ResetLocalTransitionState(map);
             Transition.Fields.callBack.Invoke(map); // making the callback single instance is full of IDK if this is possible, but this way is an attempt. Unlike the above i need to know this globally across all implementations, nut just in a specific instance. so i cannot use any to find the callback.
+
+            
+            
             
         }
 
     }
 
-    public static void ResetLocalTransitionState(this MTransition map)
+    public static void ResetLocalTransitionState(MTransition map)
     {
         //table.GetOrCreateValue(map).canTransition = false;
         Transition.canTransition = false;
+        Transition.transitionInProgress = false;
         //Transition.transitionInProgress = false;
         //table.GetOrCreateValue(map).callBackInProgress = false;
-        Debug.Log("ResetLocalTranistionState() Executed");
+        Debug.Log("ResetLocalTransitionState() Executed");
 
     }
 
-    public static void OnTransitionTrigger(this MTransition map)
+    public static void OnTransitionTrigger(MTransition map)
     {
-        Debug.Log("OnTransitionTriggere(), entered execution with map:" + map.ToString());
+        Debug.Log("OnTransitionTrigger(), entered execution with map:" + map.ToString());
         bool canTransition = table.GetOrCreateValue(map).canTransition;
         Transition.canTransition = canTransition;
         Debug.Log("Transition.canTransition = " + canTransition.ToString() + ", table.GetOrCreateValue(map).canTransition is source.");
@@ -278,13 +286,13 @@ public static class Transition
 
     }
 
-    public static void CallBack(this MTransition map)
+    public static void CallBack(MTransition map)
     {
         //CallBacks for TransitionTrigger
 
 
         // Add functions below here to be invoked with the CallBack().
-
+        
 
         // I Think i should add the Set Actives, and itteration updates here if not handled from CameraSequencer
         table.GetOrCreateValue(map).callBackInProgress = false;
@@ -321,6 +329,11 @@ public static class Transition
         Debug.Log("AfterYield Invoked: " + Fields.transitionResetCondition.Invoke(panelParse));
 
     }
+
+
+
+
+
 
 }
 

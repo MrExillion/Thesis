@@ -11,24 +11,24 @@ using SensorInputPrototype.MixinInterfaces;
 
 public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
 {
-    #if UNITY_EDITOR 
-    [ShowOnly] 
-    #endif
+#if UNITY_EDITOR
+    [ShowOnly]
+#endif
     [SerializeField]
     public int panelFocus = 1;
-    #if UNITY_EDITOR 
-    [ShowOnly] 
-    #endif
+#if UNITY_EDITOR
+    [ShowOnly]
+#endif
     [SerializeField]
     private bool panelTransition = false;
     [SerializeField] public ComicManagerMixin currentComicManagerMixin;
     [SerializeField] public ComicManagerTemplate comicManager;
     private bool blockChainReaction = false;
     private int previousTransitionType = -1;
-
+    private Quaternion cameraDefaultRotation;
     private void Awake()
     {
-        
+
     }
 
     public int GetPanelFocus()
@@ -41,18 +41,18 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
         //currentComicManagerMixin = ComicManagerMixin.mixin;
         //ComicManager.PrimaryComic = ComicManagerMixin.mixin;
         //GlobalReferenceManager.SetActiveComicContainer(comicManager);
-
+        cameraDefaultRotation = Camera.main.transform.rotation;
     }
     private void Start()
     {
         currentComicManagerMixin = ComicManagerMixin.mixin;
-        if(ComicManager.PrimaryComic == null)
+        if (ComicManager.PrimaryComic == null)
         {
             //ComicManager.PrimaryComic = ComicManager.getComicsList()[0].Item2;
             ComicManager.PrimaryComic = comicManager;
         }
-        
-        
+
+
     }
 
     private void Update()
@@ -70,30 +70,35 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
 
 
         if (currentComicManagerMixin == null)
-        { currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin);
+        {
+            currentComicManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == comicManager.GetComponent<ComicManagerMixin>().GetInstanceID()).Item2 as ComicManagerMixin);
         }
         if (previousTransitionType == (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType)
         {
             blockChainReaction = true;
+            previousTransitionType = -1;
         }
 
         //currentComicManagerMixin = ComicManager.PrimaryComic.GetPrimaryMixin();
         //currentPanelManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == .GetInstanceID()).Item2 as ComicManagerMixin);
         panelFocus = currentComicManagerMixin.currentPanel;
         panelTransition = GlobalReferenceManager.GetCurrentUniversalPanel().CanTransition();
-        Debug.Log("Can Transition?   " + panelTransition);
 
-        if(panelTransition && !blockChainReaction)
+        if (panelTransition) { Debug.Log("Can Transition?   " + panelTransition + " ,  panelFocus = " + panelFocus + " , BlockChainReaction = " + blockChainReaction); }
+
+
+
+        if (panelTransition && !blockChainReaction)
         {
             GlobalReferenceManager.GetCurrentUniversalPanel().ResetCanTransition();
-            Debug.Log("PanelTransitioned from: " + GetPanelFocus() +" to: "+comicManager.nextPanel);
+            Debug.Log("PanelTransitioned from: " + GetPanelFocus() + " to: " + comicManager.nextPanel);
             panelFocus = comicManager.nextPanel;
             Debug.Log("PanelTransitioned: " + GetPanelFocus());
             gameObject.transform.position = new Vector3(
                 (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("x"),
                 (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("y"),
                 gameObject.transform.position.z);
-            panelTransition = false;
+            
             previousTransitionType = GlobalReferenceManager.GetCurrentUniversalPanel().transitionType;
 
             //Transition.Next(currentComicManagerMixin);
@@ -108,10 +113,18 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
             //comicManager.GetPrimaryMixin().nextPanel = 1;
             //}
         }
-        else if(blockChainReaction && UniversalPanel.ResetConditions(GlobalReferenceManager.GetCurrentUniversalPanel()))
+        else if (blockChainReaction && this.IsResetConditionMet())
         {
             blockChainReaction = false;
         }
     }
-
+    private void LateUpdate()
+    {
+        if(panelTransition && !blockChainReaction)
+        {
+            Camera.main.transform.rotation = cameraDefaultRotation;
+            panelTransition = false;
+        }
+        
+    }
 }

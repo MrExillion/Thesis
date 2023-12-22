@@ -2775,7 +2775,7 @@ MonoBehaviour:
   compassAdjust: -1
   quaternion: {x: 0, y: 0, z: 0, w: 0}
   canTransition: 0
-  triggered: 1
+  triggered: 0
 --- !u!1001 &547656241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10580,7 +10580,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783446729}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1eeceeb9d574b334aaa6e68b096f872d, type: 3}
   m_Name: 
@@ -10589,7 +10589,7 @@ MonoBehaviour:
   compassAdjust: -1
   quaternion: {x: 0, y: 0, z: 0, w: 0}
   canTransition: 0
-  triggered: 1
+  triggered: 0
 --- !u!114 &2087328262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10597,7 +10597,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783446729}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 280e22f70a955a64181e049d12b234f6, type: 3}
   m_Name: 

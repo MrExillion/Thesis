@@ -149,6 +149,7 @@ public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceM
         {
             if (axisLetter == "x")
             {
+                Debug.Log("HELP!");
                 GlobalReferenceManager.SetActivePanelContainer((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).pageOrder[this.GetComponent<PanelManagerTemplate>().pageId + 1].GetComponent<PanelManagerTemplate>());
                 Transition.atEndOfPage = false;
             }
