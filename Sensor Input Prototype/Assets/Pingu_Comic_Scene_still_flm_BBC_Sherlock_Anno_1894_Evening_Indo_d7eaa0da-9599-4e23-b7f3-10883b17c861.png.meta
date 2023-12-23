@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pingu_Comic_Scene_still_flm_BBC_Sherlock_Anno_1894_Evening_Indo_d7eaa0da-9599-4e23-b7f3-10883b17c861_0: -3672142479871656300
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

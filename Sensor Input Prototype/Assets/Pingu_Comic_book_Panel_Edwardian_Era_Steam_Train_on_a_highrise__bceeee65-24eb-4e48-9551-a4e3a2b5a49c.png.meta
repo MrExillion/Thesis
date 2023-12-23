@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pingu_Comic_book_Panel_Edwardian_Era_Steam_Train_on_a_highrise__bceeee65-24eb-4e48-9551-a4e3a2b5a49c_0: -8258094125142024004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

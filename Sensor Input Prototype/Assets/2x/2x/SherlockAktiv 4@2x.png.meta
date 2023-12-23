@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SherlockAktiv 4@2x_0: 1668870508273231430
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

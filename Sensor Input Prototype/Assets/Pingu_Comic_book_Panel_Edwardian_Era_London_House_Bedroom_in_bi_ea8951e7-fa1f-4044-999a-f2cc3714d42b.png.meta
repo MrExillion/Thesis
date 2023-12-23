@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Pingu_Comic_book_Panel_Edwardian_Era_London_House_Bedroom_in_bi_ea8951e7-fa1f-4044-999a-f2cc3714d42b_0: -4126595768592628068
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
