@@ -26,7 +26,7 @@ public static class Transition
     public static bool canTransition = false;
     public static bool transitionInProgress = false;
 
-    public enum transitionTypes { HRotate = 0, SingleTap = 1, CoverLightSensor = 2 };
+    public enum transitionTypes { HRotate = 0, TabTransition = 1, CoverLightSensor = 2 };
 
     static Transition()
     {
@@ -201,20 +201,20 @@ public static class Transition
         Debug.Log("Transition.canTransition = " + canTransition.ToString() + ", table.GetOrCreateValue(map).canTransition is source.");
         if (canTransition)
         {
-            Debug.Log("GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count -1  :  " + (GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count - 1));
+            Debug.Log("GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count  :  " + (GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count));
 
 
-            if (GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count - 1)
+            if (GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count)
             {
 
                 Transition.atEndOfPage = true;
-                Debug.Log("(GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count -1   :   " + ((GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count - 1));
+                Debug.Log("(GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count - 1 :   " + ((GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count-1));
 
-                if ((GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count - 1)
+                if ((GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == (GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).pageOrder.Count-1)
                 {
                     Transition.atEndOfChapter = true;
-                    Debug.Log("(GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count -1   :    " + ((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count - 1));
-                    if ((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count - 1)
+                    Debug.Log("(GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count  - 1 :    " + ((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count -1));
+                    if ((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count -1)
                     {
                         Transition.atEndOfComic = true;
                     }

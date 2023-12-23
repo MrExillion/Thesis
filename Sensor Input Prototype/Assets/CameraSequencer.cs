@@ -8,6 +8,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using SensorInputPrototype.InspectorReadOnlyCode;
 using SensorInputPrototype.MixinInterfaces;
+using System;
+using Unity.Mathematics;
 
 public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
 {
@@ -26,6 +28,7 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
     private bool blockChainReaction = false;
     private int previousTransitionType = -1;
     private Quaternion cameraDefaultRotation;
+    private Quaternion initialRotation;
     private void Awake()
     {
 
@@ -42,6 +45,10 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
         //ComicManager.PrimaryComic = ComicManagerMixin.mixin;
         //GlobalReferenceManager.SetActiveComicContainer(comicManager);
         cameraDefaultRotation = Camera.main.transform.rotation;
+        Quaternion quaternion;
+        quaternion = GyroUpdateRoutine();
+        initialRotation = quaternion;
+
     }
     private void Start()
     {
@@ -82,7 +89,20 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
         //currentComicManagerMixin = ComicManager.PrimaryComic.GetPrimaryMixin();
         //currentPanelManagerMixin = (GlobalReferenceManager.MixinPairs.Find(x => x.Item1 == .GetInstanceID()).Item2 as ComicManagerMixin);
         panelFocus = currentComicManagerMixin.currentPanel;
-        panelTransition = GlobalReferenceManager.GetCurrentUniversalPanel().CanTransition();
+
+
+
+        if (!blockChainReaction)
+        {
+            panelTransition = GlobalReferenceManager.GetCurrentUniversalPanel().CanTransition();
+        }
+        else
+        {
+            GlobalReferenceManager.GetCurrentUniversalPanel().ResetCanTransition();
+        }
+        
+
+
 
         if (panelTransition) { Debug.Log("Can Transition?   " + panelTransition + " ,  panelFocus = " + panelFocus + " , BlockChainReaction = " + blockChainReaction); }
 
@@ -91,6 +111,7 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
         if (panelTransition && !blockChainReaction)
         {
             GlobalReferenceManager.GetCurrentUniversalPanel().ResetCanTransition();
+            previousTransitionType = (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType;
             Debug.Log("PanelTransitioned from: " + GetPanelFocus() + " to: " + comicManager.nextPanel);
             panelFocus = comicManager.nextPanel;
             Debug.Log("PanelTransitioned: " + GetPanelFocus());
@@ -98,9 +119,22 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
                 (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("x"),
                 (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("y"),
                 gameObject.transform.position.z);
-            
-            previousTransitionType = GlobalReferenceManager.GetCurrentUniversalPanel().transitionType;
+            //this.UpdateRotation(initialRotation.z, 0f);
+            Camera.main.transform.rotation = cameraDefaultRotation;
 
+
+            //if ((int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType == 0)
+            //{
+            //    Quaternion quaternion;
+            //    quaternion = GyroUpdateRoutine();
+            //    initialRotation = quaternion;
+            //}
+            
+
+
+
+
+            
             //Transition.Next(currentComicManagerMixin);
 
 
@@ -113,18 +147,92 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
             //comicManager.GetPrimaryMixin().nextPanel = 1;
             //}
         }
-        else if (blockChainReaction && this.IsResetConditionMet())
+        else if (blockChainReaction && (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType == 0)
         {
-            blockChainReaction = false;
+            Quaternion quaternion = GyroUpdateRoutine();
+
+            this.UpdateRotation(quaternion.z - initialRotation.z, quaternion.eulerAngles.z - initialRotation.eulerAngles.z);
+            if (this.IsResetConditionMet())
+            {
+                blockChainReaction = false;
+                this.ResetCanTransition();
+                panelTransition = false;
+            }
+            
+            
         }
+
+
+
+
     }
     private void LateUpdate()
     {
-        if(panelTransition && !blockChainReaction)
-        {
-            Camera.main.transform.rotation = cameraDefaultRotation;
-            panelTransition = false;
-        }
-        
+        //if(panelTransition && !blockChainReaction)
+        //{
+            
+        //    Camera.main.transform.rotation = cameraDefaultRotation;
+        //    panelTransition = false;
+        //}
+
     }
+    private Quaternion GyroUpdateRoutine()
+    {
+        Quaternion quaternion;
+
+        int compassAdjust = -1;
+        int heading = (int)MathF.Truncate(Input.compass.magneticHeading);
+        if (MathF.Abs(heading) >= 360 && heading != 0)
+        {
+            heading = heading - ((heading % 360) * 360); // I can't find indications on weather or not this is needed, but this compensates the heading to always be between -360 and 360, while never dividing by 0.
+        }
+
+
+        if (heading < 0)
+        {
+            if (heading > -90)
+            {
+                compassAdjust = 1;
+            }
+            else if (heading > -270)
+            {
+                compassAdjust = -1;
+            }
+            else
+            {
+                compassAdjust = 1;
+            }
+
+        }
+        else
+        {
+
+
+            if (heading < 90)
+            {
+                compassAdjust = -1;
+            }
+            else if (heading < 270)
+            {
+                compassAdjust = 1;
+            }
+            else
+            {
+                compassAdjust = -1;
+            }
+
+        }
+
+
+
+
+        quaternion = new Quaternion(Input.gyro.attitude.x, Input.gyro.attitude.y, Input.gyro.attitude.z, compassAdjust * Input.gyro.attitude.w);
+
+        return quaternion;
+    }
+
+
+
 }
+
+

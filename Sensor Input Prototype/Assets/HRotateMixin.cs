@@ -296,11 +296,11 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
 
 
         //UnityEngine.Debug.Log("PanelId: " + gameObject.GetComponent<UniversalPanel>().PanelId + " , GetPanelFocus() => " + (Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1));
-        if (gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1)
-        {
+        //if (gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1)
+        //{
 
-            return;
-        }
+        //    return;
+        //}
         if (gameObject.GetComponent<UniversalPanel>()  != GlobalReferenceManager.GetCurrentUniversalPanel())
         {
             return;
@@ -437,11 +437,11 @@ public class HRotateMixin : MonoBehaviour, MHRotate, MTransition
     void LateUpdate()
     {
         //UnityEngine.Debug.Log("PanelId: " + gameObject.GetComponent<UniversalPanel>().PanelId + " , GetPanelFocus() => " + (Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1));
-        if (gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1)
-        {
+        //if (gameObject.GetComponent<UniversalPanel>().PanelId != Camera.main.GetComponent<CameraSequencer>().GetPanelFocus() + 1)
+        //{
 
-            return;
-        }
+        //    return;
+        //}
         if (gameObject.GetComponent<UniversalPanel>() != GlobalReferenceManager.GetCurrentUniversalPanel())
         {
             return;

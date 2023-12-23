@@ -85,10 +85,10 @@ public static class HRotate
 
         //if (((table.GetOrCreateValue(map).horizontalRotationEuler > -300.0f && table.GetOrCreateValue(map).horizontalRotationEuler < -60.0f) || (table.GetOrCreateValue(map).horizontalRotationEuler < 300.0f && table.GetOrCreateValue(map).horizontalRotationEuler > 60.0f)))
         //  table.GetOrCreateValue(map).hasTransitioned = true;
-        Debug.Log("Camera rotation delta around z: " + (Mathf.Abs(Mathf.DeltaAngle(table.GetOrCreateValue(map).horizontalRotationEuler, Camera.main.transform.rotation.eulerAngles.z)) < 10f));
+        Debug.Log("Camera rotation delta around z: " + (Mathf.Abs(Mathf.DeltaAngle(table.GetOrCreateValue(map).horizontalRotationEuler, 0f)) < 10f));
 
         //float angleZ = Camera.main.gameObject.transform.rotation.eulerAngles.z;
-        return (Mathf.Abs(Mathf.DeltaAngle(table.GetOrCreateValue(map).horizontalRotationEuler, Camera.main.transform.rotation.eulerAngles.z)) < 10f);
+        return (Mathf.Abs(Mathf.DeltaAngle(table.GetOrCreateValue(map).horizontalRotationEuler, 0f)) < 10f);
         //return (MathF.Acos(table.GetOrCreateValue(map).horizontalRotation) < -60.0f || MathF.Acos(table.GetOrCreateValue(map).horizontalRotation) > 60.0f);
 
     }

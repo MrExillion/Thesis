@@ -70,7 +70,7 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
                 {
 
                     
-                    return (panel.GetComponent<HRotateMixin>().IsResetConditionMet());
+                    return (Camera.main.GetComponent<CameraSequencer>().IsResetConditionMet());
 
 
                     
@@ -78,7 +78,7 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
                 }
 
             default:
-                return false;
+                return true;
                 break;
         
         
