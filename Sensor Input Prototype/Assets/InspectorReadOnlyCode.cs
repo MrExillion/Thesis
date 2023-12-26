@@ -32,9 +32,12 @@ public class ShowOnlyDrawer: PropertyDrawer
             case SerializedPropertyType.Quaternion:
                 valueStr = prop.quaternionValue.ToString();
                 break;
-            case SerializedPropertyType.ObjectReference:
-                valueStr = prop.objectReferenceValue.name;
-                break;
+            //case SerializedPropertyType.ObjectReference:
+            //        if (prop.objectReferenceValue.name == null)
+            //            valueStr = "Empty";
+            //        else
+            //            valueStr = prop.objectReferenceValue.name;
+            //    break;
             default:
                 valueStr = "(not supported)";
             break;
