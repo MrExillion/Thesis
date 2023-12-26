@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using SensorInputPrototype.MixinInterfaces;
-using UnityEngine.InputSystem.Controls;
 using Unity.VisualScripting;
 
 public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
@@ -16,7 +14,7 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
     {
         if(audioSource == null)
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource = gameObject.GetOrAddComponent<AudioSource>();
 
         }
         
@@ -30,18 +28,29 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
     {
   
         universalPanel = GetComponent<UniversalPanel>();
-        this.MicrophonoeFifoAmpInitializer(audioSource, 8, 512, 2);
+        this.MicrophonoeFifoAmpInitializer(audioSource, 8, 512, 1);
     
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        //foreach(var dev in Microphone.devices)
+        //{
+            
+        //    Debug.Log(dev);
+        //}
+
         if (universalPanel != GlobalReferenceManager.GetCurrentUniversalPanel())
         {
-            if (Microphone.IsRecording(Microphone.devices[0]))
+            if(Microphone.devices.Length != 0)
             {
-                Microphone.End(Microphone.devices[0]);
+                if (Microphone.IsRecording(Microphone.devices[0]))
+                {
+                    Microphone.End(Microphone.devices[0]);
+                }
+
             }
             this.BufferFlush();
             canTransition = false;
@@ -58,7 +67,7 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
         else
         {
 
-            clip = Microphone.Start(Microphone.devices[0], false, 1, 48000);
+            clip = Microphone.Start(Microphone.devices[0], true, 1, 44100);
                      
 
             
@@ -69,7 +78,7 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
             if (clip.length == 1f)
             { 
                 this.BufferUpdate(clip, 0);
-                clip = null;
+                //clip = null;
             }
         }
 
@@ -78,8 +87,8 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
             
             float lowerShelf = 0;
             float upperShelf = 0;
-            int threshold = this.GetAvgQueueFrequencyDistribution().Length - Mathf.RoundToInt(this.GetAvgQueueFrequencyDistribution().Length / 6);
-            //Debug.Log("1: " + this.GetAvgQueueFrequencyDistribution()[0] +" ,2: " + this.GetAvgQueueFrequencyDistribution()[1] + " ,3: " + this.GetAvgQueueFrequencyDistribution()[2] + " ,4: " + this.GetAvgQueueFrequencyDistribution()[3] + " ,5: " + this.GetAvgQueueFrequencyDistribution()[4] + " ,6: " + this.GetAvgQueueFrequencyDistribution()[5] + " ,7: " + this.GetAvgQueueFrequencyDistribution()[6] + " ,8: " + this.GetAvgQueueFrequencyDistribution()[7] + " ,Amplitude: " + this.GetAvgQueueAmplitude());
+            int threshold = this.GetAvgQueueFrequencyDistribution().Length - Mathf.RoundToInt(this.GetAvgQueueFrequencyDistribution().Length / 3);
+            Debug.Log("1: " + this.GetAvgQueueFrequencyDistribution()[0] +" ,2: " + this.GetAvgQueueFrequencyDistribution()[1] + " ,3: " + this.GetAvgQueueFrequencyDistribution()[2] + " ,4: " + this.GetAvgQueueFrequencyDistribution()[3] + " ,5: " + this.GetAvgQueueFrequencyDistribution()[4] + " ,6: " + this.GetAvgQueueFrequencyDistribution()[5] + " ,7: " + this.GetAvgQueueFrequencyDistribution()[6] + " ,8: " + this.GetAvgQueueFrequencyDistribution()[7] + " ,Amplitude: " + this.GetAvgQueueAmplitude());
 
             for (int i = 0; i < this.GetAvgQueueFrequencyDistribution().Length;i++)
             {
@@ -97,17 +106,48 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
             lowerShelf /= (this.GetAvgQueueFrequencyDistribution().Length - threshold);
             upperShelf /= threshold;
             bool isAirInput = (lowerShelf > upperShelf);
-            //Debug.Log("LS: "+lowerShelf + " ,US: " + upperShelf + " isAirInput: " + isAirInput);
+            Debug.Log("LS: "+lowerShelf + " ,US: " + upperShelf + " isAirInput: " + isAirInput);
             if (this.GetAvgQueueAmplitude()*10 > 0.6f && isAirInput)
             {
                 canTransition = true;
             }
         }
+        /*if (universalPanel.transitionType == 7)
+        {
+
+            float lowerShelf = 0;
+            float upperShelf = 0;
+            int threshold = this.GetAvgQueueFrequencyDistribution().Length - Mathf.RoundToInt(this.GetAvgQueueFrequencyDistribution().Length / 6);
+            //Debug.Log("1: " + this.GetAvgQueueFrequencyDistribution()[0] +" ,2: " + this.GetAvgQueueFrequencyDistribution()[1] + " ,3: " + this.GetAvgQueueFrequencyDistribution()[2] + " ,4: " + this.GetAvgQueueFrequencyDistribution()[3] + " ,5: " + this.GetAvgQueueFrequencyDistribution()[4] + " ,6: " + this.GetAvgQueueFrequencyDistribution()[5] + " ,7: " + this.GetAvgQueueFrequencyDistribution()[6] + " ,8: " + this.GetAvgQueueFrequencyDistribution()[7] + " ,Amplitude: " + this.GetAvgQueueAmplitude());
+
+            for (int i = 0; i < this.GetAvgQueueFrequencyDistribution().Length; i++)
+            {
+                if (i < this.GetAvgQueueFrequencyDistribution().Length - threshold)
+                {
+                    lowerShelf += this.GetAvgQueueFrequencyDistribution()[i];
+
+                }
+                else
+                {
+                    upperShelf += this.GetAvgQueueFrequencyDistribution()[i];
+                }
+
+            }
+            lowerShelf /= (this.GetAvgQueueFrequencyDistribution().Length - threshold);
+            upperShelf /= threshold;
+            bool isAirInput = (lowerShelf > upperShelf);
+            //Debug.Log("LS: "+lowerShelf + " ,US: " + upperShelf + " isAirInput: " + isAirInput);
+            if (this.GetAvgQueueAmplitude() * 10 > 0.6f && isAirInput)
+            {
+                canTransition = true;
+            }
+        }*/
 
 
 
 
-
+        //if (canTransition && universalPanel.transitionType == 5)
+        //{
         if (canTransition)
         {
             universalPanel.TriggerTransition();
