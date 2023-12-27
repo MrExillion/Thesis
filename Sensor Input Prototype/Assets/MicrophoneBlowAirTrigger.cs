@@ -2,6 +2,7 @@
 using UnityEngine;
 using SensorInputPrototype.MixinInterfaces;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
 {
@@ -9,12 +10,12 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
     private AudioSource audioSource;
     public bool canTransition = false;
     private AudioClip clip;
-
+    private int[] microphoneTransitions = new int[2];
     void Awake()
     {
         if(audioSource == null)
         {
-            audioSource = gameObject.GetOrAddComponent<AudioSource>();
+            audioSource = Camera.main.gameObject.GetOrAddComponent<AudioSource>();
 
         }
         
@@ -29,7 +30,8 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
   
         universalPanel = GetComponent<UniversalPanel>();
         this.MicrophonoeFifoAmpInitializer(audioSource, 8, 512, 1);
-    
+        microphoneTransitions[0] = 5;
+        microphoneTransitions[1] = 7;
     }
 
     // Update is called once per frame
@@ -46,7 +48,8 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
         {
             if(Microphone.devices.Length != 0)
             {
-                if (Microphone.IsRecording(Microphone.devices[0]))
+
+                if (Microphone.IsRecording(Microphone.devices[0]) && !microphoneTransitions.Contains(GlobalReferenceManager.GetCurrentUniversalPanel().transitionType))
                 {
                     Microphone.End(Microphone.devices[0]);
                 }
