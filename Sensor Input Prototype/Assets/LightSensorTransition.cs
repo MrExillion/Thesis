@@ -85,11 +85,11 @@ public static class LightSensorTransition
                 }
                 if (table.GetOrCreateValue(map).universalPanel.transitionType == 7)
                  {
-                    //if (table.GetOrCreateValue(map)._gameObject.GetComponent<MicrophoneBlowAirTrigger>().canTransition) // kept inside the == 7 due to requiring MicrophoneBlowAirTrigger != null
-                    //{
-                    //    table.GetOrCreateValue(map).universalPanel.TriggerTransition();
-                    //}
+                if (table.GetOrCreateValue(map)._gameObject.GetComponent<MicrophoneBlowAirTrigger>().canTransition) // kept inside the == 7 due to requiring MicrophoneBlowAirTrigger != null
+                {
+                    table.GetOrCreateValue(map).universalPanel.TriggerTransition();
                 }
+            }
             }
             else if (table.GetOrCreateValue(map).currentIntensity - table.GetOrCreateValue(map).intensityLastFrame >= table.GetOrCreateValue(map).intensityChangeTolerance)
             {
