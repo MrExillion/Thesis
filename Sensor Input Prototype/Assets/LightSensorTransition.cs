@@ -17,6 +17,10 @@ public static class LightSensorTransition
         internal GameObject _gameObject; // gameObject where Mixin is Implemented
         internal UniversalPanel universalPanel;
         internal LightSensor lightSensor;
+        ///<summary>
+        /// All the while set in SetUp, it doesn't account for changing conditions, currently its reccomended for academic purposes that the lighting is controlled during the experiment.
+        /// </summary>
+
         internal float maxIntensity = 256f;
         internal float currentIntensity = 0f;
         internal float intensityLastFrame = 0f;
@@ -40,6 +44,8 @@ public static class LightSensorTransition
         table.GetOrCreateValue(map).currentIntensity = LightSensor.current.lightLevel.value;
         // Set last frame also to avoid first frame triggers
         table.GetOrCreateValue(map).intensityLastFrame = LightSensor.current.lightLevel.value;
+        // make Sure that the MaxIntensity isn't way off the environment:
+        table.GetOrCreateValue(map).maxIntensity = LightSensor.current.lightLevel.value * 1.05f; //tolerance is + 5%
     }
     public static void LightSensorUpdate(this MLightSensorTransition map)
     {
