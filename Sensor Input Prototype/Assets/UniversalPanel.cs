@@ -13,7 +13,7 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
     /// <summary>
     /// Transition types are passed and used as ints across mixins. Due to Microphone NOT being a multi instance capable class that ISN'T Proprietary, any new Transitions added using <see cref="Microphone.Start"/> MUST go through <seealso cref="MicrophoneBlowAirTrigger.cs"/> AND include an update to the private property <code>int[] microphoneTransitions</code>, with fixed size, as this is checking for active panel transitions that use the microphone before calling <see cref="Microphone.End"/>. Resulting int the microphone appearing to be recording, but has samples less than a second resulting in FFT showing band output with memory accretion, and amplitude to always return 0! This breaks transitions relying on the <see cref="Microphone"/>.
     /// </summary>
-    enum transitionTypeEnum { HRotate = 0, DefaultTab = 1, TabOnObject = 2, Swipe = 3, DragAndDrop = 4, MicrophoneBlowAir = 5, LightSensorBlocked = 6, LightSensorBlockedPlusShushMicrophone = 7 } // I want this to maybe be some fancier solution in the future, either by automatically finding the transition through appliance, or by using Enums to be more inspector reader friendly
+    enum transitionTypeEnum { HRotate = 0, DefaultTab = 1, TabOnObject = 2, Swipe = 3, DragAndDrop = 4, MicrophoneBlowAir = 5, LightSensorBlocked = 6, LightSensorBlockedPlusShushMicrophone = 7, Shake = 8 } // I want this to maybe be some fancier solution in the future, either by automatically finding the transition through appliance, or by using Enums to be more inspector reader friendly
     [SerializeField] transitionTypeEnum transitionTypes;
     /// <summary>
     /// This int is based on the Inspector set Enum Dropdown. 
@@ -24,6 +24,7 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
     /// <br> <see cref="MicrophoneFifoAmp"/>.cs AND (Interface as Mixin Map) <seealso cref="MMicrophoneFifoAmp"/>.cs AND <see cref="MicrophoneBlowAirTrigger"/>.cs = 5,</br>   
     /// <br> <see cref="LightSensorTransition"/>.cs AND (Interface as Mixin Map) <seealso cref="MLightSensorTransition"/>.cs AND <see cref="LightSensorTransitionComponent"/>.cs = 6,</br>
     /// <br> <see cref="MicrophoneFifoAmp"/>.cs AND (Interface as Mixin Map) <seealso cref="MMicrophoneFifoAmp"/>.cs AND <see cref="MicrophoneBlowAirTrigger"/>.cs AND <see cref="LightSensorTransition"/>.cs AND (Interface as Mixin Map) <seealso cref="MLightSensorTransition"/>.cs AND <see cref="LightSensorTransitionComponent"/>.cs = 7</br>
+    /// <br> <see cref="AccelerometerShake"/>.cs AND (Interface as Mixin Map) <seealso cref="MAccelerometerShake"/>.cs AND <see cref="AccelerometerShakeComponent"/>.cs = 8</br>
     ///</para>
     ///
     /// <br>Important for Developers Only:</br>

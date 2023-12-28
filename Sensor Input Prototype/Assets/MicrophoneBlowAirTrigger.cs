@@ -91,7 +91,7 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
             float lowerShelf = 0;
             float upperShelf = 0;
             int threshold = this.GetAvgQueueFrequencyDistribution().Length - Mathf.RoundToInt(this.GetAvgQueueFrequencyDistribution().Length / 3);
-            Debug.Log("1: " + this.GetAvgQueueFrequencyDistribution()[0] +" ,2: " + this.GetAvgQueueFrequencyDistribution()[1] + " ,3: " + this.GetAvgQueueFrequencyDistribution()[2] + " ,4: " + this.GetAvgQueueFrequencyDistribution()[3] + " ,5: " + this.GetAvgQueueFrequencyDistribution()[4] + " ,6: " + this.GetAvgQueueFrequencyDistribution()[5] + " ,7: " + this.GetAvgQueueFrequencyDistribution()[6] + " ,8: " + this.GetAvgQueueFrequencyDistribution()[7] + " ,Amplitude: " + this.GetAvgQueueAmplitude());
+            //Debug.Log("1: " + this.GetAvgQueueFrequencyDistribution()[0] +" ,2: " + this.GetAvgQueueFrequencyDistribution()[1] + " ,3: " + this.GetAvgQueueFrequencyDistribution()[2] + " ,4: " + this.GetAvgQueueFrequencyDistribution()[3] + " ,5: " + this.GetAvgQueueFrequencyDistribution()[4] + " ,6: " + this.GetAvgQueueFrequencyDistribution()[5] + " ,7: " + this.GetAvgQueueFrequencyDistribution()[6] + " ,8: " + this.GetAvgQueueFrequencyDistribution()[7] + " ,Amplitude: " + this.GetAvgQueueAmplitude());
 
             for (int i = 0; i < this.GetAvgQueueFrequencyDistribution().Length;i++)
             {
@@ -109,13 +109,13 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
             lowerShelf /= (this.GetAvgQueueFrequencyDistribution().Length - threshold);
             upperShelf /= threshold;
             bool isAirInput = (lowerShelf > upperShelf);
-            Debug.Log("LS: "+lowerShelf + " ,US: " + upperShelf + " isAirInput: " + isAirInput);
+            //Debug.Log("LS: "+lowerShelf + " ,US: " + upperShelf + " isAirInput: " + isAirInput);
             if (this.GetAvgQueueAmplitude()*10 > 0.6f && isAirInput)
             {
                 canTransition = true;
             }
         }
-        /*if (universalPanel.transitionType == 7)
+        if (universalPanel.transitionType == 7)
         {
 
             float lowerShelf = 0;
@@ -144,14 +144,14 @@ public class MicrophoneBlowAirTrigger : MonoBehaviour, MMicrophoneFifoAmp
             {
                 canTransition = true;
             }
-        }*/
+        }
 
 
 
 
         //if (canTransition && universalPanel.transitionType == 5)
         //{
-        if (canTransition)
+        if (canTransition && universalPanel.transitionType == 5)
         {
             universalPanel.TriggerTransition();
             canTransition = false;

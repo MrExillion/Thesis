@@ -12,10 +12,12 @@ namespace SensorInputPrototype.MixinInterfaces
     /// </summary>
     public class AccelerometerShakeComponent : MonoBehaviour, MAccelerometerShake
     {
-        public LinearAccelerationSensor linearAccelerometerSensorReference; // you can implement this however you like, but needs to be public or have a public Get() function
-        public UniversalPanel universalPanel;
+        [HideInInspector] public LinearAccelerationSensor linearAccelerationSensorReference;// you can implement this however you like, but needs to be public or have a public Get() function
+        [HideInInspector] public UniversalPanel universalPanel;
         void Awake()
         {
+            universalPanel = gameObject.GetComponent<UniversalPanel>();
+            linearAccelerationSensorReference = InputSystem.GetDevice<LinearAccelerationSensor>();
             this.MixinClass_Initialized(gameObject);
         }
 
@@ -30,6 +32,7 @@ namespace SensorInputPrototype.MixinInterfaces
         {
             this.MixinClass_Update();
         }
+        // FixedUpdate is called once per physics frame
         void FixedUpdate()
         {
             this.MixinClass_FixedUpdate();
