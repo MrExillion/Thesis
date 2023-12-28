@@ -11,7 +11,7 @@ using SensorInputPrototype.MixinInterfaces;
 using System;
 using Unity.Mathematics;
 
-public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
+public class CameraSequencer : MonoBehaviour, MTransition, MHRotate, MClassicComicMixin
 {
 #if UNITY_EDITOR
     [ShowOnly]
@@ -29,6 +29,7 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
     private int previousTransitionType = -1;
     private Quaternion cameraDefaultRotation;
     private Quaternion initialRotation;
+    public bool classicMode = false;
     private void Awake()
     {
 
@@ -58,7 +59,7 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
             //ComicManager.PrimaryComic = ComicManager.getComicsList()[0].Item2;
             ComicManager.PrimaryComic = comicManager;
         }
-
+        this.ClassicMixin_Initialized(gameObject);
 
     }
 
@@ -100,68 +101,74 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
         {
             GlobalReferenceManager.GetCurrentUniversalPanel().ResetCanTransition();
         }
-        
-
-
-
-        if (panelTransition) { Debug.Log("Can Transition?   " + panelTransition + " ,  panelFocus = " + panelFocus + " , BlockChainReaction = " + blockChainReaction); }
-
-
-
-        if (panelTransition && !blockChainReaction)
+        if (classicMode)
         {
-            GlobalReferenceManager.GetCurrentUniversalPanel().ResetCanTransition();
-            previousTransitionType = (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType;
-            Debug.Log("PanelTransitioned from: " + GetPanelFocus() + " to: " + comicManager.nextPanel);
-            panelFocus = comicManager.nextPanel;
-            Debug.Log("PanelTransitioned: " + GetPanelFocus());
-            gameObject.transform.position = new Vector3(
-                (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("x"),
-                (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("y"),
-                gameObject.transform.position.z);
-            //this.UpdateRotation(initialRotation.z, 0f);
-            Camera.main.transform.rotation = cameraDefaultRotation;
 
+            this.ClassicMixin_Update();
 
-            //if ((int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType == 0)
-            //{
-            //    Quaternion quaternion;
-            //    quaternion = GyroUpdateRoutine();
-            //    initialRotation = quaternion;
-            //}
-            
-
-
-
-
-            
-            //Transition.Next(currentComicManagerMixin);
-
-
-
-            //panelTransition = false; //should be a callback instead
-            //panelFocus = ;
-            //comicManager.GetPrimaryMixin().nextPanel = comicManager.GetPrimaryMixin().nextPanel + 1;
-            //if(comicManager.GetPrimaryMixin().panelOrder.Length -1 == comicManager.GetPrimaryMixin().currentPanel)
-            //{
-            //comicManager.GetPrimaryMixin().nextPanel = 1;
-            //}
         }
-        else if (blockChainReaction && (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType == 0)
+        else
         {
-            Quaternion quaternion = GyroUpdateRoutine();
 
-            this.UpdateRotation(quaternion.z - initialRotation.z, quaternion.eulerAngles.z - initialRotation.eulerAngles.z);
-            if (this.IsResetConditionMet())
+
+            if (panelTransition) { Debug.Log("Can Transition?   " + panelTransition + " ,  panelFocus = " + panelFocus + " , BlockChainReaction = " + blockChainReaction); }
+
+
+
+            if (panelTransition && !blockChainReaction)
             {
-                blockChainReaction = false;
-                this.ResetCanTransition();
-                panelTransition = false;
-            }
-            
-            
-        }
+                GlobalReferenceManager.GetCurrentUniversalPanel().ResetCanTransition();
+                previousTransitionType = (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType;
+                Debug.Log("PanelTransitioned from: " + GetPanelFocus() + " to: " + comicManager.nextPanel);
+                panelFocus = comicManager.nextPanel;
+                Debug.Log("PanelTransitioned: " + GetPanelFocus());
+                gameObject.transform.position = new Vector3(
+                    (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("x"),
+                    (GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).panelOrder[panelFocus].GetComponentInParent<PanelManagerMixin>().NextPanelAnchor("y"),
+                    gameObject.transform.position.z);
+                //this.UpdateRotation(initialRotation.z, 0f);
+                Camera.main.transform.rotation = cameraDefaultRotation;
 
+
+                //if ((int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType == 0)
+                //{
+                //    Quaternion quaternion;
+                //    quaternion = GyroUpdateRoutine();
+                //    initialRotation = quaternion;
+                //}
+
+
+
+
+
+
+                //Transition.Next(currentComicManagerMixin);
+
+
+
+                //panelTransition = false; //should be a callback instead
+                //panelFocus = ;
+                //comicManager.GetPrimaryMixin().nextPanel = comicManager.GetPrimaryMixin().nextPanel + 1;
+                //if(comicManager.GetPrimaryMixin().panelOrder.Length -1 == comicManager.GetPrimaryMixin().currentPanel)
+                //{
+                //comicManager.GetPrimaryMixin().nextPanel = 1;
+                //}
+            }
+            else if (blockChainReaction && (int)GlobalReferenceManager.GetCurrentUniversalPanel().transitionType == 0)
+            {
+                Quaternion quaternion = GyroUpdateRoutine();
+
+                this.UpdateRotation(quaternion.z - initialRotation.z, quaternion.eulerAngles.z - initialRotation.eulerAngles.z);
+                if (this.IsResetConditionMet())
+                {
+                    blockChainReaction = false;
+                    this.ResetCanTransition();
+                    panelTransition = false;
+                }
+
+
+            }
+        }
 
 
 
@@ -170,7 +177,7 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate
     {
         //if(panelTransition && !blockChainReaction)
         //{
-            
+
         //    Camera.main.transform.rotation = cameraDefaultRotation;
         //    panelTransition = false;
         //}

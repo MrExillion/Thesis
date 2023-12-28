@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/RadarScene Prototype.unity
     guid: 3de8e72eaa43ddf4da2e7ed23076df8a
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c6b6e0d595fda054a9c6b00ae6314625
+  - enabled: 1
     path: Assets/Scenes/ComicBook.unity
     guid: 26d43228c1ca80f46a1decc10368983e
+  - enabled: 1
+    path: Assets/Scenes/ClassicComicBook.unity
+    guid: f2bb2f665855e334982df6341a9243bd
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 0112f0a350aeb374f8820afa7965a7f1, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 9d4a94d0920901843a62f925dd21e32b, type: 2}
