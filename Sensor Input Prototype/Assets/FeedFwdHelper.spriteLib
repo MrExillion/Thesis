@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: HelperUi
+    m_Hash: 673153407
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: "TrykP\xE5Objekt"
+      m_Hash: 665645029
+      m_Sprite: {fileID: -1041389884, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1041389884, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+    - m_Name: "Tr\xE6kObjekt"
+      m_Hash: 597624327
+      m_Sprite: {fileID: 867952200, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 867952200, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+    - m_Name: Swipe
+      m_Hash: 446219949
+      m_Sprite: {fileID: 710192825, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 710192825, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+    - m_Name: Gyroskop
+      m_Hash: 761979092
+      m_Sprite: {fileID: 703219640, guid: c337173a990be4b45a0be847b3c0e74a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 703219640, guid: c337173a990be4b45a0be847b3c0e74a, type: 3}
+    - m_Name: BlokerLyssensor
+      m_Hash: 730298800
+      m_Sprite: {fileID: -1526849348, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1526849348, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+    - m_Name: BlokerLyssensorOgPustIMikrofon
+      m_Hash: 929078077
+      m_Sprite: {fileID: -8924663293272868758, guid: c337173a990be4b45a0be847b3c0e74a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8924663293272868758, guid: c337173a990be4b45a0be847b3c0e74a, type: 3}
+    - m_Name: PustIMikrofon
+      m_Hash: 983816855
+      m_Sprite: {fileID: 501983275641322631, guid: 23e06cf88dae5c24dbfef2f6e73006c3, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 501983275641322631, guid: 23e06cf88dae5c24dbfef2f6e73006c3, type: 3}
+    - m_Name: RystTelefonen
+      m_Hash: 558315583
+      m_Sprite: {fileID: 479128453336054860, guid: c337173a990be4b45a0be847b3c0e74a, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 479128453336054860, guid: c337173a990be4b45a0be847b3c0e74a, type: 3}
+    - m_Name: "TrykP\xE5Sk\xE6rmenHvorSomHelst"
+      m_Hash: 1039640045
+      m_Sprite: {fileID: 2109723973, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2109723973, guid: 3fd8903422077c842a24c1cb66b32c3c, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 9
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638394101300859346
+  m_Version: 1
