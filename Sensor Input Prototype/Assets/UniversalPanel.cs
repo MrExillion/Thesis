@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SceneManagement;
 
 public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobalReferenceManager
 {
@@ -121,6 +122,25 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
 
             Debug.Log("Stopping the Experiment!");
 
+            DataAcquisition.Singleton.timeAtFFDP = Time.realtimeSinceStartup;
+
+            if (SceneManager.GetSceneByName("ComicBook").isLoaded)
+            {
+                DataAcquisition.Singleton.EndInteractive();
+            }
+            if (SceneManager.GetSceneByName("ClassicComicBook").isLoaded)
+            {
+                DataAcquisition.Singleton.EndClassic();
+            }
+
+
+            if (DataAcquisition.Singleton.endOfExperiment)
+            {
+
+
+                DataAcquisition.Singleton.EndExperiment();
+            }
+            
 
         }
 

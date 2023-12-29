@@ -141,7 +141,7 @@ public static class Transition
     {
         //GlobalReferenceManager.GetCurrentUniversalPanel().CheckTransitionType();
         
-        Debug.Log("TryTansition() Executed");
+        //Debug.Log("TryTansition() Executed");
 
     }
 
@@ -151,7 +151,7 @@ public static class Transition
         //Transition.TryTransition();
         
         bool testBool = table.Any(x => x.Value.callBackInProgress == true);
-        Debug.Log("callBackInProgress evaluated to " + testBool);
+        //Debug.Log("callBackInProgress evaluated to " + testBool);
         if (!(table.Any(x => x.Value.callBackInProgress == true)) ) // a double check to avoid multiple instances of a transition running at the same time.
         {
             table.GetOrCreateValue(map).canTransition = true;
@@ -189,31 +189,31 @@ public static class Transition
         Transition.transitionInProgress = false;
         //Transition.transitionInProgress = false;
         //table.GetOrCreateValue(map).callBackInProgress = false;
-        Debug.Log("ResetLocalTransitionState() Executed");
+        //Debug.Log("ResetLocalTransitionState() Executed");
 
     }
 
     public static void OnTransitionTrigger(MTransition map)
     {
-        Debug.Log("OnTransitionTrigger(), entered execution with map:" + map.ToString());
+        //Debug.Log("OnTransitionTrigger(), entered execution with map:" + map.ToString());
         bool canTransition = table.GetOrCreateValue(map).canTransition;
         Transition.canTransition = canTransition;
-        Debug.Log("Transition.canTransition = " + canTransition.ToString() + ", table.GetOrCreateValue(map).canTransition is source.");
+        //Debug.Log("Transition.canTransition = " + canTransition.ToString() + ", table.GetOrCreateValue(map).canTransition is source.");
         if (canTransition)
         {
-            Debug.Log("GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count  :  " + (GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count));
+            //Debug.Log("GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count  :  " + (GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count));
 
 
             if (GlobalReferenceManager.GetCurrentUniversalPanel().PanelId == GlobalReferenceManager.GetActivePanelTemplate().gameObject.GetComponent<PanelManagerTemplate>().panelOrder.Count)
             {
 
                 Transition.atEndOfPage = true;
-                Debug.Log("(GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count - 1 :   " + ((GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count-1));
+                //Debug.Log("(GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count - 1 :   " + ((GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == GlobalReferenceManager.GetActivePageTemplate().gameObject.GetComponent<PageManagerTemplate>().pageOrder.Count-1));
 
                 if ((GlobalReferenceManager.GetActivePanelTemplate() as PanelManagerTemplate).pageId == (GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).pageOrder.Count-1)
                 {
                     Transition.atEndOfChapter = true;
-                    Debug.Log("(GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count  - 1 :    " + ((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count -1));
+                    //Debug.Log("(GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count  - 1 :    " + ((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count -1));
                     if ((GlobalReferenceManager.GetActivePageTemplate() as PageManagerTemplate).chapterId == GlobalReferenceManager.GetActiveChapterTemplate().gameObject.GetComponent<ChapterManagerTemplate>().chapterOrder.Count -1)
                     {
                         Transition.atEndOfComic = true;
@@ -235,7 +235,7 @@ public static class Transition
 
         }
 
-        Debug.Log("OnTransitionTrigger() executed");
+        //Debug.Log("OnTransitionTrigger() executed");
     }
     public static bool CheckTransitionType(this MTransition map)
     {
@@ -266,7 +266,7 @@ public static class Transition
                 // }
 
                 table.GetOrCreateValue(map).canTransition = GlobalReferenceManager.GetCurrentUniversalPanel().GetComponent<HRotateMixin>().canTransition;
-                Debug.Log("CheckTransitionType() Exectued returned: " + table.GetOrCreateValue(map).canTransition);
+                //Debug.Log("CheckTransitionType() Exectued returned: " + table.GetOrCreateValue(map).canTransition);
                 return table.GetOrCreateValue(map).canTransition;
 
             case 1:
@@ -279,7 +279,7 @@ public static class Transition
             case 4:
 
             default:
-                Debug.Log("Transition not found, defaulting");
+                //Debug.Log("Transition not found, defaulting");
                 return false;
         }
 
@@ -290,10 +290,10 @@ public static class Transition
     {
         //CallBacks for TransitionTrigger
 
-
+       
         // Add functions below here to be invoked with the CallBack().
-        DataAcquisition.Singleton.transitionTime = Time.realtimeSinceStartup;       
-
+        DataAcquisition.Singleton.transitionTime = Time.realtimeSinceStartup;
+        DataAcquisition.Singleton.timeSpentOnPanel[GlobalReferenceManager.GetCurrentUniversalPanel().PanelId] = DataAcquisition.Singleton.timeSinceLastTransition - DataAcquisition.Singleton.timeSinceLastTransition;
         // I Think i should add the Set Actives, and itteration updates here if not handled from CameraSequencer
         table.GetOrCreateValue(map).callBackInProgress = false;
 
@@ -316,8 +316,8 @@ public static class Transition
 
 
             }
-            Debug.Log("BeforeYield: " + table.GetOrCreateValue(map).canTransition);
-            Debug.Log("BeforeYield Invoked: " + Fields.transitionResetCondition.Invoke(panelParse));
+            //Debug.Log("BeforeYield: " + table.GetOrCreateValue(map).canTransition);
+            //Debug.Log("BeforeYield Invoked: " + Fields.transitionResetCondition.Invoke(panelParse));
 
             yield return null;
             //yield return new WaitUntil(() => (bool)Fields.transitionResetCondition?.Invoke(panelParse) == true); // I am not sure i understand/remember this functionality anymore!
@@ -325,8 +325,8 @@ public static class Transition
         }
 
         
-        Debug.Log("AfterYield: " + table.GetOrCreateValue(map).canTransition);
-        Debug.Log("AfterYield Invoked: " + Fields.transitionResetCondition.Invoke(panelParse));
+        //Debug.Log("AfterYield: " + table.GetOrCreateValue(map).canTransition);
+        //Debug.Log("AfterYield Invoked: " + Fields.transitionResetCondition.Invoke(panelParse));
 
     }
 

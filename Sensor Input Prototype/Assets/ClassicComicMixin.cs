@@ -70,7 +70,7 @@ namespace SensorInputPrototype.MixinInterfaces
                 Input.touches.CopyTo(touchesToDump, 0);
                 for (int i = 0; i < touchesToDump.Length; i++)
                 {
-                    DataAcquisition.Singleton.touchesList.Add(touchesToDump[i]);
+                    DataAcquisition.Singleton.touchesListClassic.Add(touchesToDump[i]);
                 }
 
             }
@@ -83,7 +83,7 @@ namespace SensorInputPrototype.MixinInterfaces
                 µ(M).touch = Input.GetTouch(0);
                 if (µ(M).touch.phase == TouchPhase.Began)
                 {
-                                        
+                    DataAcquisition.Singleton.numberOfTouchInteractionsClassic += 1;
                 }
                 if (µ(M).touch.phase == TouchPhase.Moved)
                 {
@@ -113,6 +113,7 @@ namespace SensorInputPrototype.MixinInterfaces
                 {
                     //µ(M).touch2LastFrame = µ(M).touch2;
                     //µ(M).touchLastFrame = µ(M).touch;
+                    DataAcquisition.Singleton.numberOfTouchInteractionsClassic += 1;
                 }
                 if (µ(M).touch.phase == TouchPhase.Moved)
                 {
@@ -149,7 +150,7 @@ namespace SensorInputPrototype.MixinInterfaces
             }
             if (Input.touchCount == 3)
             {
-
+                DataAcquisition.Singleton.numberOfTouchInteractionsClassic += 1;
                 µ(M).zoom = 1;
                 µ(M).cameraSequencer.comicManager.gameObject.transform.position = Vector3.zero;
                 GlobalReferenceManager.GetActiveComicTemplate().gameObject.transform.localScale = Vector3.one * µ(M).zoom;

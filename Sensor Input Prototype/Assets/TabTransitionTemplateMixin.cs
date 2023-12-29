@@ -59,7 +59,7 @@ public class TabTransitionTemplateMixin : MonoBehaviour, MTabTransition
             {
                 DataAcquisition.Singleton.touchesList.Add(touchesToDump[i]);
             }
-
+            
         }
 
 
@@ -83,6 +83,7 @@ public class TabTransitionTemplateMixin : MonoBehaviour, MTabTransition
                     ray = new Ray(rayOrigin, Camera.main.transform.forward); // this could be a problem if it wasn't certain that ray wouldn't be null ever with a touch count at == 1;
                     if( (int)universalPanel.transitionType == 1)
                     {
+                        DataAcquisition.Singleton.numberOfTouchInteractions += 1;
                         GlobalReferenceManager.GetCurrentUniversalPanel().TriggerTransition();
                         this.OneFingerTouchTab(0, 0);
                         return;
@@ -93,6 +94,7 @@ public class TabTransitionTemplateMixin : MonoBehaviour, MTabTransition
                     Vector2.Distance(touch.position, this.GetTouchCoords()) > Screen.currentResolution.width / 10 &&
                     this.GetTouchCoords() != Vector2.zero) // swipe distance travel > 1/10th screen width, and saved vector isn't a zero-vector.
                 {
+                    DataAcquisition.Singleton.numberOfTouchInteractions += 1;
                     GlobalReferenceManager.GetCurrentUniversalPanel().TriggerTransition();
                     this.OneFingerTouchTab(0, 0);
                 }
@@ -115,6 +117,7 @@ public class TabTransitionTemplateMixin : MonoBehaviour, MTabTransition
                     {
                         if (targetList.Contains(hit.collider.gameObject))
                         {
+                            DataAcquisition.Singleton.numberOfTouchInteractions += 1;
                             GlobalReferenceManager.GetCurrentUniversalPanel().TriggerTransition();
                             this.OneFingerTouchTab(0, 0);
                         }

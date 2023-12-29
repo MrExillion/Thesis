@@ -26,6 +26,7 @@ namespace SensorInputPrototype.Ui
                 startInteractiveComicBtn.clickable.clicked += () =>
                 {
                     SceneManager.LoadScene("ComicBook");
+                    DataAcquisition.Singleton.timeAtInteractiveLoad = Time.realtimeSinceStartup;
                 };
             }
             if(startClassicComicBtn != null)
@@ -33,6 +34,8 @@ namespace SensorInputPrototype.Ui
                 startClassicComicBtn.clickable.clicked += () =>
                 {
                     SceneManager.LoadScene("ClassicComicBook");
+                    DataAcquisition.Singleton.timeAtClassicLoad = Time.realtimeSinceStartup;
+
                 };
             }
             return null;
