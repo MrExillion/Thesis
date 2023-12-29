@@ -64,6 +64,18 @@ namespace SensorInputPrototype.MixinInterfaces
         public static void ClassicMixin_Update(this MClassicComicMixin mMixinInterface)
         {
             MClassicComicMixin M = mMixinInterface;
+            Touch[] touchesToDump = new Touch[Input.touches.Length];
+            if (touchesToDump.Length >= 1)
+            {
+                Input.touches.CopyTo(touchesToDump, 0);
+                for (int i = 0; i < touchesToDump.Length; i++)
+                {
+                    DataAcquisition.Singleton.touchesList.Add(touchesToDump[i]);
+                }
+
+            }
+
+
 
 
             if (Input.touchCount == 1) 

@@ -292,7 +292,7 @@ public static class Transition
 
 
         // Add functions below here to be invoked with the CallBack().
-        
+        DataAcquisition.Singleton.transitionTime = Time.realtimeSinceStartup;       
 
         // I Think i should add the Set Actives, and itteration updates here if not handled from CameraSequencer
         table.GetOrCreateValue(map).callBackInProgress = false;

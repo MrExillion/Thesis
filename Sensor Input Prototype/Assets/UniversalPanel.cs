@@ -109,7 +109,23 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
                 
     }
 
-   
+
+
+    // USE THIS ONLY FOR GLOBAL UPDATE BEHAVIOUR
+   void Update()
+    {
+        if (Input.touchCount == 5)
+        {
+
+            // If 5 fingerdeathpunch then kill the experiment but ask why:
+
+            Debug.Log("Stopping the Experiment!");
+
+
+        }
+
+
+    }
 
 
 }
