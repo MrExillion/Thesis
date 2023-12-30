@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,10 +41,11 @@ public class DataAcquisition : MonoBehaviour
     //variables used to calculate others
     public float transitionTime;
     public bool endOfExperiment = false;
+    public bool isEnding = false;
 
 
     string relPath = "";
-
+    
 
     private void Awake()
     {
@@ -95,44 +97,50 @@ public class DataAcquisition : MonoBehaviour
 
     public void DumpData()
     {
-        string stringToSave = "timeSinceStartUp, timeSinceLastTransition, timeAtClassicLoad, timeAtClassicEnd, durationForClassic, timeAtInteractiveLoad,  timeAtInteractiveEnd, durationForInteractive, timeAtFFDP, numberOfTouchesTotal, numberOfTouchInteractions, "; /*"column_1, column2, column3\r\naaa, bbb, ccc\r\n111, 222, 333"*/
+        string stringToSave = "timeSinceStartUp; timeSinceLastTransition; timeAtClassicLoad; timeAtClassicEnd; durationForClassic; timeAtInteractiveLoad;  timeAtInteractiveEnd; durationForInteractive; timeAtFFDP; numberOfTouchesTotal; numberOfTouchInteractions; "; /*"column_1; column2; column3\r\naaa; bbb; ccc\r\n111; 222; 333"*/
         for(int i = 0; i < touchesList.Count; i++) 
         {
-            stringToSave += "TouchesListIndex_"+i+", Phase_"+i+", TapCount_"+i+", Pressure_"+i+", FingerId_"+i+", MaxPossiblePressure_"+i+", ";
+            stringToSave += "TouchesListIndex_"+i+"; Phase_"+i+"; TapCount_"+i+"; Pressure_"+i+"; FingerId_"+i+"; MaxPossiblePressure_"+i+"; ";
         }
         for (int i = 0; i < touchesListClassic.Count; i++)
         {
-            stringToSave += "TouchesListIndexC_" + i + ", PhaseC_" + i + ", TapCountC_" + i + ", PressureC_" + i + ", FingerIdC_" + i + ", MaxPossiblePressureC_" + i + ", ";
+            stringToSave += "TouchesListIndexC_" + i + "; PhaseC_" + i + "; TapCountC_" + i + "; PressureC_" + i + "; FingerIdC_" + i + "; MaxPossiblePressureC_" + i + "; ";
         }
 
-        stringToSave += "testParticipantID, frameCountPerActiveGyro, frameCountPerActiveMicrophone, frameCountOerActiveLightSensor, disengagementReactionCards, engagementMappingReactionCompletionCards, durationForExperiment";
+        stringToSave += "testParticipantID; frameCountPerActiveGyro; frameCountPerActiveMicrophone; frameCountOerActiveLightSensor; disengagementReactionCards; engagementMappingReactionCompletionCards; durationForExperiment; ";
         for(int i = 0; i < 20; i++)
         {
-            stringToSave += "timeSpentOnPanel_" + i +", ";
+            stringToSave += "timeSpentOnPanel_" + i +"; ";
         }
         for (int i = 0; i < 20; i++)
         {
-            stringToSave += "timeSpentLookingAtClassicPanel_" + i;
+            stringToSave += "timeSpentLookingAtClassicPanel_" + i+"; ";
         }
-        stringToSave += "\r\n" + timeSinceStartUp + ", " + timeSinceLastTransition + ", " + timeAtClassicLoad + ", " + durationForClassic + ", " + timeAtInteractiveLoad + ", " + timeAtInteractiveEnd + ", " + durationForInteractive + ", " + timeAtFFDP + ", " + numberOfTouchesTotal + ", " + numberOfTouchInteractions+ ", ";
+        stringToSave += "\r\n" + timeSinceStartUp + "; " + timeSinceLastTransition + "; " + timeAtClassicLoad + "; "+ timeAtClassicEnd + "; " + durationForClassic + "; " + timeAtInteractiveLoad + "; " + timeAtInteractiveEnd + "; " + durationForInteractive + "; " + timeAtFFDP + "; " + numberOfTouchesTotal + "; " + numberOfTouchInteractions+ "; ";
         for (int i = 0; i < touchesList.Count; i++)
         {
-            stringToSave += i+","+touchesList[i].phase +","+touchesList[i].tapCount + "," + touchesList[i].pressure + "," + touchesList[i].fingerId + ","+touchesList[i].maximumPossiblePressure;
+            stringToSave += i+"; "+touchesList[i].phase +"; "+touchesList[i].tapCount + "; " + touchesList[i].pressure + "; " + touchesList[i].fingerId + "; "+touchesList[i].maximumPossiblePressure + "; ";
         }
-        for (int i = 0; i < touchesList.Count; i++)
+        for (int i = 0; i < touchesListClassic.Count; i++)
         {
-            stringToSave += i + "," + touchesListClassic[i].phase + "," + touchesListClassic[i].tapCount + "," + touchesListClassic[i].pressure + "," + touchesListClassic[i].fingerId + "," + touchesListClassic[i].maximumPossiblePressure;
+            stringToSave += i + "; " + touchesListClassic[i].phase + "; " + touchesListClassic[i].tapCount + "; " + touchesListClassic[i].pressure + "; " + touchesListClassic[i].fingerId + "; " + touchesListClassic[i].maximumPossiblePressure+ "; ";
         }
-        stringToSave += testParticipantID + ", " + frameCountPerActiveGyro + ", " + frameCountPerActiveMicrophone + ", " + frameCountPerActiveLightSensor + ", " + disengagementReactionCards + ", " + engagementMappingReactionCompletionCards + ", " + durationForExperiment + ", ";
+        stringToSave += testParticipantID + "; " + frameCountPerActiveGyro + "; " + frameCountPerActiveMicrophone + "; " + frameCountPerActiveLightSensor + "; " + disengagementReactionCards + "; " + engagementMappingReactionCompletionCards + "; " + durationForExperiment + "; ";
         for (int i = 0; i < 20; i++)
         {
-            stringToSave += timeSpentOnPanel[i]+", ";
+            stringToSave += timeSpentOnPanel[i]+"; ";
         }
         for (int i = 0; i < 20; i++)
         {
+            
             stringToSave += timeSpentLookingAtClassicPanel[i];
+            if (i < 19)
+            {
+                stringToSave += "; ";
+            }
         }
-        System.IO.File.WriteAllText(relPath + "DataAcquisition.csv", stringToSave);
+        
+        System.IO.File.WriteAllText(relPath + "DataAcquisition"+System.IO.Directory.GetFiles(relPath, "*.csv").Length+".csv", stringToSave);
 
 
     }

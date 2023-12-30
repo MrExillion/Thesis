@@ -43,7 +43,7 @@ public static class Transition
         internal List<TransitionCB> transitionCB = new List<TransitionCB>();
         public static readonly TransitionCallBack callBack = CallBack;
         public static readonly TransitionResetCondition transitionResetCondition = UniversalPanel.ResetConditions;
-
+        internal int transitionCounts = -1;
         void Update()
         {
             //    // just used to update canTransition
@@ -292,8 +292,14 @@ public static class Transition
 
        
         // Add functions below here to be invoked with the CallBack().
+        
+        if (table.GetOrCreateValue(map).transitionCounts < GlobalReferenceManager.GetCurrentUniversalPanel().GetNumberOfPanels(GlobalReferenceManager.GetCurrentUniversalPanel(),true))
+        {
+            table.GetOrCreateValue(map).transitionCounts++;
+        }
+        DataAcquisition.Singleton.timeSpentOnPanel[table.GetOrCreateValue(map).transitionCounts] = Time.realtimeSinceStartup - DataAcquisition.Singleton.timeSinceLastTransition;
         DataAcquisition.Singleton.transitionTime = Time.realtimeSinceStartup;
-        DataAcquisition.Singleton.timeSpentOnPanel[GlobalReferenceManager.GetCurrentUniversalPanel().PanelId] = DataAcquisition.Singleton.timeSinceLastTransition - DataAcquisition.Singleton.timeSinceLastTransition;
+
         // I Think i should add the Set Actives, and itteration updates here if not handled from CameraSequencer
         table.GetOrCreateValue(map).callBackInProgress = false;
 

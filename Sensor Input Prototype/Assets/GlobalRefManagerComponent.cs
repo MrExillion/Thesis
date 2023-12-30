@@ -1,16 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using SensorInputPrototype.MixinInterfaces;
-using System;
-#if UNITY_EDITOR
-using UnityEditor.SearchService;
-
-using UnityEngine.SceneManagement;
-using Unity.Android.Types;
-using UnityEditor;
-using System.ComponentModel;
-#endif
 public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
 {
     // possibly redundant later... but for now do as tooltip says!
@@ -83,6 +73,48 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
 
 
     }
+    void Update()
+    {
+        if (Input.touchCount == 5)
+        {
 
+            // If 5 fingerdeathpunch then kill the experiment but ask why:
+            if (Input.GetTouch(4).phase == TouchPhase.Ended && !DataAcquisition.Singleton.isEnding)
+            {
+                DataAcquisition.Singleton.isEnding = true;
+                Debug.Log("Stopping the Experiment!");
+
+                DataAcquisition.Singleton.timeAtFFDP = Time.realtimeSinceStartup;
+
+                if (SceneManager.GetSceneByName("ComicBook").isLoaded)
+                {
+                    DataAcquisition.Singleton.EndInteractive();
+                    DataAcquisition.Singleton.endOfExperiment = true; // DO NOT KEEP THIS LINE
+                }
+                if (SceneManager.GetSceneByName("ClassicComicBook").isLoaded)
+                {
+                    DataAcquisition.Singleton.EndClassic();
+                }
+
+
+                if (DataAcquisition.Singleton.endOfExperiment)
+                {
+
+
+                    DataAcquisition.Singleton.EndExperiment();
+                }
+                else if (SceneManager.GetActiveScene().name == "ComicBook")
+                {
+                    SceneManager.LoadScene("ClassicComicBook"); // Change this to pause screen or inbuilt survey?
+
+                }
+                else if (SceneManager.GetActiveScene().name == "ClassicComicBook")
+                {
+                    SceneManager.LoadScene("ComicBook");
+                }
+            }
+
+        }
+    }
 
 }

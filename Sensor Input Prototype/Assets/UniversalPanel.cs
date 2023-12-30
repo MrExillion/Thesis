@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobalReferenceManager
 {
-    
+
     public int PanelId = 0; // I am considering the UI system to be able to simply dictate the panel ID by order of execution as the list in the PageManager, but for now its not like that. 
     /// <summary>
     /// Transition types are passed and used as ints across mixins. Due to Microphone NOT being a multi instance capable class that ISN'T Proprietary, any new Transitions added using <see cref="Microphone.Start"/> MUST go through <seealso cref="MicrophoneBlowAirTrigger.cs"/> AND include an update to the private property <code>int[] microphoneTransitions</code>, with fixed size, as this is checking for active panel transitions that use the microphone before calling <see cref="Microphone.End"/>. Resulting int the microphone appearing to be recording, but has samples less than a second resulting in FFT showing band output with memory accretion, and amplitude to always return 0! This breaks transitions relying on the <see cref="Microphone"/>.
@@ -31,7 +31,7 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
     /// <br>Important for Developers Only:</br>
     /// <br>Due to Microphone NOT being a multi instance capable class that ISN'T Proprietary, any new Transitions added using <see cref="Microphone.Start"/> MUST go through MicrophoneBlowAirTrigger.cs AND include an update to the private property <code>int[] microphoneTransitions</code>, with fixed size, as this is checking for active panel transitions that use the microphone before calling <see cref="Microphone.End"/>. Resulting int the microphone appearing to be recording, but has samples less than a second resulting in FFT showing band output with memory accretion, and amplitude to always return 0! This breaks transitions relying on the Microphone.</br>
     /// </summary>
-    [HideInInspector]public int transitionType = 0;
+    [HideInInspector] public int transitionType = 0;
     private Type TransitionBehaviour;
 
     private void Awake()
@@ -62,13 +62,13 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
         //       // else
         //       // {
         //            //Debug.Log("CanTransition:\t"+GetComponent<HRotateMixin>().canTransition+",\t"+this.PanelId);
-                    
+
         //       // }
-                
-                
+
+
         //    case 1:
-                
-                
+
+
         //    case 2:
 
         //    case 3:
@@ -80,9 +80,9 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
         //        return false;
         //}
 
-            
 
-        
+
+
     }
 
     public static bool ResetConditions(UniversalPanel panel)
@@ -92,57 +92,30 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
             case (int)Transition.transitionTypes.HRotate:
                 {
 
-                    
+
                     return (Camera.main.GetComponent<CameraSequencer>().IsResetConditionMet());
 
 
-                    
+
 
                 }
 
             default:
                 return true;
                 break;
-        
-        
+
+
         }
 
-                
+
     }
 
 
 
     // USE THIS ONLY FOR GLOBAL UPDATE BEHAVIOUR
-   void Update()
+    void Update()
     {
-        if (Input.touchCount == 5)
-        {
-
-            // If 5 fingerdeathpunch then kill the experiment but ask why:
-
-            Debug.Log("Stopping the Experiment!");
-
-            DataAcquisition.Singleton.timeAtFFDP = Time.realtimeSinceStartup;
-
-            if (SceneManager.GetSceneByName("ComicBook").isLoaded)
-            {
-                DataAcquisition.Singleton.EndInteractive();
-            }
-            if (SceneManager.GetSceneByName("ClassicComicBook").isLoaded)
-            {
-                DataAcquisition.Singleton.EndClassic();
-            }
-
-
-            if (DataAcquisition.Singleton.endOfExperiment)
-            {
-
-
-                DataAcquisition.Singleton.EndExperiment();
-            }
-            
-
-        }
+        
 
 
     }
