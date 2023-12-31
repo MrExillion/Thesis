@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+//using UnityEngine.InputSystem.EnhancedTouch;
 
 
 namespace SensorInputPrototype.MixinInterfaces
@@ -26,7 +27,7 @@ namespace SensorInputPrototype.MixinInterfaces
             internal Touch touch2;
             internal Touch touchLastFrame;
             internal Touch touch2LastFrame;
-            
+            internal int panelFocus;
             internal enum enumItems { item = 0, item1 = 1 };
             internal List<string> stringList = new(); // or new List<string>(); depends on your style ofc.
         }
@@ -61,6 +62,30 @@ namespace SensorInputPrototype.MixinInterfaces
             MClassicComicMixin M = mMixinInterface;
             //µ(M).touch = Input.GetTouch(0);
         }
+
+        public static void ClassicMixin_CurrentPanelFocus(this MClassicComicMixin mMixinInterface)
+        {
+            MClassicComicMixin M = mMixinInterface;
+            RaycastHit hit;
+            Vector3 rayOrigin = Camera.main.transform.position;
+
+
+            Ray ray = new Ray(rayOrigin, Camera.main.transform.forward);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.TryGetComponent(out UniversalPanel component))
+                {
+                    µ(M).panelFocus = GlobalRefManagerComponent.singleton.GetDefactoPanelId(component);
+                }
+            }
+
+            DataAcquisition.Singleton.timeSpentLookingAtClassicPanel[table.GetOrCreateValue(M).panelFocus] += Time.unscaledDeltaTime;
+
+        }
+
+
+
         public static void ClassicMixin_Update(this MClassicComicMixin mMixinInterface)
         {
             MClassicComicMixin M = mMixinInterface;
@@ -75,7 +100,7 @@ namespace SensorInputPrototype.MixinInterfaces
 
             }
 
-
+            M.ClassicMixin_CurrentPanelFocus();
 
 
             if (Input.touchCount == 1) 

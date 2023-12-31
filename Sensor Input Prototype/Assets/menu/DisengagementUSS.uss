@@ -1,0 +1,251 @@
+.DisengagementOuter {
+    display: flex;
+    height: 100%;
+    background-image: url('project://database/Assets/menu/image%20(1).png?fileID=2800000&guid=27a601d8b93ac4c4ca93f6a0ceb03406&type=3#image (1)');
+    -unity-background-image-tint-color: rgba(204, 209, 169, 0.3);
+    -unity-background-scale-mode: scale-and-crop;
+    -unity-slice-left: 148;
+    -unity-slice-top: 148;
+    -unity-slice-right: 148;
+    -unity-slice-bottom: 148;
+    -unity-slice-scale: 0.3px;
+}
+
+.Button {
+    height: 80%;
+    width: 40%;
+    border-top-left-radius: 6%;
+    border-top-right-radius: 6%;
+    border-bottom-right-radius: 6%;
+    border-bottom-left-radius: 6%;
+    border-left-color: rgba(255, 255, 255, 0.3);
+    border-right-color: rgba(255, 255, 255, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url('project://database/Assets/menu/testGradientCircle.png?fileID=6395087274024682266&guid=c243e459c25732741848eea2a8edf91d&type=3#testGradientCircle_0');
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.23);
+    -unity-slice-left: 0;
+    -unity-slice-bottom: 0;
+    -unity-slice-right: 0;
+    -unity-slice-top: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 1;
+    font-size: 2364%;
+    white-space: normal;
+    -unity-font-style: bold;
+    -unity-font-definition: url('project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=4f5fac1292d6a6f479fe6fdc1b929f97&type=3#NotInter-Regular');
+    text-shadow: 0.3% 0.6% 4% rgba(255, 255, 255, 0.83);
+    -unity-text-outline-width: 2%;
+    -unity-text-outline-color: rgba(255, 255, 255, 0.5);
+}
+
+.unity-radio-button__input {
+    width: 90%;/*
+    height: 80%;
+    margin-right: 3%;
+    margin-left: 3%; */
+    
+}
+VisualElement.unity-base-field__input{
+    width: 100%;
+    -unity-text-align: left;
+        
+
+}
+
+
+.unity-radio-button_group__container {
+    width: 100%;
+    height: 80%;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+.unity-radio-button_group__container > .unity-radio-button {
+    padding-left: 10%;
+    height: 800%;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+.unity-radio-button__checkmark {
+    padding-left: 10%;
+    height: 10000%;
+    width: 10000%;
+    
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+
+RadioButton {
+    height: 10%!important;
+
+}
+RadioButton > VisualElement > * {
+    font-size: 1400%;
+    width: 10%;
+    height: 100%;
+
+
+
+    
+}
+.unity-radio-button__text{
+}
+
+
+.unity-base-field__input 
+{
+    /* margin-left: -30%; */
+    
+}
+
+RadioButton > VisualElement > Label {
+    /* margin-left:30%!important; */
+    justify: left!important;
+   
+}
+
+
+.unity-base-field__input {
+    width: 100%;
+    height: 80%;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    margin-right: 3%;
+    margin-left: 3%;
+    flex-basis: left; 
+     
+}
+.unity-base-field__input > *{
+
+
+padding-left: -30%;
+height: 100%;
+
+}
+
+.RadioGroup {
+    align-items: left!important;
+    justify-content: center;
+    flex-direction: column;
+    /* max-height: 80%; */
+    min-height: 70%;
+    min-width: 70%;
+    flex-basis: auto;
+    overflow: hidden;
+    scale: 1 1;
+    margin-top: -5%;
+    margin-right: 3%;
+    margin-bottom: 6%;
+    margin-left: 3%;
+}
+.Rdogrp{
+    flex-basis: 100%;
+    -unity-text-align: middle-left;
+    text-overflow: ellipsis;
+    -unity-text-outline-width: initial;
+    font-size: 62%;
+    width: 90%;
+    align-self: auto;
+    
+    max-width: 50%;
+    overflow: hidden;
+    letter-spacing: initial;
+    word-spacing: initial;
+    -unity-paragraph-spacing: initial;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    -unity-background-scale-mode: scale-and-crop;
+    height: 81%;
+    min-height: 50%;
+    max-height: 60%;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.CardFrame {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    font-size: 20%;
+    -unity-font-style: normal;
+    white-space: normal;
+    text-overflow: ellipsis;
+    -unity-text-align: upper-center;
+    color: rgb(0, 0, 0);
+    align-items: center;
+    flex-direction: column;
+}
+
+.HovedMenuKnap1 {
+    height: 80%;
+    width: 40%;
+    border-top-left-radius: 6%;
+    border-top-right-radius: 6%;
+    border-bottom-right-radius: 6%;
+    border-bottom-left-radius: 6%;
+    border-left-color: rgba(255, 255, 255, 0.3);
+    border-right-color: rgba(255, 255, 255, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url('project://database/Assets/menu/testGradientCircle.png?fileID=6395087274024682266&guid=c243e459c25732741848eea2a8edf91d&type=3#testGradientCircle_0');
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.23);
+    -unity-slice-left: 0;
+    -unity-slice-bottom: 0;
+    -unity-slice-right: 0;
+    -unity-slice-top: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 1;
+    font-size: 364%;
+    white-space: normal;
+    -unity-font-style: bold;
+    -unity-font-definition: url('project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=4f5fac1292d6a6f479fe6fdc1b929f97&type=3#NotInter-Regular');
+    text-shadow: 0.3% 0.6% 4% rgba(255, 255, 255, 0.83);
+    -unity-text-outline-width: 2%;
+    -unity-text-outline-color: rgba(255, 255, 255, 0.5);
+}
+
+.Label {
+    white-space: normal;
+    -unity-text-align: middle-center;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    font-size: 2000%;
+    display: flex;
+    padding-top: 4%;
+    padding-right: 2%;
+    padding-bottom: 4%;
+    padding-left: 2%;
+    margin-top: 4%;
+    margin-right: 2%;
+    margin-bottom: 4%;
+    margin-left: 2%;
+    flex-basis: auto;
+    align-items: stretch;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+}
+
+.HovedMenuFooterGroup {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 6%;
+    border-right-width: 6%;
+    border-bottom-width: 6%;
+    border-left-width: 6%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-image: url('project://database/Assets/menu/testGradientCircle.png?fileID=6395087274024682266&guid=c243e459c25732741848eea2a8edf91d&type=3#testGradientCircle_0');
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.5);
+    height: 20%;
+    align-items: center;
+    justify-content: space-around;
+    align-self: center;
+}
+

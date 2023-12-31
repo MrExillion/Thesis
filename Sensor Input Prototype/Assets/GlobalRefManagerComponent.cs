@@ -6,6 +6,7 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
     // possibly redundant later... but for now do as tooltip says!
     [TooltipAttribute("REQUIRED: Set this to the first and or only comic in the hierarchy")] 
     public GameObject primaryComic;
+    [HideInInspector] public static GlobalRefManagerComponent singleton;
     //[SerializeField] public Array[] Comics = { };
     //private List<GameObject> comics;
 
@@ -24,7 +25,7 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
     ////public List<List<GameObject>> hhh;
     //public GameObject comicContainer;
     //public static ComicManagerTemplate comicTemplate;
-   
+
     ////[SerializeField]public ComicList ComicList = new ComicList();
     //private void Awake()
     //{
@@ -36,7 +37,7 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
     //{
     //    comicTemplate = GameObject.FindAnyObjectByType<ComicManagerTemplate>();
     //    comicContainer = comicContainer.gameObject;
-        
+
 
     //    comics = comicTemplate.comicsList;
     //    foreach (GameObject go in comicTemplate.comicsList)
@@ -57,22 +58,36 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
     //                    hierarchy.SetValue(go4, (comics.IndexOf(go)) * (chapter.IndexOf(go2)) * (pages.IndexOf(go3)) * (panels.IndexOf(go4)));
 
     //                }
-                    
+
     //                //Pages.SetValue(Panels, pages.IndexOf(go3));
     //            }
     //            //Chapters.SetValue(Pages, chapter.IndexOf(go2));
     //        }
     //        //Comics.SetValue(Chapters, comics.IndexOf(go));
-            
+
     //    }
     //}
+
+    void Awake()
+    {
+        if(singleton == null)
+        {
+            singleton = this;
+        }
+    }
+
 
     void Start()    // Initialize references -- MUST run before Camera Start();
     {
         this.GlobalReferenceManagerInit(gameObject);
 
-
+        this.SetDefactorPanelIds(primaryComic.GetComponent<ComicManagerTemplate>());
+        
     }
+    
+    
+    
+
     void Update()
     {
         if (Input.touchCount == 5)

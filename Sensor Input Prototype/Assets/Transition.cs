@@ -293,12 +293,12 @@ public static class Transition
        
         // Add functions below here to be invoked with the CallBack().
         
-        if (table.GetOrCreateValue(map).transitionCounts < GlobalReferenceManager.GetCurrentUniversalPanel().GetNumberOfPanels(GlobalReferenceManager.GetCurrentUniversalPanel(),true))
-        {
-            table.GetOrCreateValue(map).transitionCounts++;
-        }
-        DataAcquisition.Singleton.timeSpentOnPanel[table.GetOrCreateValue(map).transitionCounts] = Time.realtimeSinceStartup - DataAcquisition.Singleton.timeSinceLastTransition;
-        DataAcquisition.Singleton.transitionTime = Time.realtimeSinceStartup;
+        //if (table.GetOrCreateValue(map).transitionCounts < GlobalReferenceManager.GetCurrentUniversalPanel().GetNumberOfPanels(GlobalReferenceManager.GetCurrentUniversalPanel(),true))
+        //{
+        //    table.GetOrCreateValue(map).transitionCounts++;
+        //}
+        DataAcquisition.Singleton.timeSpentOnPanel[GlobalRefManagerComponent.singleton.GetDefactoPanelId(GlobalReferenceManager.GetCurrentUniversalPanel())] = DataAcquisition.Singleton.timeSinceLastTransition - DataAcquisition.Singleton.timeAtInteractiveLoad;
+        DataAcquisition.Singleton.timeSinceLastTransition = Time.realtimeSinceStartup;
 
         // I Think i should add the Set Actives, and itteration updates here if not handled from CameraSequencer
         table.GetOrCreateValue(map).callBackInProgress = false;

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DataAcquisition : MonoBehaviour
 {
+    
     public float timeSinceStartUp = 0f; // Implemented //possibly duplicated
     public float timeSinceLastTransition = 0f; // Implemented
     public float timeAtClassicLoad = 0f; // Implemented
@@ -61,14 +62,42 @@ public class DataAcquisition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(testParticipantID.ToString());
+        Debug.Log(testParticipantID.ToString());  
     }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded; 
+
+
+    }
+
+    private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        if (scene.name == "ComicBook" && loadSceneMode == LoadSceneMode.Single)
+        {
+
+            timeAtInteractiveLoad = Time.realtimeSinceStartup;
+            DataAcquisition.Singleton.timeSinceLastTransition = timeAtInteractiveLoad;
+            DataAcquisition.Singleton.endOfExperiment = (timeAtClassicLoad > 0);
+
+        }
+        if (scene.name == "ClassicComicBook" && loadSceneMode == LoadSceneMode.Single)
+        {
+
+            timeAtClassicLoad = Time.realtimeSinceStartup;
+            DataAcquisition.Singleton.endOfExperiment = (timeAtInteractiveLoad > 0);
+        }
+
+    }
+
+
+
 
     // Update is called once per frame
     private void Update()
     {
         timeSinceStartUp = Time.realtimeSinceStartup;
-        timeSinceLastTransition = transitionTime - Time.realtimeSinceStartup;
+        //timeSinceLastTransition = transitionTime - Time.realtimeSinceStartup;
         if (SceneManager.GetSceneByName("ComicBook").isLoaded)
         {
             numberOfTouchesTotal += Input.touchCount;
@@ -83,10 +112,12 @@ public class DataAcquisition : MonoBehaviour
 
     public void EndInteractive()
     {
+        timeAtInteractiveEnd = Time.realtimeSinceStartup;
         durationForInteractive = timeAtInteractiveEnd - timeAtInteractiveLoad;
     }
     public void EndClassic()
     {
+        timeAtClassicEnd = Time.realtimeSinceStartup;
         durationForClassic = timeAtClassicEnd - timeAtClassicLoad;
     }
     public void EndExperiment()
@@ -128,7 +159,7 @@ public class DataAcquisition : MonoBehaviour
         stringToSave += testParticipantID + "; " + frameCountPerActiveGyro + "; " + frameCountPerActiveMicrophone + "; " + frameCountPerActiveLightSensor + "; " + disengagementReactionCards + "; " + engagementMappingReactionCompletionCards + "; " + durationForExperiment + "; ";
         for (int i = 0; i < 20; i++)
         {
-            stringToSave += timeSpentOnPanel[i]+"; ";
+            stringToSave += Singleton.timeSpentOnPanel[i]+"; ";
         }
         for (int i = 0; i < 20; i++)
         {

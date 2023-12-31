@@ -37,7 +37,7 @@ public static class GlobalReferenceManager
     {
         //internal int stuff;
         internal ComicManagerTemplate comicManagerTemplate1 = null;
-        
+        internal List<GameObject> defactoPanelList = new List<GameObject>();
 
 
     }
@@ -229,6 +229,128 @@ public static class GlobalReferenceManager
 
     }
 
+
+    [System.Obsolete]public static int GetDefactoPanelId(UniversalPanel component) 
+    {
+        int currentPanelNum = 0;
+
+        PanelManagerTemplate page = component.GetComponentInParent<PanelManagerTemplate>();
+        PageManagerTemplate chapter = page.GetComponentInParent<PageManagerTemplate>();
+        ChapterManagerTemplate comic = chapter.GetComponentInParent<ChapterManagerTemplate>();
+        ComicManagerTemplate container = comic.GetComponentInParent<ComicManagerTemplate>();
+
+        for (int i = container.containerId; i >= 0; i--)
+        {
+            if (i < container.containerId)
+            {
+                for (int j = container.comicsList[i].GetComponent<ChapterManagerTemplate>().chapterOrder.Count; j >= 0; j--)
+                {
+                    if (j < chapter.chapterId)
+                    {
+                        for (int k = chapter.pageOrder[j].GetComponent<PageManagerTemplate>().pageOrder.Count; k >= 0; k--)
+                        {
+                            if (k < page.pageId)
+                            {
+                                currentPanelNum += container.comicsList[i].GetComponent<ChapterManagerTemplate>().chapterOrder[j].GetComponent<PageManagerTemplate>().pageOrder[k].GetComponent<PanelManagerTemplate>().panelOrder.Count;
+                            }
+                            else
+                            {
+                                currentPanelNum += component.PanelId;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int k = page.pageId; k >= 0; k--)
+                        {
+                            if (k < page.pageId)
+                            {
+                                currentPanelNum += container.comicsList[i].GetComponent<ChapterManagerTemplate>().chapterOrder[j].GetComponent<PageManagerTemplate>().pageOrder[k].GetComponent<PanelManagerTemplate>().panelOrder.Count;
+                            }
+                            else
+                            {
+
+                                currentPanelNum += component.PanelId;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int j = chapter.chapterId; j >= 0; j--)
+                {
+                    if (j < chapter.chapterId)
+                    {
+                        for (int k = chapter.pageOrder[j].GetComponent<PageManagerTemplate>().pageOrder.Count; k >= 0; k--)
+                        {
+                            if (k < page.pageId)
+                            {
+                                currentPanelNum += chapter.pageOrder[k].GetComponent<PanelManagerTemplate>().panelOrder.Count;
+
+                            }
+                            else
+                            {
+                                currentPanelNum += component.PanelId;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        for (int k = page.pageId; k >= 0; k--)
+                        {
+                            if (k < page.pageId)
+                            {
+                                currentPanelNum += chapter.pageOrder[k].GetComponent<PanelManagerTemplate>().panelOrder.Count;
+                            }
+                            else
+                            {
+                                currentPanelNum += component.PanelId;
+                            }
+
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+        return currentPanelNum;
+    }
+
+    public static int GetDefactoPanelId(this IGlobalReferenceManager globalRef, UniversalPanel component)
+    {
+
+        return table.GetOrCreateValue(globalRef).defactoPanelList.IndexOf(component.gameObject);
+    }
+    public static void SetDefactorPanelIds(this IGlobalReferenceManager globalRef, ComicManagerTemplate comicManagerTemplate)
+    {
+ 
+        List<GameObject> defactoPanelList = new List<GameObject>();
+
+        List<GameObject> comics = comicManagerTemplate.comicsList;
+        //List<GameObject> chapterGObjs = comicManagerTemplate.comicsList[comicManagerTemplate.comicsList.Count - 1].GetComponent<ChapterManagerTemplate>().chapterOrder;
+        //List<GameObject> pageGObjs = chapterGObjs[chapterGObjs.Count-1].GetComponent<PageManagerTemplate>().pageOrder;
+        //UniversalPanel lastPanel = pageGObjs[pageGObjs.Count-1].GetComponent<UniversalPanel>();
+     
+
+        for(int i = 0; i < comics.Count; i++)
+        {
+            for (int j = 0; j < comics[i].GetComponent<ChapterManagerTemplate>().chapterOrder.Count; j++)
+            {
+                for(int k = 0; k < comics[i].GetComponent<ChapterManagerTemplate>().chapterOrder[j].GetComponent<PageManagerTemplate>().pageOrder.Count; k++)
+                {
+                    for(int l = 0; l < comics[i].GetComponent<ChapterManagerTemplate>().chapterOrder[j].GetComponent<PageManagerTemplate>().pageOrder[k].GetComponent<PanelManagerTemplate>().panelOrder.Count;l++) 
+                    {
+                        defactoPanelList.Add(comics[i].GetComponent<ChapterManagerTemplate>().chapterOrder[j].GetComponent<PageManagerTemplate>().pageOrder[k].GetComponent<PanelManagerTemplate>().panelOrder[l]);
+                    }
+                }
+            }
+        }
+         table.GetOrCreateValue(globalRef).defactoPanelList = new(defactoPanelList);
+    }
 
 
 }

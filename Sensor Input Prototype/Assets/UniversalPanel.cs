@@ -116,7 +116,7 @@ public class UniversalPanel : MonoBehaviour, MTransition, MPanelManager, IGlobal
     void Update()
     {
         
-
+        
 
     }
 
