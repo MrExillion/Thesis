@@ -1,0 +1,58 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/menu/DisengagementUSS.uss?fileID=7433441132597879392&amp;guid=4c0eb3d67c3ef3a40bc8c11e336ce35c&amp;type=3#DisengagementUSS" />
+    <ui:VisualElement name="VisualElement2" style="flex-grow: 1; min-width: auto;">
+        <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" style="font-size: 80%; height: 100%; -unity-text-align: middle-center;" />
+    </ui:VisualElement>
+    <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Auto" vertical-page-size="-1" style="height: 80%;">
+        <ui:VisualElement tabindex="-1" name="VisualElementContainer" style="min-width: 100%; flex-wrap: nowrap; height: 100%; max-height: 100%; min-height: 469%;">
+            <ui:VisualElement name="InterlectualCards" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="2" text="Vælg dét ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Interlektuelt&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:RadioButtonGroup value="-1" choices="Intellektuelt Udfordrende,Strategisk Svært,Svært at regne den ud,Kræver planlægning,Kedeligt,Ugennemførligt,Mangel på kreativ stimuli,Svært at lære,Dårlige Puslespil " focusable="false" class="RadioGroup RadioGrpup" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
+                    <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" style="font-size: 61%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="PhysicalCards" tabindex="0" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="-1" text="Vælg dét ord der bedst beskriver din årsag til at ønske at stoppe." display-tooltip-when-elided="true" class="Label" />
+                <ui:RadioButtonGroup value="-1" choices="Non-Reponsivt,Lav Frihed,Dårlig kontrol,Krævende,Uintuitivt,Lav præcision,Dårlig timing,Dårlig berøring,Brug af Fysisk Handling " focusable="false" class="RadioGroup" />
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; align-items: stretch; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; width: 100%; height: 100%; display: none; visibility: hidden;">
+                    <ui:Button text="Tilbage" display-tooltip-when-elided="true" name="GoToIntellectualCards" tabindex="1" class="Button" style="flex-direction: row; flex-basis: 50%; -unity-text-align: middle-center; height: 50%; width: 50%;" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToSensoryCards" tabindex="1" class="Button" style="flex-direction: row; flex-basis: 50%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="SensoryCards" tabindex="2" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="-1" text="Vælg dét ord der bedst beskriver din årsag til at ønske at stoppe." display-tooltip-when-elided="true" class="Label" style="display: flex;" />
+                <ui:RadioButtonGroup value="-1" choices="Uoverraskende,Irriterende Tema,Visuelt Grimt,Dårlig Lyd,Dårlig Musik,Uhygge,Dårlig Atmosfære,Senseløst,Ingen mulighed for at gå på opdagelse " focusable="false" class="RadioGroup" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; display: none; visibility: hidden;">
+                    <ui:Button text="Tilbage" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToSocialCards" class="Button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="SocialCards" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="-1" text="Vælg dét ord der bedst beskriver din årsag til at ønske at stoppe." display-tooltip-when-elided="true" class="Label" />
+                <ui:RadioButtonGroup value="-1" choices="Dårlig holdånd,Ingen venner,Dårlig Samarbejde,Snakkeri,Deling,Forening,Deltagelse,At høre til,Mangel på Samvær " focusable="false" name="RadioButtonGroup" class="RadioGroup" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; display: none; visibility: hidden;">
+                    <ui:Button text="Tilbage" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToNarrativeCards" class="Button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="NarativeCards" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="-1" text="Vælg dét ord der bedst beskriver din årsag til at ønske at stoppe." display-tooltip-when-elided="true" class="Label" />
+                <ui:RadioButtonGroup value="-1" choices="Ingen Spænding,Ingen Dramatik,Kedelige Karakterer,Dårlig Historie,Ingen/Dårlige Motiver,Mangel på udvikling,Uinteressante begivenheder,Konflikter,Kedsommelig historie " focusable="false" class="RadioGroup" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; display: none; visibility: hidden;">
+                    <ui:Button text="Tilbage" display-tooltip-when-elided="true" name="GoToSocialCards" class="Button" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToEmotionalCards" class="Button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="EmotionalCards" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="-1" text="Vælg dét ord der bedst beskriver din årsag til at ønske at stoppe." display-tooltip-when-elided="true" class="Label" style="display: flex;" />
+                <ui:RadioButtonGroup value="-1" choices="Tiltrækning,Hævngerrighed,Vrede,Tragisk,Frygt,Anspændthed,Ligeglad,Ulykkelig,Ikke Medrivende " focusable="false" class="RadioGroup" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; display: none; visibility: hidden;">
+                    <ui:Button text="Tilbage" display-tooltip-when-elided="true" name="GoToNarrativeCards" class="Button" />
+                    <ui:Button text="Bekræft" display-tooltip-when-elided="true" name="ConfirmCards" class="Button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+</ui:UXML>

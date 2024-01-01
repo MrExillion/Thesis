@@ -109,7 +109,11 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
                 if (SceneManager.GetSceneByName("ClassicComicBook").isLoaded)
                 {
                     DataAcquisition.Singleton.EndClassic();
+                    
+                    
+                
                 }
+
 
 
                 if (DataAcquisition.Singleton.endOfExperiment)
@@ -118,14 +122,20 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
 
                     DataAcquisition.Singleton.EndExperiment();
                 }
+
+
+
                 else if (SceneManager.GetActiveScene().name == "ComicBook")
                 {
+ 
                     SceneManager.LoadScene("ClassicComicBook"); // Change this to pause screen or inbuilt survey?
 
                 }
                 else if (SceneManager.GetActiveScene().name == "ClassicComicBook")
                 {
-                    SceneManager.LoadScene("ComicBook");
+                    //SceneManager.LoadScene("ComicBook");
+                    SceneManager.LoadScene("DisengagementScene");
+
                 }
             }
 

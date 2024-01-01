@@ -12,8 +12,8 @@
 }
 
 .Button {
-    height: 80%;
-    width: 40%;
+    height: 8%;
+    width: 60%;
     border-top-left-radius: 6%;
     border-top-right-radius: 6%;
     border-bottom-right-radius: 6%;
@@ -31,137 +31,21 @@
     -unity-slice-top: 0;
     -unity-background-scale-mode: stretch-to-fill;
     -unity-slice-scale: 1;
-    font-size: 2364%;
+    font-size: 470%;
     white-space: normal;
     -unity-font-style: bold;
     -unity-font-definition: url('project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=4f5fac1292d6a6f479fe6fdc1b929f97&type=3#NotInter-Regular');
     text-shadow: 0.3% 0.6% 4% rgba(255, 255, 255, 0.83);
     -unity-text-outline-width: 2%;
     -unity-text-outline-color: rgba(255, 255, 255, 0.5);
-}
-
-.unity-radio-button__input {
-    width: 90%;/*
-    height: 80%;
-    margin-right: 3%;
-    margin-left: 3%; */
-    
-}
-VisualElement.unity-base-field__input{
-    width: 100%;
-    -unity-text-align: left;
-        
-
-}
-
-
-.unity-radio-button_group__container {
-    width: 100%;
-    height: 80%;
-    margin-right: 3%;
-    margin-left: 3%;
-}
-.unity-radio-button_group__container > .unity-radio-button {
-    padding-left: 10%;
-    height: 800%;
-    margin-right: 3%;
-    margin-left: 3%;
-}
-
-.unity-radio-button__checkmark {
-    padding-left: 10%;
-    height: 10000%;
-    width: 10000%;
-    
-    margin-right: 3%;
-    margin-left: 3%;
-}
-
-
-RadioButton {
-    height: 10%!important;
-
-}
-RadioButton > VisualElement > * {
-    font-size: 1400%;
-    width: 10%;
-    height: 100%;
-
-
-
-    
-}
-.unity-radio-button__text{
-}
-
-
-.unity-base-field__input 
-{
-    /* margin-left: -30%; */
-    
-}
-
-RadioButton > VisualElement > Label {
-    /* margin-left:30%!important; */
-    justify: left!important;
-   
-}
-
-
-.unity-base-field__input {
-    width: 100%;
-    height: 80%;
-    margin-top: 4%;
-    margin-bottom: 4%;
-    margin-right: 3%;
-    margin-left: 3%;
-    flex-basis: left; 
-     
-}
-.unity-base-field__input > *{
-
-
-padding-left: -30%;
-height: 100%;
-
-}
-
-.RadioGroup {
-    align-items: left!important;
-    justify-content: center;
-    flex-direction: column;
-    /* max-height: 80%; */
-    min-height: 70%;
-    min-width: 70%;
-    flex-basis: auto;
-    overflow: hidden;
-    scale: 1 1;
-    margin-top: -5%;
-    margin-right: 3%;
+    -unity-text-align: middle-center;
+    align-items: center;
+    align-self: center;
+    max-height: 20%;
+    margin-top: 6%;
+    margin-right: 6%;
     margin-bottom: 6%;
-    margin-left: 3%;
-}
-.Rdogrp{
-    flex-basis: 100%;
-    -unity-text-align: middle-left;
-    text-overflow: ellipsis;
-    -unity-text-outline-width: initial;
-    font-size: 62%;
-    width: 90%;
-    align-self: auto;
-    
-    max-width: 50%;
-    overflow: hidden;
-    letter-spacing: initial;
-    word-spacing: initial;
-    -unity-paragraph-spacing: initial;
-    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    -unity-background-scale-mode: scale-and-crop;
-    height: 81%;
-    min-height: 50%;
-    max-height: 60%;
-    justify-content: space-between;
-    align-items: stretch;
+    margin-left: 6%;
 }
 
 .CardFrame {
@@ -249,3 +133,33 @@ height: 100%;
     align-self: center;
 }
 
+.CheckBoxCustom {
+    font-size: 2000%;
+}
+
+.CustomGroupBox {
+    width: 95%;
+}
+
+.CustomGroupBox .CheckBoxCustom .unity-toggle__checkmark {
+    height: 70%;
+    width: 10%;
+    margin-top: 2%;
+    margin-right: 4%;
+    margin-bottom: 2%;
+    margin-left: 4%;
+}
+
+.DEMM-EMM__Header {
+    font-size: 200%;
+    height: 17%;
+    -unity-text-align: upper-center;
+    max-height: 20%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    align-self: stretch;
+    justify-content: space-between;
+    width: 100%;
+    white-space: normal;
+}

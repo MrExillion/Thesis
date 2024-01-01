@@ -20,6 +20,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ClassicComicBook.unity
     guid: f2bb2f665855e334982df6341a9243bd
+  - enabled: 1
+    path: Assets/Scenes/IntermediateScene.unity
+    guid: 35ba54a99f9547c4db34bf056a3bf523
+  - enabled: 1
+    path: Assets/Scenes/DisengagementScene.unity
+    guid: bf92321cc0c54c242b46d6e8de44a3c8
+  - enabled: 1
+    path: Assets/Scenes/FinalSurveyScene.unity
+    guid: 8e4401d2fa4a72840bd93c9f37277519
+  - enabled: 1
+    path: Assets/Scenes/EndOfExperimentScene.unity
+    guid: 698fecde5f9f3b0429fdb8e1d18e5652
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 0112f0a350aeb374f8820afa7965a7f1, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 9d4a94d0920901843a62f925dd21e32b, type: 2}
