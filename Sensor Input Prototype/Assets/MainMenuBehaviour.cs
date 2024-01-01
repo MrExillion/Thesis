@@ -10,6 +10,15 @@ namespace SensorInputPrototype.Ui
     {
         public UIDocument MainMenu;
 
+        private void Awake()
+        {
+            if (MainMenu == null)
+            {
+                MainMenu = GetComponent<UIDocument>();
+            }
+
+        }
+
         private void OnEnable()
         {
             BindMainMenu();

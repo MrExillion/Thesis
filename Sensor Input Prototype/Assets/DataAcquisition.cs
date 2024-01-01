@@ -36,6 +36,8 @@ public class DataAcquisition : MonoBehaviour
 
     public float[] timeSpentOnPanel = new float[20]; // Implemented
     public float[] timeSpentLookingAtClassicPanel = new float[20]; //
+    public int numberOfPreviousRespondents = 0;
+    
     public static DataAcquisition Singleton;
     
     
@@ -45,8 +47,13 @@ public class DataAcquisition : MonoBehaviour
     public bool isEnding = false;
 
 
+    public bool bugsfixed = false;
+
     string relPath = "";
     
+
+
+
 
     private void Awake()
     {
@@ -62,7 +69,9 @@ public class DataAcquisition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(testParticipantID.ToString());  
+        Debug.Log(testParticipantID.ToString());
+        DataAcquisition.Singleton.numberOfPreviousRespondents = System.IO.Directory.GetFiles(relPath, "*.csv").Length;
+
     }
     void OnEnable()
     {
@@ -171,7 +180,7 @@ public class DataAcquisition : MonoBehaviour
             }
         }
         
-        System.IO.File.WriteAllText(relPath + "DataAcquisition"+System.IO.Directory.GetFiles(relPath, "*.csv").Length+".csv", stringToSave);
+        System.IO.File.WriteAllText(relPath + "DataAcquisition"+Singleton.numberOfPreviousRespondents+".csv", stringToSave);
 
 
     }

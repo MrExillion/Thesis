@@ -1,10 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/menu/MainMenu.uss?fileID=7433441132597879392&amp;guid=65bd9c2f02a739440b77f84bfc7385e7&amp;type=3#MainMenu" />
+    <!-- <Style src="project://database/Assets/menu/MainMenu.uss?fileID=7433441132597879392&amp;guid=65bd9c2f02a739440b77f84bfc7385e7&amp;type=3#MainMenu" /> -->
+    <Style src="project://database/Assets/menu/IntermediateMenuStyle.uss?fileID=7433441132597879392&amp;guid=e5ff14d2d8c58cd4a82a566ab1466245&amp;type=3#IntermediateMenuStyle" />
     <ui:GroupBox class="HovedMenuHeader">
-        <ui:Label tabindex="-1" text="Sir Arthur Conan Doyles: \n En Skandale I Bøhmen" display-tooltip-when-elided="true" enable-rich-text="false" parse-escape-sequences="true" class="HovedMenuHeaderLabel" />
+        <ui:Label tabindex="-1" text="Versions ID:\n " display-tooltip-when-elided="true" enable-rich-text="false" parse-escape-sequences="true" name="IntermediateMenuHeaderText" class="HovedMenuHeaderLabel" />
     </ui:GroupBox>
     <ui:GroupBox class="HovedMenuKrop">
-        <ui:VisualElement class="HovedMenuForsideBillede" />
+        <ui:VisualElement class="HovedMenuForsideBillede">
+            <ui:Label tabindex="0" text="Inden de fortsætter bedes De ved Computeren udfylde et spørgeskema. De vil i den forbindelse blive spurgt om &quot;Versions ID&quot;,  som De kan se i toppen af denne skærm.&#10;&#10;&#10;Når De har gjort dette kan de klikke fortsæt.&#10;" display-tooltip-when-elided="true" enable-rich-text="true" parse-escape-sequences="true" class="IntermediateTextInstructions" />
+            <ui:Button text="Jeg har besvaret Spørgeskmaet" display-tooltip-when-elided="true" name="NaesteTekstKnap" class="HovedMenuKnap1" />
+            <ui:Label tabindex="0" text="Da der kan være enkelte fejl på nogle af appens anvendelse af sensorer, kan De opleve at sidde fast, De kan med fordel klikke på telefonens røde Tænd-Sluk knap på højre side af telefonen, slukke skærmen, og tænde den igen. Dette vil i de fleste tilfælde rette fejlen." display-tooltip-when-elided="true" enable-rich-text="true" parse-secape-sequences="true" class="BugFixInstructions" />
+        </ui:VisualElement>
     </ui:GroupBox>
     <ui:GroupBox class="HovedMenuFooterGroup">
         <ui:GroupBox style="flex-direction: row; align-items: center; justify-content: space-between; width: 90%; height: 95%;">

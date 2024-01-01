@@ -87,4 +87,35 @@ VisualElement {
     justify-content: space-around;
     align-self: center;
     width: 100%;
+    background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.43);
+}
+
+.HovedMenuKnap1 {
+    height: 80%;
+    width: 40%;
+    border-top-left-radius: 6%;
+    border-top-right-radius: 6%;
+    border-bottom-right-radius: 6%;
+    border-bottom-left-radius: 6%;
+    border-left-color: rgba(255, 255, 255, 0.3);
+    border-right-color: rgba(255, 255, 255, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
+    background-image: url('project://database/Assets/menu/testGradientCircle.png?fileID=6395087274024682266&guid=c243e459c25732741848eea2a8edf91d&type=3#testGradientCircle_0');
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.23);
+    -unity-slice-left: 0;
+    -unity-slice-bottom: 0;
+    -unity-slice-right: 0;
+    -unity-slice-top: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+    -unity-slice-scale: 1;
+    font-size: 364%;
+    white-space: normal;
+    -unity-font-style: bold;
+    -unity-font-definition: url('project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=4f5fac1292d6a6f479fe6fdc1b929f97&type=3#NotInter-Regular');
+    text-shadow: 0.3% 0.6% 4% rgba(255, 255, 255, 0.83);
+    -unity-text-outline-width: 2%;
+    -unity-text-outline-color: rgba(255, 255, 255, 0.5);
 }
