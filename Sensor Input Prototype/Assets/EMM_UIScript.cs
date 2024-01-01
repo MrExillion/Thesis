@@ -49,17 +49,34 @@ public class EMM_UIScript : MonoBehaviour
                             {
                                 if (scenename == "DisengagementScene")
                                 {
-                                    DataAcquisition.Singleton.disengagementReactionCards += choice.name + ", ";
+                                    if(DataAcquisition.Singleton.disengagementReactionCards == "N/A")
+                                    {
+                                        DataAcquisition.Singleton.disengagementReactionCards = choice.text + ", ";
+                                    }
+                                    else
+                                    {
+                                        DataAcquisition.Singleton.disengagementReactionCards += choice.text + ", ";
+                                    }
+
                                 }
                                 else if (scenename == "EngagementScene")
                                 {
-                                    DataAcquisition.Singleton.engagementMappingReactionCompletionCards += choice.name + ", ";
+                                    if (DataAcquisition.Singleton.engagementMappingReactionCompletionCards == "N/A")
+                                    {
+                                        DataAcquisition.Singleton.engagementMappingReactionCompletionCards = choice.text + ", ";
+                                    }
+
+                                    else
+                                    {
+                                        DataAcquisition.Singleton.engagementMappingReactionCompletionCards += choice.text + ", ";
+                                    }
+
                                 }
 
                             }
                         }
 
-                        if ((DataAcquisition.Singleton.timeAtClassicLoad >= 0 || DataAcquisition.Singleton.timeAtInteractiveLoad >= 0) && !(DataAcquisition.Singleton.timeAtClassicLoad >= 0 && DataAcquisition.Singleton.timeAtInteractiveLoad >= 0)) //XOR 
+                        if ((DataAcquisition.Singleton.timeAtClassicLoad > 0 || DataAcquisition.Singleton.timeAtInteractiveLoad > 0) && !(DataAcquisition.Singleton.timeAtClassicLoad > 0 && DataAcquisition.Singleton.timeAtInteractiveLoad > 0)) //XOR 
                         {
                             SceneManager.LoadScene("IntermediateScene");
                         }

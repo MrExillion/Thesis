@@ -1,9 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xsi:noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/menu/IntermediateMenuStyle.uss?fileID=7433441132597879392&amp;guid=e5ff14d2d8c58cd4a82a566ab1466245&amp;type=3#IntermediateMenuStyle" />
+    <Style src="project://database/Assets/menu/FinalSurveyUss.uss?fileID=7433441132597879392&amp;guid=9921a6015bba20b4691e785998505e8c&amp;type=3#FinalSurveyUss" />
+    <ui:VisualElement name="VisualElement">
+        <ui:GroupBox class="HovedMenuHeader">
+            <ui:Label tabindex="-1" text="Versions ID:\n " display-tooltip-when-elided="true" enable-rich-text="false" parse-escape-sequences="true" name="IntermediateMenuHeaderText" class="HovedMenuHeaderLabel" />
+        </ui:GroupBox>
+        <ui:GroupBox class="HovedMenuKrop">
+            <ui:VisualElement class="HovedMenuForsideBillede">
+                <ui:Label tabindex="0" text="Inden du er helt færdig, bedes du ved Computeren udfylde et spørgeskema. Du vil i den forbindelse blive spurgt om &quot;Versions ID&quot;,  som du kan se i toppen af denne skærm.&#10;&#10;&#10;Når du har gjort dette kan de klikke &quot;Jeg har besvaret det eksterne spørgeskema&quot;, Når du har gjort det kan du afslutte Experimentet, tak for din hjælp." display-tooltip-when-elided="true" enable-rich-text="true" parse-escape-sequences="true" name="InfoText" class="IntermediateTextInstructions" />
+                <ui:Button text="Jeg har besvaret det eksterne Spørgeskma" display-tooltip-when-elided="true" name="NaesteTekstKnap" class="HovedMenuKnap1" />
+                <ui:Label tabindex="0" text="Da der kan være enkelte fejl på nogle af appens anvendelse af sensorer, kan De opleve at sidde fast, De kan med fordel klikke på telefonens røde Tænd-Sluk knap på højre side af telefonen, slukke skærmen, og tænde den igen. Dette vil i de fleste tilfælde rette fejlen." display-tooltip-when-elided="true" enable-rich-text="true" parse-secape-sequences="true" name="BugFixInstruksioner" class="BugFixInstructions" />
+            </ui:VisualElement>
+        </ui:GroupBox>
+        <ui:GroupBox class="HovedMenuFooterGroup">
+            <ui:GroupBox style="flex-direction: row; align-items: center; justify-content: space-between; width: 90%; height: 95%;">
+                <ui:Button text="Interaktiv Fortælling" display-tooltip-when-elided="true" name="GoToInteractiveComicButton" class="HovedMenuKnap1" />
+                <ui:Button text="Klassisk Fortælling" display-tooltip-when-elided="true" focusable="false" name="GoToClassicComicButton" class="HovedMenuKnap1" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

@@ -69,7 +69,7 @@
                     <ui:Toggle text="Deling (verb.)" name="Toggle32" class="CheckBoxCustom" />
                     <ui:Toggle text="Forening/Fælleskab (2x Sub.)" name="Toggle33" class="CheckBoxCustom" />
                     <ui:Toggle text="Deltagelsesmuligheder" name="Toggle34" class="CheckBoxCustom" />
-                    <ui:Toggle text="At høre til" name="Toggle35" class="CheckBoxCustom" />
+                    <ui:Toggle text="Føle sig forkert" name="Toggle35" class="CheckBoxCustom" />
                     <ui:Toggle text="For meget/Mangel på Samvær" name="Toggle36" class="CheckBoxCustom" />
                 </ui:GroupBox>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">

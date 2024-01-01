@@ -112,8 +112,17 @@ namespace SensorInputPrototype.MixinInterfaces
                 mMixinInterface.MixinClass_OnFocusGained();
                 return;
             }
-            
-                table.GetOrCreateValue(mMixinInterface).accelerationVector3Buffer.Dequeue();
+
+
+            Debug.Log("1_Remember to Check if bug is fixed");
+            if (_Fields(m).linearAccelerationSensor.enabled != true)
+            {
+                mMixinInterface.MixinClass_OnFocusGained();
+                return;
+            }
+            Debug.Log("2_Remember to Check if bug is fixed__AccelerometerShake.cs");
+
+            table.GetOrCreateValue(mMixinInterface).accelerationVector3Buffer.Dequeue();
                 table.GetOrCreateValue(mMixinInterface).accelerationVector3Buffer.Enqueue(linearAcceleration);
             
 

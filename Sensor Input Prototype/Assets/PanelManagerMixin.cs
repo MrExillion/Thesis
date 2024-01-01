@@ -178,7 +178,7 @@ public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceM
             }
             else
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("EngagementScene");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Choice");
             }
 
 

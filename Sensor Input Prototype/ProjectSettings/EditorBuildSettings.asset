@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ComicBook.unity
     guid: 26d43228c1ca80f46a1decc10368983e
   - enabled: 1
+    path: Assets/Scenes/Choice.unity
+    guid: 9a2f226e07510364f8a857318eb6c523
+  - enabled: 1
     path: Assets/Scenes/DisengagementScene.unity
     guid: bf92321cc0c54c242b46d6e8de44a3c8
   - enabled: 1
@@ -26,7 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalSurveyScene.unity
     guid: 8e4401d2fa4a72840bd93c9f37277519
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/EndOfExperimentScene.unity
     guid: 698fecde5f9f3b0429fdb8e1d18e5652
   m_configObjects:

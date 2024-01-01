@@ -59,10 +59,9 @@ public class CameraSequencer : MonoBehaviour, MTransition, MHRotate, MClassicCom
             //ComicManager.PrimaryComic = ComicManager.getComicsList()[0].Item2;
             ComicManager.PrimaryComic = comicManager;
         }
-        if (Camera.main.scene.name == "ClassicComicBook")
-        {
+
             this.ClassicMixin_Initialized(gameObject);
-        }
+        
 
 
     }
