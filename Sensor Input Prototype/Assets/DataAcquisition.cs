@@ -73,8 +73,8 @@ public class DataAcquisition : MonoBehaviour
         DataAcquisition.Singleton.numberOfPreviousRespondents = System.IO.Directory.GetFiles(relPath, "*.csv").Length;
 
     }
-    void OnEnable()
-    {
+    void OnEnable() // this is called each load even though this is on dont destroy on load in the menu, because its and callback delegate.
+    { 
         SceneManager.sceneLoaded += SceneManager_sceneLoaded; 
 
 

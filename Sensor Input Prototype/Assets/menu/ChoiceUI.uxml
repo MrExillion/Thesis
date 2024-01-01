@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/menu/ChoiceUss.uss?fileID=7433441132597879392&amp;guid=615b06e968343fa46b577f35a739bca7&amp;type=3#ChoiceUss" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement class="HovedMenuHeader" style="flex-grow: 1;">
+            <ui:Label tabindex="-1" text="Version Færdig&#10;Om denne version:" display-tooltip-when-elided="true" name="Label" class="HovedMenuHeaderLabel" style="-unity-text-align: upper-center;" />
+        </ui:VisualElement>
+        <ui:VisualElement class="HovedMenuKrop" style="flex-grow: 1;">
+            <ui:VisualElement class="HovedMenuKrop HovedMenuForsideBillede" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Hvis der var flere kapitler, historier,&#10;eller hvis den tegneserie her var længere, ville du så gerne fortsætte med at læse nu?" display-tooltip-when-elided="true" class="HovedMenuHeaderLabel" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Footer" class="HovedMenuFooterGroup" style="flex-grow: 1;">
+            <ui:Button text="Nej" display-tooltip-when-elided="true" name="NejKnap" class="HovedMenuKnap1" />
+            <ui:Button text="Ja" display-tooltip-when-elided="true" name="JaKnap" class="HovedMenuKnap1" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

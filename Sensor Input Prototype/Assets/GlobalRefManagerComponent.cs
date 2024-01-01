@@ -82,7 +82,9 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
         this.GlobalReferenceManagerInit(gameObject);
 
         this.SetDefactorPanelIds(primaryComic.GetComponent<ComicManagerTemplate>());
-        
+
+
+
     }
     
     
@@ -97,14 +99,14 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
             if (Input.GetTouch(4).phase == TouchPhase.Ended && !DataAcquisition.Singleton.isEnding)
             {
                 DataAcquisition.Singleton.isEnding = true;
-                Debug.Log("Stopping the Experiment!");
+                //Debug.Log("Stopping the Experiment!");
 
                 DataAcquisition.Singleton.timeAtFFDP = Time.realtimeSinceStartup;
 
                 if (SceneManager.GetSceneByName("ComicBook").isLoaded)
                 {
                     DataAcquisition.Singleton.EndInteractive();
-                    DataAcquisition.Singleton.endOfExperiment = true; // DO NOT KEEP THIS LINE
+                   
                 }
                 if (SceneManager.GetSceneByName("ClassicComicBook").isLoaded)
                 {
@@ -116,27 +118,19 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
 
 
 
-                if (DataAcquisition.Singleton.endOfExperiment)
-                {
+                //if (DataAcquisition.Singleton.endOfExperiment) Not interested in this here;
+                //{
+
+                //    SceneManager.LoadScene("FinalSurveyScene");
+                //    //DataAcquisition.Singleton.EndExperiment();
+                //}
 
 
-                    DataAcquisition.Singleton.EndExperiment();
-                }
 
-
-
-                else if (SceneManager.GetActiveScene().name == "ComicBook")
-                {
- 
-                    SceneManager.LoadScene("ClassicComicBook"); // Change this to pause screen or inbuilt survey?
-
-                }
-                else if (SceneManager.GetActiveScene().name == "ClassicComicBook")
-                {
                     //SceneManager.LoadScene("ComicBook");
                     SceneManager.LoadScene("DisengagementScene");
 
-                }
+                
             }
 
         }

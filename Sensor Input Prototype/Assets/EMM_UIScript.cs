@@ -51,7 +51,7 @@ public class EMM_UIScript : MonoBehaviour
                                 {
                                     DataAcquisition.Singleton.disengagementReactionCards += choice.name + ", ";
                                 }
-                                else if (scenename == "EndOfExperimentScene")
+                                else if (scenename == "EngagementScene")
                                 {
                                     DataAcquisition.Singleton.engagementMappingReactionCompletionCards += choice.name + ", ";
                                 }

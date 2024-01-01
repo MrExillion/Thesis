@@ -1,0 +1,7 @@
+@import url('project://database/Assets/menu/MainMenu.uss?fileID=7433441132597879392&guid=65bd9c2f02a739440b77f84bfc7385e7&type=3#MainMenu');
+#Footer {
+    align-self: center;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}

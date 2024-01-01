@@ -6,17 +6,17 @@
     <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Auto" vertical-page-size="1" style="height: 70%;">
         <ui:VisualElement tabindex="-1" name="VisualElementContainer" style="min-width: 100%; flex-wrap: nowrap; height: 100%; max-height: 100%;">
             <ui:VisualElement name="InterlectualCards" class="CardFrame" style="display: flex;">
-                <ui:Label tabindex="2" text="Vælg venligst de 5 årsager du mener bedst beskriver dit Ja, bemærk at du ikke beksriver tegneserien, men din oplevelse med disse ord.&#10;&#10;&lt;Interlektuelt&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Interlektuelt&gt;" display-tooltip-when-elided="true" class="Label" />
                 <ui:GroupBox class="CustomGroupBox">
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
+                    <ui:Toggle text="Intellektuelt Udfordrende" name="Toggle1" class="CheckBoxCustom" />
+                    <ui:Toggle text="Strategisk Svært" name="Toggle2" class="CheckBoxCustom" />
+                    <ui:Toggle text="Svært at regne den ud" name="Toggle3" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kræver planlægning" name="Toggle4" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kedeligt" name="Toggle5" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ugennemførligt" name="Toggle6" class="CheckBoxCustom" />
+                    <ui:Toggle text="Mangel på kreativ stimuli" name="Toggle7" class="CheckBoxCustom" />
+                    <ui:Toggle text="Svært at lære" name="Toggle8" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlige Puslespil" name="Toggle9" class="CheckBoxCustom" />
                 </ui:GroupBox>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
                     <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
@@ -24,17 +24,17 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="PhysicalCards" tabindex="0" class="CardFrame" style="display: flex;">
-                <ui:Label tabindex="2" text="Vælg venligst de 5 årsager du mener bedst beskriver dit Ja, bemærk at du ikke beksriver tegneserien, men din oplevelse med disse ord.&#10;&#10;&lt;Fysisk&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Fysisk&gt;" display-tooltip-when-elided="true" class="Label" />
                 <ui:GroupBox class="CustomGroupBox">
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
+                    <ui:Toggle text="Langsom Respons" name="Toggle10" class="CheckBoxCustom" />
+                    <ui:Toggle text="Lav/Ingen Fri bevægelighed" name="Toggle11" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig kontrol/styring" name="Toggle12" class="CheckBoxCustom" />
+                    <ui:Toggle text="Anstrængende" name="Toggle13" class="CheckBoxCustom" />
+                    <ui:Toggle text="Uintuitivt" name="Toggle14" class="CheckBoxCustom" />
+                    <ui:Toggle text="Upræcist" name="Toggle15" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig timing" name="Toggle16" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig &quot;Touch&quot;" name="Toggle17" class="CheckBoxCustom" />
+                    <ui:Toggle text="Brug af Fysisk Handling" name="Toggle18" class="CheckBoxCustom" />
                 </ui:GroupBox>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
                     <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
@@ -42,17 +42,17 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="SensoryCards" tabindex="2" class="CardFrame" style="display: flex;">
-                <ui:Label tabindex="2" text="Vælg venligst de 5 årsager du mener bedst beskriver dit Ja, bemærk at du ikke beksriver tegneserien, men din oplevelse med disse ord.&#10;&#10;&lt;De 7 Sanser&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;De 7 Sanser&gt;" display-tooltip-when-elided="true" class="Label" />
                 <ui:GroupBox class="CustomGroupBox">
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ubehageligt overraskende" name="Toggle19" class="CheckBoxCustom" />
+                    <ui:Toggle text="Irriterende Stemning" name="Toggle20" class="CheckBoxCustom" />
+                    <ui:Toggle text="Visuelt Grimt/Uimponerende" name="Toggle21" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig/Mangel på Lyd og eller Musik" name="Toggle22" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig/Utilpas mavefornemmelse" name="Toggle23" class="CheckBoxCustom" />
+                    <ui:Toggle text="Uhygge/Gys/Hygge" name="Toggle24" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig Atmosfære" name="Toggle25" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ingen ændring i sanserne" name="Toggle26" class="CheckBoxCustom" />
+                    <ui:Toggle text="Blev ikke nysgerrig" name="Toggle27" class="CheckBoxCustom" />
                 </ui:GroupBox>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
                     <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
@@ -60,17 +60,17 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="SocialCards" class="CardFrame" style="display: flex;">
-                <ui:Label tabindex="2" text="Vælg venligst de 5 årsager du mener bedst beskriver dit Ja, bemærk at du ikke beksriver tegneserien, men din oplevelse med disse ord.&#10;&#10;&lt;Socialt&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Social&gt;" display-tooltip-when-elided="true" class="Label" />
                 <ui:GroupBox class="CustomGroupBox">
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig/Mangel på holdånd" name="Toggle28" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ingen/for mange venner" name="Toggle29" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig/Mangel på Samarbejde" name="Toggle30" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kommunikation" name="Toggle31" class="CheckBoxCustom" />
+                    <ui:Toggle text="Deling (verb.)" name="Toggle32" class="CheckBoxCustom" />
+                    <ui:Toggle text="Forening/Fælleskab (2x Sub.)" name="Toggle33" class="CheckBoxCustom" />
+                    <ui:Toggle text="Deltagelsesmuligheder" name="Toggle34" class="CheckBoxCustom" />
+                    <ui:Toggle text="At høre til" name="Toggle35" class="CheckBoxCustom" />
+                    <ui:Toggle text="For meget/Mangel på Samvær" name="Toggle36" class="CheckBoxCustom" />
                 </ui:GroupBox>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
                     <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
@@ -78,17 +78,17 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="NarativeCards" class="CardFrame" style="display: flex;">
-                <ui:Label tabindex="2" text="Vælg venligst de 5 årsager du mener bedst beskriver dit Ja, bemærk at du ikke beksriver tegneserien, men din oplevelse med disse ord.&#10;&#10;&lt;Fortælling&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Fortælling&gt;" display-tooltip-when-elided="true" class="Label" />
                 <ui:GroupBox class="CustomGroupBox">
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ingen/for meget Spænding" name="Toggle37" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ingen/for meget Dramatik" name="Toggle38" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kedelige Karakterer" name="Toggle39" class="CheckBoxCustom" />
+                    <ui:Toggle text="Fortællingen" name="Toggle40" class="CheckBoxCustom" />
+                    <ui:Toggle text="Usammenhæng: Årsag-Virkining" name="Toggle41" class="CheckBoxCustom" />
+                    <ui:Toggle text="Fortællingens Udvikling" name="Toggle42" class="CheckBoxCustom" />
+                    <ui:Toggle text="Uinteressante begivenheder" name="Toggle43" class="CheckBoxCustom" />
+                    <ui:Toggle text="Konflikter" name="Toggle44" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kedsommelig fortælling" name="Toggle45" class="CheckBoxCustom" />
                 </ui:GroupBox>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
                     <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
@@ -96,17 +96,127 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="EmotionalCards" class="CardFrame" style="display: flex;">
-                <ui:Label tabindex="2" text="Vælg venligst de 5 årsager du mener bedst beskriver dit Ja, bemærk at du ikke beksriver tegneserien, men din oplevelse med disse ord.&#10;&#10;&lt;Følelser&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Følelser&gt;" display-tooltip-when-elided="true" class="Label" />
                 <ui:GroupBox class="CustomGroupBox">
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
-                    <ui:Toggle text="Toggle" class="CheckBoxCustom" />
+                    <ui:Toggle text="Tiltrækning/Fristelse" name="Toggle46" class="CheckBoxCustom" />
+                    <ui:Toggle text="Hævngerrighed" name="Toggle47" class="CheckBoxCustom" />
+                    <ui:Toggle text="Vrede" name="Toggle48" class="CheckBoxCustom" />
+                    <ui:Toggle text="Tragisk" name="Toggle49" class="CheckBoxCustom" />
+                    <ui:Toggle text="Frygt" name="Toggle50" class="CheckBoxCustom" />
+                    <ui:Toggle text="Anspændthed" name="Toggle51" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ligeglad" name="Toggle52" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ulykkelig" name="Toggle53" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ikke Medrivende" name="Toggle54" class="CheckBoxCustom" />
+                </ui:GroupBox>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
+                    <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" style="font-size: 61%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement tabindex="-1" name="VisualElementContainer2" style="min-width: 100%; flex-wrap: nowrap; height: 100%; max-height: 100%;">
+            <ui:VisualElement name="InterlectualCards" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Interlektuelt&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:GroupBox class="CustomGroupBox">
+                    <ui:Toggle text="Intellektuelt Udfordrende" name="Toggle1" class="CheckBoxCustom" />
+                    <ui:Toggle text="Strategisk Svært" name="Toggle2" class="CheckBoxCustom" />
+                    <ui:Toggle text="Svært at regne den ud" name="Toggle3" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kræver planlægning" name="Toggle4" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kedeligt" name="Toggle5" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ugennemførligt" name="Toggle6" class="CheckBoxCustom" />
+                    <ui:Toggle text="Mangel på kreativ stimuli" name="Toggle7" class="CheckBoxCustom" />
+                    <ui:Toggle text="Svært at lære" name="Toggle8" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlige Puslespil" name="Toggle9" class="CheckBoxCustom" />
+                </ui:GroupBox>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
+                    <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" style="font-size: 61%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="PhysicalCards" tabindex="0" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Fysisk&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:GroupBox class="CustomGroupBox">
+                    <ui:Toggle text="Langsom Respons" name="Toggle10" class="CheckBoxCustom" />
+                    <ui:Toggle text="Lav/Ingen Fri bevægelighed" name="Toggle11" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig kontrol/styring" name="Toggle12" class="CheckBoxCustom" />
+                    <ui:Toggle text="Anstrængende" name="Toggle13" class="CheckBoxCustom" />
+                    <ui:Toggle text="Uintuitivt" name="Toggle14" class="CheckBoxCustom" />
+                    <ui:Toggle text="Upræcist" name="Toggle15" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig timing" name="Toggle16" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig &quot;Touch&quot;" name="Toggle17" class="CheckBoxCustom" />
+                    <ui:Toggle text="Brug af Fysisk Handling" name="Toggle18" class="CheckBoxCustom" />
+                </ui:GroupBox>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
+                    <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" style="font-size: 61%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="SensoryCards" tabindex="2" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;De 7 Sanser&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:GroupBox class="CustomGroupBox">
+                    <ui:Toggle text="Ubehageligt overraskende" name="Toggle19" class="CheckBoxCustom" />
+                    <ui:Toggle text="Irriterende Stemning" name="Toggle20" class="CheckBoxCustom" />
+                    <ui:Toggle text="Visuelt Grimt/Uimponerende" name="Toggle21" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig/Mangel på Lyd og eller Musik" name="Toggle22" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig/Utilpas mavefornemmelse" name="Toggle23" class="CheckBoxCustom" />
+                    <ui:Toggle text="Uhygge/Gys/Hygge" name="Toggle24" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig Atmosfære" name="Toggle25" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ingen ændring i sanserne" name="Toggle26" class="CheckBoxCustom" />
+                    <ui:Toggle text="Blev ikke nysgerrig" name="Toggle27" class="CheckBoxCustom" />
+                </ui:GroupBox>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
+                    <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" style="font-size: 61%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="SocialCards" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Social&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:GroupBox class="CustomGroupBox">
+                    <ui:Toggle text="Dårlig/Mangel på holdånd" name="Toggle28" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ingen/for mange venner" name="Toggle29" class="CheckBoxCustom" />
+                    <ui:Toggle text="Dårlig/Mangel på Samarbejde" name="Toggle30" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kommunikation" name="Toggle31" class="CheckBoxCustom" />
+                    <ui:Toggle text="Deling (verb.)" name="Toggle32" class="CheckBoxCustom" />
+                    <ui:Toggle text="Forening/Fælleskab (2x Sub.)" name="Toggle33" class="CheckBoxCustom" />
+                    <ui:Toggle text="Deltagelsesmuligheder" name="Toggle34" class="CheckBoxCustom" />
+                    <ui:Toggle text="At høre til" name="Toggle35" class="CheckBoxCustom" />
+                    <ui:Toggle text="For meget/Mangel på Samvær" name="Toggle36" class="CheckBoxCustom" />
+                </ui:GroupBox>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
+                    <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" style="font-size: 61%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="NarativeCards" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Fortælling&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:GroupBox class="CustomGroupBox">
+                    <ui:Toggle text="Ingen/for meget Spænding" name="Toggle37" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ingen/for meget Dramatik" name="Toggle38" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kedelige Karakterer" name="Toggle39" class="CheckBoxCustom" />
+                    <ui:Toggle text="Fortællingen" name="Toggle40" class="CheckBoxCustom" />
+                    <ui:Toggle text="Usammenhæng: Årsag-Virkining" name="Toggle41" class="CheckBoxCustom" />
+                    <ui:Toggle text="Fortællingens Udvikling" name="Toggle42" class="CheckBoxCustom" />
+                    <ui:Toggle text="Uinteressante begivenheder" name="Toggle43" class="CheckBoxCustom" />
+                    <ui:Toggle text="Konflikter" name="Toggle44" class="CheckBoxCustom" />
+                    <ui:Toggle text="Kedsommelig fortælling" name="Toggle45" class="CheckBoxCustom" />
+                </ui:GroupBox>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
+                    <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />
+                    <ui:Button text="Næste" display-tooltip-when-elided="true" name="GoToPhysicalCards" class="Button" style="font-size: 61%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="EmotionalCards" class="CardFrame" style="display: flex;">
+                <ui:Label tabindex="2" text="Vælg ord der bedst beskriver din årsag til at ønske at stoppe.&#10;&#10;&lt;Følelser&gt;" display-tooltip-when-elided="true" class="Label" />
+                <ui:GroupBox class="CustomGroupBox">
+                    <ui:Toggle text="Tiltrækning/Fristelse" name="Toggle46" class="CheckBoxCustom" />
+                    <ui:Toggle text="Hævngerrighed" name="Toggle47" class="CheckBoxCustom" />
+                    <ui:Toggle text="Vrede" name="Toggle48" class="CheckBoxCustom" />
+                    <ui:Toggle text="Tragisk" name="Toggle49" class="CheckBoxCustom" />
+                    <ui:Toggle text="Frygt" name="Toggle50" class="CheckBoxCustom" />
+                    <ui:Toggle text="Anspændthed" name="Toggle51" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ligeglad" name="Toggle52" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ulykkelig" name="Toggle53" class="CheckBoxCustom" />
+                    <ui:Toggle text="Ikke Medrivende" name="Toggle54" class="CheckBoxCustom" />
                 </ui:GroupBox>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; justify-content: center; align-self: stretch; flex-basis: 0; transform-origin: bottom; padding-top: 0; padding-right: 0; padding-bottom: 2%; padding-left: 0; margin-top: 1%; margin-right: 1%; margin-bottom: 1%; margin-left: 1%; visibility: hidden; display: none;">
                     <ui:Button text="Previous" display-tooltip-when-elided="true" class="Button" style="display: none;" />

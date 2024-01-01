@@ -26,7 +26,7 @@ public class IntermediateMenuBehaviour : MonoBehaviour
 
     private IEnumerator<Object> BindIntermediateBehaviour()
     {
-        string newtext = "\r\n\r\n\r\nTak for Deres evaluering af første halvdel.\r\nInden De fortsætter minder jeg Dem om følgende: De til enhver tid kan stoppe næste halvdel, hvis De mister interessen således, De under normale omstændigheder ville have lagt appen fra Dem, dog bør De se bort fra Deres generelle interesse i tegneserier.\r\n\r\nDe Kan gøre dette ved at lægge 5 fingre på skærmen og fjerne dem igen.\r\n\r\nAppen vil hefter Spørge Dem om hvorfor De har valgt at stoppe, hvor du blot skal vælge 5 ting på skærmen.\r\nDet det vil ligne det de har lige har set. Vær opmærksom på: om De svarer på årsagen til at stoppe eller fortsætte.\r\n";
+        string newtext = "\r\n\r\n\r\nTak for din evaluering af Del 1.\r\nInden du fortsætter minder jeg lige om følgende: Du til enhver tid kan stoppe næste halvdel, hvis du mister interessen. Dvs. hvis du under normale omstændigheder ville have lagt appen fra dig, dog bør du se bort fra din generelle interesse i tegneserier.\r\n\r\nDu kan gøre dette ved at lægge 5 fingre på skærmen og fjerne dem igen.\r\n\r\nAppen vil hefter Spørge dig, hvorfor du har valgt at stoppe, hvor du blot skal vælge 5 ting på skærmen.\r\nDet det vil ligne det du har lige har set. Vær opmærksom på: om De svarer på årsagen til at stoppe eller fortsætte.\r\n";
         
         var root = interMediateMenu.rootVisualElement;
         var infoText = root.Q<Label>("InfoText");

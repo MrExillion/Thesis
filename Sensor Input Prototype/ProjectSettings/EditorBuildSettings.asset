@@ -5,12 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 3fc8acdd13e6c734bafef6554d6fdbcd
-  - enabled: 0
-    path: Assets/Scenes/RadarScene Prototype.unity
-    guid: 3de8e72eaa43ddf4da2e7ed23076df8a
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: c6b6e0d595fda054a9c6b00ae6314625
@@ -18,14 +12,17 @@ EditorBuildSettings:
     path: Assets/Scenes/ComicBook.unity
     guid: 26d43228c1ca80f46a1decc10368983e
   - enabled: 1
-    path: Assets/Scenes/ClassicComicBook.unity
-    guid: f2bb2f665855e334982df6341a9243bd
+    path: Assets/Scenes/DisengagementScene.unity
+    guid: bf92321cc0c54c242b46d6e8de44a3c8
+  - enabled: 1
+    path: Assets/Scenes/EngagementScene.unity
+    guid: 8eccf856f2e2142478f0a9a6e6e61f5f
   - enabled: 1
     path: Assets/Scenes/IntermediateScene.unity
     guid: 35ba54a99f9547c4db34bf056a3bf523
   - enabled: 1
-    path: Assets/Scenes/DisengagementScene.unity
-    guid: bf92321cc0c54c242b46d6e8de44a3c8
+    path: Assets/Scenes/ClassicComicBook.unity
+    guid: f2bb2f665855e334982df6341a9243bd
   - enabled: 1
     path: Assets/Scenes/FinalSurveyScene.unity
     guid: 8e4401d2fa4a72840bd93c9f37277519

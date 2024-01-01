@@ -169,6 +169,20 @@ public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceM
         }
         else
         {
+
+            if (DataAcquisition.Singleton.endOfExperiment)
+            {
+
+                UnityEngine.SceneManagement.SceneManager.LoadScene("FinalSurveyScene");
+                //DataAcquisition.Singleton.EndExperiment();
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("EngagementScene");
+            }
+
+
+            /*This above will end all comic looping below*/
             if (axisLetter == "x")
             {
                 GlobalReferenceManager.SetActiveChapterContainer((GlobalReferenceManager.GetActiveComicTemplate() as ComicManagerTemplate).comicsList[0].GetComponent<ChapterManagerTemplate>());
