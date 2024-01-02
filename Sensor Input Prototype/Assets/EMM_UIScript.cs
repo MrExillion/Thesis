@@ -28,9 +28,9 @@ public class EMM_UIScript : MonoBehaviour
 
 
 
-        for (int i = 0; i < 54; i++)
+        for (int i = 1; i <= 54; i++)
         {
-            choicesList.Add(root.Q<Toggle>("Toggle" + (i + 1)));
+            choicesList.Add(root.Q<Toggle>("Toggle" + i));
             //root.Q<Toggle>("Toggle" + (i+1), "CheckBoxCustom").(choicesList[i]);
 
         }
@@ -99,7 +99,7 @@ public class EMM_UIScript : MonoBehaviour
         int count = 0;
         int[] index = new int[5];
 
-        for (int i = 0; i < choicesList.Count; i++)
+        for (int i = 0; i <= choicesList.Count; i++)
         {
             if (count == 5)
             {

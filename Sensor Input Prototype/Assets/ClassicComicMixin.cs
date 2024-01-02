@@ -78,6 +78,12 @@ namespace SensorInputPrototype.MixinInterfaces
                 if (hit.collider.TryGetComponent(out UniversalPanel component))
                 {
                     µ(M).panelFocus = GlobalRefManagerComponent.singleton.GetDefactoPanelId(component);
+
+                    if(component == Camera.main.GetComponent<EndClassicComicUIBehaviour>().finalPanel)
+                    {
+                        GlobalRefManagerComponent.singleton.rayHitFinalPanel(true);
+                    }
+
                 }
             }
 

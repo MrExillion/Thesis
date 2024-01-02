@@ -113,10 +113,10 @@ public class DataAcquisition : MonoBehaviour
             bool changeRegistered = false;
             foreach(Touch touch in Input.touches)
             {
-                if(Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
-                {
-                    changeRegistered = true;   
-                }
+                //if(Input.touches[touch.fingerId-1].deltaPosition.magnitude > 0.05f)
+                //{
+                //    changeRegistered = true;   
+                //}
             }
             if((Input.touchCount != touchCountLastFrame) || changeRegistered)
             {
@@ -129,10 +129,10 @@ public class DataAcquisition : MonoBehaviour
             bool changeRegistered = false;
             foreach (Touch touch in Input.touches)
             {
-                if (Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
-                {
-                    changeRegistered = true;
-                }
+                //if (Input.touches[touch.fingerId-1].deltaPosition.magnitude > 0.05f)
+                //{
+                //    changeRegistered = true;
+                //}
             }
             if ((Input.touchCount != touchCountLastFrame) || changeRegistered)
             {
@@ -182,7 +182,7 @@ public class DataAcquisition : MonoBehaviour
         {
             stringToSave += "timeSpentLookingAtClassicPanel_" + i + "\r\n ";
         }
-        stringToSave += ";" + timeSinceStartUp + "\r\n " + timeSinceLastTransition + "\r\n " + timeAtClassicLoad + "\r\n " + timeAtClassicEnd + "\r\n " + durationForClassic + "\r\n " + timeAtInteractiveLoad + "\r\n " + timeAtInteractiveEnd + "\r\n " + durationForInteractive + "\r\n " + timeAtFFDP + "\r\n " + numberOfTouchesTotal + "\r\n " + numberOfTouchInteractions + "\r\n ";
+        stringToSave += "; " + timeSinceStartUp + "\r\n " + timeSinceLastTransition + "\r\n " + timeAtClassicLoad + "\r\n " + timeAtClassicEnd + "\r\n " + durationForClassic + "\r\n " + timeAtInteractiveLoad + "\r\n " + timeAtInteractiveEnd + "\r\n " + durationForInteractive + "\r\n " + timeAtFFDP + "\r\n " + numberOfTouchesTotal + "\r\n " + numberOfTouchInteractions + "\r\n ";
         for (int i = 0; i < touchesList.Count; i++)
         {
             stringToSave += i + "\r\n " + touchesList[i].phase + "\r\n " + touchesList[i].tapCount + "\r\n " + touchesList[i].pressure + "\r\n " + touchesList[i].fingerId + "\r\n " + touchesList[i].maximumPossiblePressure + "\r\n ";

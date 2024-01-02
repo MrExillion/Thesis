@@ -172,12 +172,20 @@ public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceM
 
             if (DataAcquisition.Singleton.endOfExperiment)
             {
-
+                if (Camera.main.scene.name == "ComicBook")
+                {
+                    DataAcquisition.Singleton.EndInteractive();
+                }
                 UnityEngine.SceneManagement.SceneManager.LoadScene("FinalSurveyScene");
                 //DataAcquisition.Singleton.EndExperiment();
             }
             else
             {
+                if(Camera.main.scene.name == "ComicBook")
+                {
+                    DataAcquisition.Singleton.EndInteractive();
+                }
+
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Choice");
             }
 

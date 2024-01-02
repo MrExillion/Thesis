@@ -56,10 +56,10 @@ public class TabTransitionTemplateMixin : MonoBehaviour, MTabTransition
         bool changeRegistered = false;
         foreach (Touch touch in Input.touches)
         {
-            if (Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
-            {
-                changeRegistered = true;
-            }
+            //if (Input.touches[touch.fingerId - 1].deltaPosition.magnitude > 0.05f)
+            //{
+            //    changeRegistered = true;
+            //}
         }
 
         if ((Input.touchCount != touchCountLastFrame) || changeRegistered)

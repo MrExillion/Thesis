@@ -20,7 +20,7 @@ public static class GlobalReferenceManager
     private static PanelManagerTemplate activePanelTemplate = null;
     private static ComicManagerMixin comicManagerMixin = null;
     private delegate void GlobalRefInitCallBack();
-
+    
 
     //private static IDictionary dictionary; Dictionary still has a mix type issue in my use case, i want a single list though i could proably do Dictionary<int, UnityEngine.Component>> MixinPairs with the same style of implementation. But getin the mixin in question could be either more coplex computation or less. LookUp would looklike this as Dictionary: GlobalReferenceManager.MixinPairs[instance ID i am looking to match].Foobar() || (...) ].property || (...)].fields etc. On a code readability level this is easier. However I do not know if Add works nicely with this.
 
@@ -38,7 +38,7 @@ public static class GlobalReferenceManager
         //internal int stuff;
         internal ComicManagerTemplate comicManagerTemplate1 = null;
         internal List<GameObject> defactoPanelList = new List<GameObject>();
-
+        internal bool _rayHitFinalPanel = false;
 
     }
     //[ExecuteInEditMode]
@@ -350,6 +350,17 @@ public static class GlobalReferenceManager
             }
         }
          table.GetOrCreateValue(globalRef).defactoPanelList = new(defactoPanelList);
+    }
+
+    public static bool rayHitFinalPanel(this IGlobalReferenceManager m)
+    {
+
+        return table.GetOrCreateValue(m)._rayHitFinalPanel;
+    }
+    public static void rayHitFinalPanel(this IGlobalReferenceManager m,bool value)
+    {
+
+         table.GetOrCreateValue(m)._rayHitFinalPanel = value;
     }
 
 
