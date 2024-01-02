@@ -29,7 +29,7 @@ public class IntermediateMenuBehaviour : MonoBehaviour
         string newtext = "\r\n\r\n\r\nTak for din evaluering af Del 1.\r\nInden du fortsætter minder jeg lige om følgende: Du til enhver tid kan stoppe næste halvdel, hvis du mister interessen. Dvs. hvis du under normale omstændigheder ville have lagt appen fra dig, dog bør du se bort fra din generelle interesse i tegneserier.\r\n\r\nDu kan gøre dette ved at lægge 5 fingre på skærmen og fjerne dem igen.\r\n\r\nAppen vil hefter Spørge dig, hvorfor du har valgt at stoppe, hvor du blot skal vælge 5 ting på skærmen.\r\nDet det vil ligne det du har lige har set. Vær opmærksom på: om De svarer på årsagen til at stoppe eller fortsætte.\r\n";
         
         var root = interMediateMenu.rootVisualElement;
-        var infoText = root.Q<Label>("InfoText");
+        var infoText = root.Q<Label>("InfoTekst");
         var startClassicComicBtn = root.Q<Button>("GoToClassicComicButton");
         var startInteractiveComicBtn = root.Q<Button>("GoToInteractiveComicButton");
         var nextTextBtn = root.Q<Button>("NaesteTekstKnap");

@@ -1,6 +1,6 @@
 @import url('project://database/Assets/menu/MainMenu.uss?fileID=7433441132597879392&guid=65bd9c2f02a739440b77f84bfc7385e7&type=3#MainMenu');
 .IntermediateTextInstructions {
-    font-size: 200%;
+    font-size: 385%;
     flex-wrap: nowrap;
     flex-direction: row;
     max-width: 100%;

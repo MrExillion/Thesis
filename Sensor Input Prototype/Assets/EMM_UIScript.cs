@@ -86,7 +86,8 @@ public class EMM_UIScript : MonoBehaviour
                         }
 
                         //
-                        //
+                        DataAcquisition.Singleton.isEnding = false;
+                       
                     }
                 };
         }

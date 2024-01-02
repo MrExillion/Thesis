@@ -83,7 +83,7 @@ public class GlobalRefManagerComponent : MonoBehaviour, IGlobalReferenceManager
 
         this.SetDefactorPanelIds(primaryComic.GetComponent<ComicManagerTemplate>());
 
-
+        DataAcquisition.Singleton.isEnding = false;
 
     }
     

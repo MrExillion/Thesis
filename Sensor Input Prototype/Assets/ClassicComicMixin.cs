@@ -28,6 +28,7 @@ namespace SensorInputPrototype.MixinInterfaces
             internal Touch touchLastFrame;
             internal Touch touch2LastFrame;
             internal int panelFocus;
+            internal int touchCountLastFrame = 0;
             internal enum enumItems { item = 0, item1 = 1 };
             internal List<string> stringList = new(); // or new List<string>(); depends on your style ofc.
         }
@@ -89,17 +90,29 @@ namespace SensorInputPrototype.MixinInterfaces
         public static void ClassicMixin_Update(this MClassicComicMixin mMixinInterface)
         {
             MClassicComicMixin M = mMixinInterface;
-            Touch[] touchesToDump = new Touch[Input.touches.Length];
-            if (touchesToDump.Length >= 1)
+            bool changeRegistered = false;
+            foreach (Touch touch in Input.touches)
             {
-                Input.touches.CopyTo(touchesToDump, 0);
-                for (int i = 0; i < touchesToDump.Length; i++)
+                if (Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
                 {
-                    DataAcquisition.Singleton.touchesListClassic.Add(touchesToDump[i]);
+                    changeRegistered = true;
                 }
-
             }
 
+            if ((Input.touchCount != µ(M).touchCountLastFrame) || changeRegistered)
+            {
+                Touch[] touchesToDump = new Touch[Input.touches.Length];
+                if (touchesToDump.Length >= 1)
+                {
+                    Input.touches.CopyTo(touchesToDump, 0);
+                    for (int i = 0; i < touchesToDump.Length; i++)
+                    {
+                        DataAcquisition.Singleton.touchesListClassic.Add(touchesToDump[i]);
+                    }
+
+                }
+            }
+            µ(M).touchCountLastFrame = Input.touchCount;
             M.ClassicMixin_CurrentPanelFocus();
 
 

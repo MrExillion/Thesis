@@ -42,7 +42,9 @@ public class TabTransitionTemplateMixin : MonoBehaviour, MTabTransition
         universalPanel = GetComponent<UniversalPanel>();
         }
 
+    int touchCountLastFrame = 0;
     // Update is called once per frame
+
     void Update()
     {
 
@@ -51,18 +53,29 @@ public class TabTransitionTemplateMixin : MonoBehaviour, MTabTransition
             return;
         }
 
-        Touch[] touchesToDump = new Touch[Input.touches.Length];
-        if (touchesToDump.Length >= 1)
+        bool changeRegistered = false;
+        foreach (Touch touch in Input.touches)
         {
-            Input.touches.CopyTo(touchesToDump, 0);
-            for (int i = 0; i < touchesToDump.Length; i++)
+            if (Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
             {
-                DataAcquisition.Singleton.touchesList.Add(touchesToDump[i]);
+                changeRegistered = true;
             }
-            
         }
 
+        if ((Input.touchCount != touchCountLastFrame) || changeRegistered)
+        {
+            Touch[] touchesToDump = new Touch[Input.touches.Length];
+            if (touchesToDump.Length >= 1)
+            {
+                Input.touches.CopyTo(touchesToDump, 0);
+                for (int i = 0; i < touchesToDump.Length; i++)
+                {
+                    DataAcquisition.Singleton.touchesList.Add(touchesToDump[i]);
+                }
 
+            }
+        }
+        touchCountLastFrame = Input.touchCount;
 
         // touchCount is the amount of touches registered on the screen so 1 = 1 finger, 2 = 2 fingers etc.
         if (Input.touchCount > numTouches) // i need to add a cd timer

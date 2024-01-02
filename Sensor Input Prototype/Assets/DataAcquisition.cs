@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -47,7 +48,7 @@ public class DataAcquisition : MonoBehaviour
     public bool isEnding = false;
 
 
-    public bool bugsfixed = false;
+    public bool bugsfixed = true;
 
     string relPath = "";
     
@@ -101,7 +102,7 @@ public class DataAcquisition : MonoBehaviour
 
 
 
-
+    int touchCountLastFrame = 0;
     // Update is called once per frame
     private void Update()
     {
@@ -109,12 +110,37 @@ public class DataAcquisition : MonoBehaviour
         //timeSinceLastTransition = transitionTime - Time.realtimeSinceStartup;
         if (SceneManager.GetSceneByName("ComicBook").isLoaded)
         {
-            numberOfTouchesTotal += Input.touchCount;
+            bool changeRegistered = false;
+            foreach(Touch touch in Input.touches)
+            {
+                if(Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
+                {
+                    changeRegistered = true;   
+                }
+            }
+            if((Input.touchCount != touchCountLastFrame) || changeRegistered)
+            {
+                numberOfTouchesTotal += Input.touchCount;
+            }
+
         }
         if (SceneManager.GetSceneByName("ClassicComicBook").isLoaded)
         {
-            numberOfTouchesTotalClassic += Input.touchCount;
+            bool changeRegistered = false;
+            foreach (Touch touch in Input.touches)
+            {
+                if (Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
+                {
+                    changeRegistered = true;
+                }
+            }
+            if ((Input.touchCount != touchCountLastFrame) || changeRegistered)
+            {
+                numberOfTouchesTotalClassic += Input.touchCount;
+            }
+            
         }
+        touchCountLastFrame = Input.touchCount;
         
 
     }
@@ -137,46 +163,46 @@ public class DataAcquisition : MonoBehaviour
 
     public void DumpData()
     {
-        string stringToSave = "timeSinceStartUp; timeSinceLastTransition; timeAtClassicLoad; timeAtClassicEnd; durationForClassic; timeAtInteractiveLoad;  timeAtInteractiveEnd; durationForInteractive; timeAtFFDP; numberOfTouchesTotal; numberOfTouchInteractions; "; /*"column_1; column2; column3\r\naaa; bbb; ccc\r\n111; 222; 333"*/
-        for(int i = 0; i < touchesList.Count; i++) 
+        string stringToSave = "timeSinceStartUp\r\n timeSinceLastTransition\r\n timeAtClassicLoad\r\n timeAtClassicEnd\r\n durationForClassic\r\n timeAtInteractiveLoad\r\n  timeAtInteractiveEnd\r\n durationForInteractive\r\n timeAtFFDP\r\n numberOfTouchesTotal\r\n numberOfTouchInteractions\r\n "; /*"column_1\r\n column2\r\n column3\r\naaa\r\n bbb\r\n ccc\r\n111\r\n 222\r\n 333"*/
+        for (int i = 0; i < touchesList.Count; i++) 
         {
-            stringToSave += "TouchesListIndex_"+i+"; Phase_"+i+"; TapCount_"+i+"; Pressure_"+i+"; FingerId_"+i+"; MaxPossiblePressure_"+i+"; ";
+            stringToSave += "TouchesListIndex_" + i + "\r\n Phase_" + i + "\r\n TapCount_" + i + "\r\n Pressure_" + i + "\r\n FingerId_" + i + "\r\n MaxPossiblePressure_" + i + "\r\n ";
         }
         for (int i = 0; i < touchesListClassic.Count; i++)
         {
-            stringToSave += "TouchesListIndexC_" + i + "; PhaseC_" + i + "; TapCountC_" + i + "; PressureC_" + i + "; FingerIdC_" + i + "; MaxPossiblePressureC_" + i + "; ";
+            stringToSave += "TouchesListIndexC_" + i + "\r\n PhaseC_" + i + "\r\n TapCountC_" + i + "\r\n PressureC_" + i + "\r\n FingerIdC_" + i + "\r\n MaxPossiblePressureC_" + i + "\r\n ";
         }
 
-        stringToSave += "testParticipantID; frameCountPerActiveGyro; frameCountPerActiveMicrophone; frameCountOerActiveLightSensor; disengagementReactionCards; engagementMappingReactionCompletionCards; durationForExperiment; ";
-        for(int i = 0; i < 20; i++)
+        stringToSave += "testParticipantID\r\n frameCountPerActiveGyro\r\n frameCountPerActiveMicrophone\r\n frameCountOerActiveLightSensor\r\n disengagementReactionCards\r\n engagementMappingReactionCompletionCards\r\n durationForExperiment\r\n ";
+        for (int i = 0; i < 20; i++)
         {
-            stringToSave += "timeSpentOnPanel_" + i +"; ";
+            stringToSave += "timeSpentOnPanel_" + i + "\r\n ";
         }
         for (int i = 0; i < 20; i++)
         {
-            stringToSave += "timeSpentLookingAtClassicPanel_" + i+"; ";
+            stringToSave += "timeSpentLookingAtClassicPanel_" + i + "\r\n ";
         }
-        stringToSave += "\r\n" + timeSinceStartUp + "; " + timeSinceLastTransition + "; " + timeAtClassicLoad + "; "+ timeAtClassicEnd + "; " + durationForClassic + "; " + timeAtInteractiveLoad + "; " + timeAtInteractiveEnd + "; " + durationForInteractive + "; " + timeAtFFDP + "; " + numberOfTouchesTotal + "; " + numberOfTouchInteractions+ "; ";
+        stringToSave += ";" + timeSinceStartUp + "\r\n " + timeSinceLastTransition + "\r\n " + timeAtClassicLoad + "\r\n " + timeAtClassicEnd + "\r\n " + durationForClassic + "\r\n " + timeAtInteractiveLoad + "\r\n " + timeAtInteractiveEnd + "\r\n " + durationForInteractive + "\r\n " + timeAtFFDP + "\r\n " + numberOfTouchesTotal + "\r\n " + numberOfTouchInteractions + "\r\n ";
         for (int i = 0; i < touchesList.Count; i++)
         {
-            stringToSave += i+"; "+touchesList[i].phase +"; "+touchesList[i].tapCount + "; " + touchesList[i].pressure + "; " + touchesList[i].fingerId + "; "+touchesList[i].maximumPossiblePressure + "; ";
+            stringToSave += i + "\r\n " + touchesList[i].phase + "\r\n " + touchesList[i].tapCount + "\r\n " + touchesList[i].pressure + "\r\n " + touchesList[i].fingerId + "\r\n " + touchesList[i].maximumPossiblePressure + "\r\n ";
         }
         for (int i = 0; i < touchesListClassic.Count; i++)
         {
-            stringToSave += i + "; " + touchesListClassic[i].phase + "; " + touchesListClassic[i].tapCount + "; " + touchesListClassic[i].pressure + "; " + touchesListClassic[i].fingerId + "; " + touchesListClassic[i].maximumPossiblePressure+ "; ";
+            stringToSave += i + "\r\n " + touchesListClassic[i].phase + "\r\n " + touchesListClassic[i].tapCount + "\r\n " + touchesListClassic[i].pressure + "\r\n " + touchesListClassic[i].fingerId + "\r\n " + touchesListClassic[i].maximumPossiblePressure + "\r\n ";
         }
-        stringToSave += testParticipantID + "; " + frameCountPerActiveGyro + "; " + frameCountPerActiveMicrophone + "; " + frameCountPerActiveLightSensor + "; " + disengagementReactionCards + "; " + engagementMappingReactionCompletionCards + "; " + durationForExperiment + "; ";
+        stringToSave += testParticipantID + "\r\n " + frameCountPerActiveGyro + "\r\n " + frameCountPerActiveMicrophone + "\r\n " + frameCountPerActiveLightSensor + "\r\n " + disengagementReactionCards + "\r\n " + engagementMappingReactionCompletionCards + "\r\n " + durationForExperiment + "\r\n ";
         for (int i = 0; i < 20; i++)
         {
-            stringToSave += Singleton.timeSpentOnPanel[i]+"; ";
+            stringToSave += Singleton.timeSpentOnPanel[i] + "\r\n ";
         }
         for (int i = 0; i < 20; i++)
         {
-            
+
             stringToSave += timeSpentLookingAtClassicPanel[i];
             if (i < 19)
             {
-                stringToSave += "; ";
+                stringToSave += "\r\n ";
             }
         }
         
