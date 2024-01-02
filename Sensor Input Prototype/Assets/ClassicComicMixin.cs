@@ -99,10 +99,10 @@ namespace SensorInputPrototype.MixinInterfaces
             bool changeRegistered = false;
             foreach (Touch touch in Input.touches)
             {
-                if (Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
-                {
-                    changeRegistered = true;
-                }
+                //if (Input.touches[touch.fingerId].deltaPosition.magnitude > 0.05f)
+                //{
+                //    changeRegistered = true;
+                //}
             }
 
             if ((Input.touchCount != µ(M).touchCountLastFrame) || changeRegistered)
