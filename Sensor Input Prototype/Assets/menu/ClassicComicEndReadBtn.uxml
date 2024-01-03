@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/menu/MainMenu.uss?fileID=7433441132597879392&amp;guid=65bd9c2f02a739440b77f84bfc7385e7&amp;type=3#MainMenu" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-        <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: center; align-items: flex-start; align-self: flex-end; height: 305px;">
-            <ui:Button text="Finish Reading" display-tooltip-when-elided="true" name="EndReadingBtn" class="HovedMenuKnap1" />
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: center; align-items: flex-start; align-self: flex-end; height: 10%; width: 80%; ">
+            <ui:Button text="F&#230;rdig med at l&#230;se" display-tooltip-when-elided="true" name="EndReadingBtn" class="HovedMenuKnap1" style="background-color: rgba(100,100,100,40);"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
