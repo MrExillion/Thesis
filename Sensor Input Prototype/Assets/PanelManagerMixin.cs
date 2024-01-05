@@ -176,7 +176,7 @@ public class PanelManagerMixin : MonoBehaviour, MPanelManager, IGlobalReferenceM
                 {
                     DataAcquisition.Singleton.EndInteractive();
                 }
-                UnityEngine.SceneManagement.SceneManager.LoadScene("FinalSurveyScene");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Choice");
                 //DataAcquisition.Singleton.EndExperiment();
             }
             else

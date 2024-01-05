@@ -57,7 +57,7 @@ public class FinalSurveyUIBehaviour : MonoBehaviour
                 {
                     if (btn.visible == true)
                     {
-                        btn.SetEnabled(true);
+                        btn.SetEnabled(false);
                     }
                 }
                 var btn2 = root.Q<Button>("GoToClassicComicButton");
